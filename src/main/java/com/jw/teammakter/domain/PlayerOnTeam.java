@@ -1,14 +1,21 @@
 package com.jw.teammakter.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class PlayerOnTeam {
 
-    private String playerName;
+    public PlayerOnTeam(PlayerWithRating player){
+        this.player = player;
+    }
+
+    private PlayerWithRating player;
 
     private int team;
+
+    public int getTeam(){
+        return this.team;
+    }
+
+    public void setTeam(int team){
+        this.team = team;
+    }
 
 }
