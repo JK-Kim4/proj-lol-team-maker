@@ -35,12 +35,18 @@ public class MakerController {
 
     @PostMapping("/maker/making")
     @ResponseBody
-    public int teamMaking(@RequestBody List<Player> info){
-        System.out.println("player name = " + info.size());
+    public List<PlayerOnTeam> teamMaking(@RequestBody List<Player> info){
+        info.forEach(player -> {
+            System.out.println("input playername = " +player.getPlayerName());
+        });
 
         List<PlayerOnTeam> result = makerService.makeTeam(info);
 
-        return info.size();
+        System.out.println(result.get(0).getTeam());
+        System.out.println(result.get(1).getTeam());
+
+
+        return result;
     }
 
 }

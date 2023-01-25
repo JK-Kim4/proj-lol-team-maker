@@ -1,4 +1,5 @@
 {{>layouts/header}}
+<div id="inputDiv">
 <form action="/maker/making" id="playerForm">
     <table>
         <thead>
@@ -255,6 +256,19 @@
 
     <button type="button" id="submitBtn">제출</button>
 </form>
+</div>
+<div>
+    <h4>A team</h4>
+    <ul id="teamA">
+
+    </ul>
+</div>
+<div>
+    <h4>B team</h4>
+    <ul id="teamB">
+
+    </ul>
+</div>
 <script type="application/javascript">
     $(document).ready(function (){
         $("#submitBtn").on("click", function (){
@@ -274,8 +288,20 @@
                 method: "post",
                 contentType: "application/json; charset=utf-8",
                 data:JSON.stringify(arrayList),
+                dataType:"json",
                 success: function (result){
                     console.log(result);
+
+                    result.forEach (function (elem, index) {
+                       if(elem.team == 0){
+                           $("#teamA").append("<li>"+elem.player.playerName+" ("+elem.player.totalRating+")</li>");
+                       } else{
+                           $("#teamB").append("<li>"+elem.player.playerName+" ("+elem.player.totalRating+")</li>");
+                       }
+                    });
+                },
+                error: function (x){
+                    console.log(x);
                 }
             })
         });
