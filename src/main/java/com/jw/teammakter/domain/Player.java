@@ -1,12 +1,10 @@
 package com.jw.teammakter.domain;
 
-import ch.qos.logback.classic.spi.PlatformInfo;
+public class Player {
 
-public class PlayerInfo {
+    public Player(){};
 
-    public PlayerInfo(){};
-
-    public PlayerInfo(String playerName, int position, int tier){
+    public Player(String playerName, int position, int tier){
         this.playerName = playerName;
         this.position = position;
         this.tier = tier;

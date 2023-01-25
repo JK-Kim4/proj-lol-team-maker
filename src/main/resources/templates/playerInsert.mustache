@@ -1,4 +1,5 @@
-<form action="/maker/making">
+{{>layouts/header}}
+<form action="/maker/making" id="playerForm">
     <table>
         <thead>
         <tr>
@@ -7,31 +8,276 @@
             <td>포지션</td>
             <td>티어</td>
         </tr>
-        <tr>
-            <td>1</td>
-            <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
-            <td>
-                <select name="position">
-                    <option value="80">탑</option>
-                    <option value="100">정글</option>
-                    <option value="70">미드</option>
-                    <option value="60">원딜</option>
-                    <option value="60">서포터</option>
-                </select>
-            </td>
-            <td>
-                <select name="tier">
-                    <option value="0">아이언</option>
-                    <option value="10">브론즈</option>
-                    <option value="30">실버</option>
-                    <option value="50">골드</option>
-                    <option value="80">플래티넘</option>
-                    <option value="100">다이아몬드</option>
-                </select>
-            </td>
-        </tr>
         </thead>
+        <tbody>
+            <tr id="player1">
+                <td>1</td>
+                <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+                <td>
+                    <select name="position">
+                        <option value="80">탑</option>
+                        <option value="100">정글</option>
+                        <option value="70">미드</option>
+                        <option value="60">원딜</option>
+                        <option value="60">서포터</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tier">
+                        <option value="0">아이언</option>
+                        <option value="20">브론즈</option>
+                        <option value="25">실버</option>
+                        <option value="50">골드</option>
+                        <option value="60">플래티넘</option>
+                        <option value="75">다이아몬드</option>
+                        <option value="100">천상계</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="player2">
+                <td>2</td>
+                <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+                <td>
+                    <select name="position">
+                        <option value="80">탑</option>
+                        <option value="100">정글</option>
+                        <option value="70">미드</option>
+                        <option value="60">원딜</option>
+                        <option value="60">서포터</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tier">
+                        <option value="0">아이언</option>
+                        <option value="20">브론즈</option>
+                        <option value="25">실버</option>
+                        <option value="50">골드</option>
+                        <option value="60">플래티넘</option>
+                        <option value="75">다이아몬드</option>
+                        <option value="100">천상계</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="player3">
+                <td>3</td>
+                <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+                <td>
+                    <select name="position">
+                        <option value="80">탑</option>
+                        <option value="100">정글</option>
+                        <option value="70">미드</option>
+                        <option value="60">원딜</option>
+                        <option value="60">서포터</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tier">
+                        <option value="0">아이언</option>
+                        <option value="20">브론즈</option>
+                        <option value="25">실버</option>
+                        <option value="50">골드</option>
+                        <option value="60">플래티넘</option>
+                        <option value="75">다이아몬드</option>
+                        <option value="100">천상계</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="player4">
+                <td>4</td>
+                <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+                <td>
+                    <select name="position">
+                        <option value="80">탑</option>
+                        <option value="100">정글</option>
+                        <option value="70">미드</option>
+                        <option value="60">원딜</option>
+                        <option value="60">서포터</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tier">
+                        <option value="0">아이언</option>
+                        <option value="20">브론즈</option>
+                        <option value="25">실버</option>
+                        <option value="50">골드</option>
+                        <option value="60">플래티넘</option>
+                        <option value="75">다이아몬드</option>
+                        <option value="100">천상계</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="player5">
+                <td>5</td>
+                <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+                <td>
+                    <select name="position">
+                        <option value="80">탑</option>
+                        <option value="100">정글</option>
+                        <option value="70">미드</option>
+                        <option value="60">원딜</option>
+                        <option value="60">서포터</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tier">
+                        <option value="0">아이언</option>
+                        <option value="20">브론즈</option>
+                        <option value="25">실버</option>
+                        <option value="50">골드</option>
+                        <option value="60">플래티넘</option>
+                        <option value="75">다이아몬드</option>
+                        <option value="100">천상계</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="player6">
+                <td>6</td>
+                <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+                <td>
+                    <select name="position">
+                        <option value="80">탑</option>
+                        <option value="100">정글</option>
+                        <option value="70">미드</option>
+                        <option value="60">원딜</option>
+                        <option value="60">서포터</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tier">
+                        <option value="0">아이언</option>
+                        <option value="20">브론즈</option>
+                        <option value="25">실버</option>
+                        <option value="50">골드</option>
+                        <option value="60">플래티넘</option>
+                        <option value="75">다이아몬드</option>
+                        <option value="100">천상계</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="player7">
+                <td>7</td>
+                <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+                <td>
+                    <select name="position">
+                        <option value="80">탑</option>
+                        <option value="100">정글</option>
+                        <option value="70">미드</option>
+                        <option value="60">원딜</option>
+                        <option value="60">서포터</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tier">
+                        <option value="0">아이언</option>
+                        <option value="20">브론즈</option>
+                        <option value="25">실버</option>
+                        <option value="50">골드</option>
+                        <option value="60">플래티넘</option>
+                        <option value="75">다이아몬드</option>
+                        <option value="100">천상계</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="player8">
+                <td>8</td>
+                <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+                <td>
+                    <select name="position">
+                        <option value="80">탑</option>
+                        <option value="100">정글</option>
+                        <option value="70">미드</option>
+                        <option value="60">원딜</option>
+                        <option value="60">서포터</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tier">
+                        <option value="0">아이언</option>
+                        <option value="20">브론즈</option>
+                        <option value="25">실버</option>
+                        <option value="50">골드</option>
+                        <option value="60">플래티넘</option>
+                        <option value="75">다이아몬드</option>
+                        <option value="100">천상계</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="player9">
+                <td>9</td>
+                <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+                <td>
+                    <select name="position">
+                        <option value="80">탑</option>
+                        <option value="100">정글</option>
+                        <option value="70">미드</option>
+                        <option value="60">원딜</option>
+                        <option value="60">서포터</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tier">
+                        <option value="0">아이언</option>
+                        <option value="20">브론즈</option>
+                        <option value="25">실버</option>
+                        <option value="50">골드</option>
+                        <option value="60">플래티넘</option>
+                        <option value="75">다이아몬드</option>
+                        <option value="100">천상계</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="player10">
+                <td>10</td>
+                <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+                <td>
+                    <select name="position">
+                        <option value="80">탑</option>
+                        <option value="100">정글</option>
+                        <option value="70">미드</option>
+                        <option value="60">원딜</option>
+                        <option value="60">서포터</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tier">
+                        <option value="0">아이언</option>
+                        <option value="20">브론즈</option>
+                        <option value="25">실버</option>
+                        <option value="50">골드</option>
+                        <option value="60">플래티넘</option>
+                        <option value="75">다이아몬드</option>
+                        <option value="100">천상계</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
     </table>
 
-    <button type="submit">제출</button>
+    <button type="button" id="submitBtn">제출</button>
 </form>
+<script type="application/javascript">
+    $(document).ready(function (){
+        $("#submitBtn").on("click", function (){
+            let size = 10;
+            let arrayList = new Array();
+            for(let i = 1; i <= size; i++){
+                let obj = {
+                    playerName : $("#player"+i).find("[name=playerName]").val(),
+                    position: $("#player"+i).find("[name=position]").val(),
+                    tier: $("#player"+i).find("[name=tier]").val()
+                }
+                arrayList.push(obj);
+            }
+
+            $.ajax({
+                url: "/maker/making",
+                method: "post",
+                contentType: "application/json; charset=utf-8",
+                data:JSON.stringify(arrayList),
+                success: function (result){
+                    console.log(result);
+                }
+            })
+        });
+    });
+</script>
