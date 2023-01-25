@@ -1,0 +1,37 @@
+<form action="/maker/making">
+    <table>
+        <thead>
+        <tr>
+            <td>번호</td>
+            <td>이름</td>
+            <td>포지션</td>
+            <td>티어</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td><input type="text" name="playerName" placeholder="플레이어의 이름을 입력해 주세요."></td>
+            <td>
+                <select name="position">
+                    <option value="80">탑</option>
+                    <option value="100">정글</option>
+                    <option value="70">미드</option>
+                    <option value="60">원딜</option>
+                    <option value="60">서포터</option>
+                </select>
+            </td>
+            <td>
+                <select name="tier">
+                    <option value="0">아이언</option>
+                    <option value="10">브론즈</option>
+                    <option value="30">실버</option>
+                    <option value="50">골드</option>
+                    <option value="80">플래티넘</option>
+                    <option value="100">다이아몬드</option>
+                </select>
+            </td>
+        </tr>
+        </thead>
+    </table>
+
+    <button type="submit">제출</button>
+</form>
