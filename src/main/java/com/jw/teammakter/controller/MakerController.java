@@ -1,6 +1,5 @@
 package com.jw.teammakter.controller;
 
-import com.jw.teammakter.Application;
 import com.jw.teammakter.domain.Player;
 import com.jw.teammakter.domain.PlayerOnTeam;
 import com.jw.teammakter.service.MakerService;
@@ -31,13 +30,19 @@ public class MakerController {
 
     @GetMapping("/maker/player/list")
     public String playerListPage(Model model){
-        model.addAttribute("players", Application.PLAYER);
+        model.addAttribute("players", makerService.getPlayerAll());
         return "player/playerList";
     }
 
     @GetMapping("/maker/player/insert")
     public String playerInsertPage(){
         return "player/playerInsert";
+    }
+
+    @GetMapping("/maker/players")
+    @ResponseBody
+    public List<Player> getPlayerAll(){
+        return makerService.getPlayerAll();
     }
 
     @PostMapping("/maker/making")

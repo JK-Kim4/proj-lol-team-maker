@@ -1,7 +1,6 @@
 {{>layouts/header}}
 <div class="container starter-template">
     <h3>플레이어 등록</h3>
-    <form>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="inputName">이름</label>
@@ -41,9 +40,39 @@
                 </select>
             </div>
         </div>
-    </form>
 
     <button class="btn btn-success" type="button" id="insertBtn">등록</button>
     <button class="btn btn-danger" type="button" onclick="location.href='/maker/player/list'">취소</button>
 </div>
+<script>
+    $(document).ready(function() {
+
+        $("#insertBtn").on("click", function () {
+            let name = $("#inputName").val();
+            let position = $("#inputPosition").val();
+            let tier = $("#inputTier").val();
+
+            //TODO parameter validation
+
+            let player = {
+                "playerName": name,
+                "position": position,
+                "tier": tier
+            }
+
+            $.ajax({
+                url: "/maker/player/insert",
+                method: "post",
+                contentType: "application/json;  charset=utf-8",
+                data: JSON.stringify(player),
+                success: function (result) {
+
+                },
+                error: function (x) {
+                    console.log(x);
+                }
+            });
+        });
+    });
+</script>
 {{>layouts/footer}}

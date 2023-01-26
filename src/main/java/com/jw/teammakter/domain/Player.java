@@ -4,39 +4,39 @@ public class Player {
 
     public Player(){};
 
-    public Player(int id, String playerName, int position, int tier){
+    public Player(int id, String playerName, String position, String tier){
         this.id = id;
         this.playerName = playerName;
-        this.position = position;
-        this.tier = tier;
+        this.position = Position.valueOf(position);
+        this.tier = Tier.valueOf(tier);
     }
 
     private int id;
     private String playerName;
-    private int position;
-    private int tier;
+    private Position position;
+    private Tier tier;
 
     public String getPlayerName() {
         return this.playerName;
     }
 
     public int getPosition(){
-        return this.position;
+        return this.position.getPoint();
     }
 
     public int getTier(){
-        return this.tier;
+        return this.tier.getPoint();
     }
 
     public void setPlayerName(String playerName){
         this.playerName = playerName;
     }
 
-    public void setPosition(int position){
-        this.position = position;
+    public void setPosition(String position){
+        this.position = Position.valueOf(position);
     }
 
-    public void setTier(int tier){
-        this.tier = tier;
+    public void setTier(String tier){
+        this.tier = Tier.valueOf(tier);
     }
 }

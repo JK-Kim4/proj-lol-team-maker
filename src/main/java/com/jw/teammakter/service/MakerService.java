@@ -3,6 +3,8 @@ package com.jw.teammakter.service;
 import com.jw.teammakter.domain.Player;
 import com.jw.teammakter.domain.PlayerOnTeam;
 import com.jw.teammakter.domain.PlayerWithRating;
+import com.jw.teammakter.repository.MemoryMakerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,6 +13,14 @@ import java.util.List;
 
 @Service
 public class MakerService {
+
+    private MemoryMakerRepository makerRepository;
+
+    @Autowired
+    public MakerService(final MemoryMakerRepository makerRepository){
+        this.makerRepository = makerRepository;
+    }
+
     public List<PlayerOnTeam> makeTeam(List<Player> info) {
         List<PlayerOnTeam> result = new ArrayList<>();
         List<PlayerWithRating> playerWithRatings = parsePlayerWithRating(info);
@@ -52,5 +62,9 @@ public class MakerService {
             }
 
             return result;
+    }
+
+    public List<Player> getPlayerAll() {
+        return makerRepository.getPlayerAll();
     }
 }
