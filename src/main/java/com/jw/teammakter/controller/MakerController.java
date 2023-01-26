@@ -26,7 +26,7 @@ public class MakerController {
 
     @GetMapping(value = {"/maker/index", "/"})
     public String indexPage(){
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/maker/player/list")

@@ -3,30 +3,47 @@
     <h3>플레이어 등록</h3>
     <form>
         <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputCity">이름</label>
-                <input type="text" class="form-control" id="inputCity">
-            </div>
             <div class="form-group col-md-4">
-                <label for="inputState">포지션</label>
-                <select id="inputState" class="form-control">
+                <label for="inputName">이름</label>
+                <input type="text" class="form-control" id="inputName">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputPosition">포지션</label>
+                <select id="inputPosition" class="form-control">
                     <option selected>Choose...</option>
-                    <option>...</option>
+                    <option value="top">탑</option>
+                    <option value="jungle">정글</option>
+                    <option value="apcarry">미드</option>
+                    <option value="adcarry">원딜</option>
+                    <option value="supporter">서폿</option>
+                    <option value="allrounder">올라운더</option>
                 </select>
             </div>
             <div class="form-group col-md-2">
-                <label for="inputZip">티어</label>
-                <input type="text" class="form-control" id="inputZip">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                    Check me out
-                </label>
+                <label for="inputTier">티어</label>
+                <select id="inputTier" class="form-control">
+                    <option selected>Choose...</option>
+                    <option value="iron">아이언</option>
+                    <option value="bronze">브론즈</option>
+                    <option value="silver">실버</option>
+                    <option value="gold1">골드1</option>
+                    <option value="gold2">골드2</option>
+                    <option value="gold3">골드3</option>
+                    <option value="gold4">골드4</option>
+                    <option value="platinum1">플래티넘1</option>
+                    <option value="platinum2">플래티넘2</option>
+                    <option value="platinum3">플래티넘3</option>
+                    <option value="platinum4">플래티넘4</option>
+                    <option value="diamond1">다이아몬드1</option>
+                    <option value="diamond2">다이아몬드2</option>
+                    <option value="diamond3">다이아몬드3</option>
+                    <option value="diamond4">다이아몬드4</option>
+                </select>
             </div>
         </div>
     </form>
+
+    <button class="btn btn-success" type="button" id="insertBtn">등록</button>
+    <button class="btn btn-danger" type="button" onclick="location.href='/maker/player/list'">취소</button>
 </div>
 {{>layouts/footer}}
