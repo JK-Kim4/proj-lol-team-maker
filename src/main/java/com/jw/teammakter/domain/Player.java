@@ -20,11 +20,11 @@ public class Player {
         return this.playerName;
     }
 
-    public int getPosition(){
+    public int getPositionPoint(){
         return this.position.getPoint();
     }
 
-    public int getTier(){
+    public int getTierPoint(){
         return this.tier.getPoint();
     }
 

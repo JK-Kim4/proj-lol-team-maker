@@ -12,16 +12,16 @@ public class MemoryMakerRepository implements MakerRepository{
     public static final List<Player> PLAYER = new ArrayList<>();
 
     /*sample data 10 players*/
-    Player player1 = new Player(1,"player1", "SUPPORTER","iron");
-    Player player2 = new Player(2,"player2","TOP","bronze");
-    Player player3 = new Player(3,"player3", "JUNGLE","silver");
-    Player player4 = new Player(4,"player4", "JUNGLE","silver");
-    Player player5 = new Player(5,"player5", "ADCARRY","silver");
-    Player player6 = new Player(6,"player6", "JUNGLE","gold4");
-    Player player7 = new Player(7,"player7","APCARRY","gold4");
-    Player player8 = new Player(8,"player8","ADCARRY","diamond1");
-    Player player9 = new Player(9,"player9", "TOP","platinum4");
-    Player player10 = new Player(10,"player10","APCARRY","gold1");
+    Player player1 = new Player(1,"player1", "SUPPORTER","IRON");
+    Player player2 = new Player(2,"player2","TOP","BRONZE");
+    Player player3 = new Player(3,"player3", "JUNGLE","SILVER");
+    Player player4 = new Player(4,"player4", "JUNGLE","SILVER");
+    Player player5 = new Player(5,"player5", "ADCARRY","SILVER");
+    Player player6 = new Player(6,"player6", "JUNGLE","GOLD4");
+    Player player7 = new Player(7,"player7","APCARRY","GOLD4");
+    Player player8 = new Player(8,"player8","ADCARRY","DIAMOND1");
+    Player player9 = new Player(9,"player9", "TOP","PLATINUM4");
+    Player player10 = new Player(10,"player10","APCARRY","GOLD1");
 
     public List<Player> getPlayerAll(){
 

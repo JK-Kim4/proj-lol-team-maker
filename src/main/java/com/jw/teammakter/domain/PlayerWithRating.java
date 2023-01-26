@@ -4,7 +4,7 @@ public class PlayerWithRating {
 
     public PlayerWithRating(Player player){
         this.playerName = player.getPlayerName();
-        this.totalRating = (player.getPosition() + player.getTier());
+        this.totalRating = (player.getPositionPoint() + player.getTierPoint());
     }
 
     private String playerName;
