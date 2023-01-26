@@ -4,12 +4,14 @@ public class Player {
 
     public Player(){};
 
-    public Player(String playerName, int position, int tier){
+    public Player(int id, String playerName, int position, int tier){
+        this.id = id;
         this.playerName = playerName;
         this.position = position;
         this.tier = tier;
     }
 
+    private int id;
     private String playerName;
     private int position;
     private int tier;

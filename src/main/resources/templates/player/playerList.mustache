@@ -1,0 +1,42 @@
+{{>layouts/header}}
+<div class="container starter-template" id="inputDiv">
+    <h3>플레이어 목록</h3>
+<form action="/maker/making" id="playerForm">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nickname</th>
+                <th scope="col">Position</th>
+                <th scope="col">Top tier</th>
+            </tr>
+        </thead>
+        <tbody id="playerList">
+            {{#players}}
+                <tr>
+                    <th><input type="checkbox" name="player" value="{{id}}"
+                            data-name="{{playerName}}"
+                            data-position="{{position}}"
+                            data-tier="{{tier}}"
+                        >
+                    </th>
+                    <td><span>{{playerName}}</span></td>
+                    <td><span>{{position}}</span></td>
+                    <td><span>{{tier}}</span></td>
+                </tr>
+            {{/players}}
+        </tbody>
+    </table>
+    <button class="btn btn-success" type="button" id="makeBtn">팀 만들기</button>
+    <button class="btn btn-dark" type="button" id="insertBtn">플레이어 등록</button>
+</form>
+</div>
+<script type="application/javascript">
+    $(document).ready(function (){
+        $("#insertBtn").on("click", function (){
+            location.href="/maker/player/insert";
+        });
+
+    });
+</script>
+{{>layouts/footer}}

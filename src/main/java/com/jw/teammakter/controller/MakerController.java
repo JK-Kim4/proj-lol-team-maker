@@ -26,13 +26,18 @@ public class MakerController {
 
     @GetMapping(value = {"/maker/index", "/"})
     public String indexPage(){
-        return "index";
+        return "/index";
+    }
+
+    @GetMapping("/maker/player/list")
+    public String playerListPage(Model model){
+        model.addAttribute("players", Application.PLAYER);
+        return "player/playerList";
     }
 
     @GetMapping("/maker/player/insert")
-    public String playerInsertPage(Model model){
-        model.addAttribute("players", Application.PLAYER);
-        return "playerInsert";
+    public String playerInsertPage(){
+        return "player/playerInsert";
     }
 
     @PostMapping("/maker/making")
@@ -43,10 +48,6 @@ public class MakerController {
         });
 
         List<PlayerOnTeam> result = makerService.makeTeam(info);
-
-        System.out.println(result.get(0).getTeam());
-        System.out.println(result.get(1).getTeam());
-
 
         return result;
     }

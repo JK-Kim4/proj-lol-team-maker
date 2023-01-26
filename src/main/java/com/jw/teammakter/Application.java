@@ -15,16 +15,16 @@ public class Application {
     public static void main(String[] args) {
 
         /*sample data 10 players*/
-        Player player1 = new Player("player1", 100,100);
-        Player player2 = new Player("player2", 100,100);
-        Player player3 = new Player("player3", 100,100);
-        Player player4 = new Player("player4", 100,100);
-        Player player5 = new Player("player5", 100,100);
-        Player player6 = new Player("player6", 100,100);
-        Player player7 = new Player("player7", 100,100);
-        Player player8 = new Player("player8", 100,100);
-        Player player9 = new Player("player9", 100,100);
-        Player player10 = new Player("player10", 100,100);
+        Player player1 = new Player(1,"player1", 100,100);
+        Player player2 = new Player(2,"player2", 100,100);
+        Player player3 = new Player(3,"player3", 100,100);
+        Player player4 = new Player(4,"player4", 100,100);
+        Player player5 = new Player(5,"player5", 100,100);
+        Player player6 = new Player(6,"player6", 100,100);
+        Player player7 = new Player(7,"player7", 100,100);
+        Player player8 = new Player(8,"player8", 100,100);
+        Player player9 = new Player(9,"player9", 100,100);
+        Player player10 = new Player(10,"player10", 100,100);
 
         List<Player> players = new ArrayList<>();
 
