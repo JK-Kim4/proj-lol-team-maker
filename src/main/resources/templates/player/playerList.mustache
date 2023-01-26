@@ -26,7 +26,7 @@
             {{/players}}
         </tbody>
     </table>
-    <div class="form-row" style="border: black solid 1px; padding: 5px; margin-bottom: 5px;">
+    <div class="form-row" style="border: black solid 1px; paddi당ng: 5px; margin-bottom: 5px;">
         <h5>팀 생성 조건 선택</h5>
         <div class="form-group col-md-2">
             <label for="conditionBattle">피튀기는 내전</label>
@@ -40,8 +40,48 @@
     <button class="btn btn-success" type="button" id="makeBtn">팀 만들기</button>
     <button class="btn btn-dark" type="button" id="insertBtn">플레이어 등록</button>
 </div>
+<div class="container starter-template" id="resultDiv">
+    <div class="row">
+        <div class="col-5" id="teamA">
+        </div>
+        <div class="col-5" id="teamB">
+        </div>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-danger" id="resetBtn">초기화</button>
+    </div>
+</div>
 <script >
     $(document).ready(function (){
+        $("#resultDiv").hide();
+
+        $("#resetBtn").on("click", function (){
+            $("#resultDiv").hide();
+            $("#inputDiv").show();
+        });
+
+        $("#makeBtn").on("click", function (){
+
+            //TODO 선택 player 검증 및 데이터 만들기
+            $.ajax({
+               url: "/maker/making",
+               method: "post",
+                async:false,
+                success: function (result){
+
+                   let html = "";
+
+                   console.log(result);
+                   $("#resultDiv").html(result);
+                   $("#resultDiv").show();
+                },error: function (x){
+                   console.log(x);
+                }
+               /*contentType: "application/json; charset-utf-8",
+               data: {}*/
+            });
+        });
+
         $("#insertBtn").on("click", function (){
             location.href="/maker/player/insert";
         });
