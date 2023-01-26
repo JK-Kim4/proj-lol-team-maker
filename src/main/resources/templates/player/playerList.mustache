@@ -1,7 +1,6 @@
 {{>layouts/header}}
 <div class="container starter-template" id="inputDiv">
     <h3>플레이어 목록</h3>
-<form action="/maker/making" id="playerForm">
     <table class="table">
         <thead>
             <tr>
@@ -27,9 +26,19 @@
             {{/players}}
         </tbody>
     </table>
+    <div class="form-row" style="border: black solid 1px; padding: 5px; margin-bottom: 5px;">
+        <h5>팀 생성 조건 선택</h5>
+        <div class="form-group col-md-2">
+            <label for="conditionBattle">피튀기는 내전</label>
+            <input type="radio" name="inputCondition" id="conditionBattle" value="battle">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="conditionFun">피안튀기는 내전</label>
+            <input type="radio" name="inputCondition" id="conditionFun" value="condition" selected>
+        </div>
+    </div>
     <button class="btn btn-success" type="button" id="makeBtn">팀 만들기</button>
     <button class="btn btn-dark" type="button" id="insertBtn">플레이어 등록</button>
-</form>
 </div>
 <script >
     $(document).ready(function (){
