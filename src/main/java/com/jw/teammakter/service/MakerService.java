@@ -67,4 +67,8 @@ public class MakerService {
     public List<Player> getPlayerAll() {
         return makerRepository.getPlayerAll();
     }
+
+    public int insertPlayer(Player player) {
+        return makerRepository.addPlayer(player);
+    }
 }

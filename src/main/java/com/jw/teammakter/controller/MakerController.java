@@ -45,6 +45,12 @@ public class MakerController {
         return makerService.getPlayerAll();
     }
 
+    @PostMapping("/maker/player/insert")
+    @ResponseBody
+    public int insertMethod(@RequestBody Player player){
+        return makerService.insertPlayer(player);
+    }
+
     @PostMapping("/maker/making")
     @ResponseBody
     public List<PlayerOnTeam> teamMaking(@RequestBody List<Player> info){

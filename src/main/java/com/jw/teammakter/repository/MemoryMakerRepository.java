@@ -23,8 +23,7 @@ public class MemoryMakerRepository implements MakerRepository{
     Player player9 = new Player(9,"player9", "TOP","PLATINUM4");
     Player player10 = new Player(10,"player10","APCARRY","GOLD1");
 
-    public List<Player> getPlayerAll(){
-
+    public MemoryMakerRepository(){
         PLAYER.add(player1);
         PLAYER.add(player2);
         PLAYER.add(player3);
@@ -35,9 +34,15 @@ public class MemoryMakerRepository implements MakerRepository{
         PLAYER.add(player8);
         PLAYER.add(player9);
         PLAYER.add(player10);
+    }
 
-
+    public List<Player> getPlayerAll(){
         return PLAYER;
+    }
+
+    public int addPlayer(Player player){
+        PLAYER.add(player);
+        return PLAYER.size();
     }
 
 }
