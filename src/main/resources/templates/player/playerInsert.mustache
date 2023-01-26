@@ -53,6 +53,15 @@
             let tier = $("#inputTier").val();
 
             //TODO parameter validation
+            if(position == undefined || position == null){
+                alert("포지션을 선택해 주세요.");
+                return;
+            }
+
+            if(tier == undefined || tier == null){
+                alert("티어를 선택해 주세요.");
+                return;
+            }
 
             let player = {
                 "playerName": name,

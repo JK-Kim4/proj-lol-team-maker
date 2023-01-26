@@ -16,4 +16,9 @@ public class EnumTest {
 
 
     }
+
+    @Test
+    void Enum_Iterating_test(){
+        Position.stream().forEach(System.out::println);
+    }
 }

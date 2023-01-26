@@ -1,5 +1,7 @@
 package com.jw.teammakter.domain;
 
+import java.util.stream.Stream;
+
 public enum Tier {
 
     IRON("iron", 0),
@@ -32,5 +34,9 @@ public enum Tier {
     }
     public int getPoint(){
         return this.point;
+    }
+
+    public static Stream<Tier> stream() {
+        return Stream.of(Tier.values());
     }
 }
