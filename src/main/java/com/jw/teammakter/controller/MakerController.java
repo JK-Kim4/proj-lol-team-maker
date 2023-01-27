@@ -53,7 +53,7 @@ public class MakerController {
 
     @PostMapping("/maker/making")
     @ResponseBody
-    public List<PlayerOnTeam> teamMaking(Model model, @RequestBody List<Player> players){
+    public List<PlayerOnTeam> teamMaking(Model model, @RequestBody List<Player> info){
         /*info.forEach(player -> {
             System.out.println("input playername = " +player.getPlayerName());
         });*/

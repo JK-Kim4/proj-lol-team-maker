@@ -63,9 +63,13 @@
         $("#makeBtn").on("click", function (){
 
             //TODO 선택 player 검증 및 데이터 만들기
-            let data = {
+            let data = [];
 
-            };
+            if($("input:checkbox[name='player']:checked").length > 0){
+                $("input:checkbox[name='player']:checked").each(function (index,element){
+                    data.push(element.val());
+                });
+            }
 
             $.ajax({
                 url: "/maker/making",
