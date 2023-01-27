@@ -63,22 +63,24 @@
         $("#makeBtn").on("click", function (){
 
             //TODO 선택 player 검증 및 데이터 만들기
+            let data = {
+
+            };
+
             $.ajax({
-               url: "/maker/making",
-               method: "post",
-                async:false,
+                url: "/maker/making",
+                method: "post",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
                 success: function (result){
-
-                   let html = "";
-
-                   console.log(result);
-                   $("#resultDiv").html(result);
-                   $("#resultDiv").show();
-                },error: function (x){
-                   console.log(x);
+                    let html = "";
+                    console.log(result);
+                    $("#resultDiv").html(result);
+                    $("#resultDiv").show();
+                },
+                error: function (x){
+                    console.log(x);
                 }
-               /*contentType: "application/json; charset-utf-8",
-               data: {}*/
             });
         });
 

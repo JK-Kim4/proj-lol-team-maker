@@ -53,7 +53,7 @@ public class MakerController {
 
     @PostMapping("/maker/making")
     @ResponseBody
-    public List<PlayerOnTeam> teamMaking(){
+    public List<PlayerOnTeam> teamMaking(Model model, @RequestBody List<Player> players){
         /*info.forEach(player -> {
             System.out.println("input playername = " +player.getPlayerName());
         });*/
@@ -66,10 +66,5 @@ public class MakerController {
     @GetMapping("/template")
     public String templatePage(){
         return "starter-template";
-    }
-
-    @GetMapping("/maker/resultpage")
-    public String resultPage(){
-        return "player/playerTeamResult";
     }
 }
