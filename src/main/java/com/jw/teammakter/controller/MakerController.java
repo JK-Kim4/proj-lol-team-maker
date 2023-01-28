@@ -53,12 +53,9 @@ public class MakerController {
 
     @PostMapping("/maker/making")
     @ResponseBody
-    public List<PlayerOnTeam> teamMaking(Model model, @RequestBody List<Player> info){
-        /*info.forEach(player -> {
-            System.out.println("input playername = " +player.getPlayerName());
-        });*/
-
-        List<PlayerOnTeam> result = makerService.makeTeam(makerService.getPlayerAll());
+    public List<PlayerOnTeam> teamMaking(Model model, @RequestBody List<Integer> info){
+        List<Player> selectedPlayer = makerService.getPlayersById(info);
+        List<PlayerOnTeam> result = makerService.makeTeam(selectedPlayer);
 
         return result;
     }

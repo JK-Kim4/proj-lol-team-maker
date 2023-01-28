@@ -21,6 +21,19 @@ public class MakerService {
         this.makerRepository = makerRepository;
     }
 
+    public List<Player> getPlayersById(List<Integer> ids){
+        List<Player> result = new ArrayList<>();
+        MemoryMakerRepository.PLAYER.stream().forEach(player -> {
+            ids.stream().forEach(id->{
+                if(player.getId() == id){
+                    result.add(player);
+                }
+            });
+        });
+        return result;
+    }
+
+
     public List<PlayerOnTeam> makeTeam(List<Player> info) {
         List<PlayerOnTeam> result = new ArrayList<>();
         List<PlayerWithRating> playerWithRatings = parsePlayerWithRating(info);

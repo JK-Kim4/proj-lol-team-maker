@@ -16,6 +16,10 @@ public class Player {
     private Position position;
     private Tier tier;
 
+    public int getId(){
+        return this.id;
+    }
+
     public String getPlayerName() {
         return this.playerName;
     }
