@@ -31,11 +31,11 @@
         <div class="form-group col-md-2">
             <label for="conditionBattle">피튀기는 내전</label>
             <input type="radio" name="inputCondition" id="conditionBattle" value="battle">
-        </div>-->
+        </div>
         <div class="form-group col-md-2">
             <label for="conditionFun">피안튀기는 내전</label>
             <input type="radio" name="inputCondition" id="conditionFun" value="condition" selected>
-        </div>
+        </div>-->
     </div>
     <button class="btn btn-success" type="button" id="makeBtn">팀 만들기</button>
     <button class="btn btn-dark" type="button" id="insertBtn">플레이어 등록</button>
@@ -63,6 +63,8 @@
 
         $("#resetBtn").on("click", function (){
             $("#resultDiv").hide();
+            $("#teamA").empty();
+            $("#teamB").empty();
             $("#inputDiv").show();
         });
 

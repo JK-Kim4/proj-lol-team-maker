@@ -37,7 +37,7 @@ public class MakerService {
     public List<PlayerOnTeam> makeTeam(List<Player> info) {
         List<PlayerOnTeam> result = new ArrayList<>();
         List<PlayerWithRating> playerWithRatings = parsePlayerWithRating(info);
-        result = sortPlayerByRating(playerWithRatings);
+        result = balancedPartition(playerWithRatings);
 
         return result;
     }
@@ -51,27 +51,32 @@ public class MakerService {
         return result;
     }
 
-    private List<PlayerOnTeam> sortPlayerByRating(List<PlayerWithRating> players){
+    private List<PlayerOnTeam> balancedPartition(List<PlayerWithRating> players){
         List<PlayerOnTeam> result = new ArrayList<>();
+
             for(int i = 0; i < players.size(); i++){
                 PlayerWithRating temp = players.get(i);
                 for(int j = i+1; j < players.size(); j++){
                     if(temp.getTotalRating() > players.get(j).getTotalRating()){
                         Collections.swap(players, i ,j);
                     }else if(temp.getTotalRating() == players.get(j).getTotalRating()){
-                        continue;
+                        break;
                     }
                 }
             }
 
             int index = 0;
             for(PlayerWithRating player : players){
-                if(index == 0 || index == 2 || index == 4 || index == 6 || index == 9) {
-                    result.add(new PlayerOnTeam(player, 1));
-                }else{
+
+                System.out.println(player.getTotalRating());
+
+                if(index == 0){
                     result.add(new PlayerOnTeam(player, 0));
+                    index++;
+                }else if(index == 1){
+                    result.add(new PlayerOnTeam(player, 1));
+                    index--;
                 }
-                index++;
             }
 
             return result;
