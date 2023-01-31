@@ -1,12 +1,11 @@
 package com.jw.teammakter.repository;
 
 import com.jw.teammakter.domain.Player;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+
 public class MemoryMakerRepository implements MakerRepository{
 
     public static final List<Player> PLAYER = new ArrayList<>();
@@ -36,10 +35,12 @@ public class MemoryMakerRepository implements MakerRepository{
         PLAYER.add(player10);
     }
 
+    @Override
     public List<Player> getPlayerAll(){
         return PLAYER;
     }
 
+    @Override
     public int addPlayer(Player player){
         PLAYER.add(player);
         return PLAYER.size();
