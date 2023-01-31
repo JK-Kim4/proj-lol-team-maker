@@ -1,7 +1,7 @@
 {{>layouts/header}}
 <div class="container starter-template" id="inputDiv">
     <h3>플레이어 목록</h3>
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -12,13 +12,12 @@
         </thead>
         <tbody id="playerList">
             {{#players}}
-                <tr>
-                    <th><input type="checkbox" name="player" value="{{id}}"
-                            data-name="{{playerName}}"
-                            data-position="{{position}}"
-                            data-tier="{{tier}}"
+                <tr onclick="javascript:changeStatus({{id}});">
+                    <td>
+                        <input type="checkbox" name="player" value="{{id}}"
+                               id="player{{id}}"
                         >
-                    </th>
+                    </td>
                     <td><span>{{playerName}}</span></td>
                     <td><span>{{position}}</span></td>
                     <td><span>{{tier}}</span></td>
@@ -92,7 +91,6 @@
                 success: function (result){
                     let aTotal = 0;
                     let bTotal = 0;
-                    console.log(result);
 
                     result.forEach(function (elem, index){
                        if(elem.team == 1){
@@ -118,5 +116,13 @@
             location.href="/maker/player/insert";
         });
     });
+
+    function changeStatus(id){
+        if($("#player"+id).is(":checked") == true){
+            $("#player"+id).prop("checked", false);
+        }else{
+            $("#player"+id).prop("checked", true);
+        }
+    }
 </script>
 {{>layouts/footer}}

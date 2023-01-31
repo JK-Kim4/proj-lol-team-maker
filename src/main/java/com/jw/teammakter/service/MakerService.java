@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -53,33 +54,39 @@ public class MakerService {
 
     private List<PlayerOnTeam> balancedPartition(List<PlayerWithRating> players){
         List<PlayerOnTeam> result = new ArrayList<>();
+        int index = 0;
+        //total rating 오름차순 정렬
+        Comparator<PlayerWithRating> cp = new Comparator<PlayerWithRating>() {
+            @Override
+            public int compare(PlayerWithRating o1, PlayerWithRating o2) {
 
-            for(int i = 0; i < players.size(); i++){
-                PlayerWithRating temp = players.get(i);
-                for(int j = i+1; j < players.size(); j++){
-                    if(temp.getTotalRating() > players.get(j).getTotalRating()){
-                        Collections.swap(players, i ,j);
-                    }else if(temp.getTotalRating() == players.get(j).getTotalRating()){
-                        break;
-                    }
+                int total1 = o1.getTotalRating();
+                int total2 = o2.getTotalRating();
+
+                if(total1 > total2){
+                    return 1;
+                }else{
+                    return -1;
                 }
             }
+        };
 
-            int index = 0;
-            for(PlayerWithRating player : players){
+        Collections.sort(players, cp);
 
-                System.out.println(player.getTotalRating());
+        for(PlayerWithRating player : players){
 
-                if(index == 0){
-                    result.add(new PlayerOnTeam(player, 0));
-                    index++;
-                }else if(index == 1){
-                    result.add(new PlayerOnTeam(player, 1));
-                    index--;
-                }
+            System.out.println(player.getTotalRating());
+
+            if(index == 0){
+                result.add(new PlayerOnTeam(player, 0));
+                index++;
+            }else if(index == 1){
+                result.add(new PlayerOnTeam(player, 1));
+                index--;
             }
+        }
 
-            return result;
+        return result;
     }
 
     public List<Player> getPlayerAll() {
