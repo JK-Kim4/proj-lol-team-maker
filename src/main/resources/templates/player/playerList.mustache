@@ -8,19 +8,17 @@
                 <th scope="col">Nickname</th>
                 <th scope="col">Position</th>
                 <th scope="col">Top tier</th>
+                <th scope="col">삭제</th>
             </tr>
         </thead>
         <tbody id="playerList">
             {{#players}}
                 <tr onclick="javascript:changeStatus({{id}});">
-                    <td>
-                        <input type="checkbox" name="player" value="{{id}}"
-                               id="player{{id}}"
-                        >
-                    </td>
+                    <td><input type="checkbox" name="player" value="{{id}}" id="player{{id}}"></td>
                     <td><span>{{playerName}}</span></td>
                     <td><span>{{position}}</span></td>
                     <td><span>{{tier}}</span></td>
+                    <td><button class="btn btn-danger" onclick="javascript:deletePlayer({{id}});">삭제</button></td>
                 </tr>
             {{/players}}
         </tbody>
@@ -152,6 +150,25 @@
             $("#player"+id).prop("checked", false);
         }else{
             $("#player"+id).prop("checked", true);
+        }
+    }
+
+    function deletePlayer(id){
+        if(confirm("플레이어를 삭제하시겠습니까?")) {
+            $.ajax({
+                url: "/maker/delete/"+id,
+                method: "DELETE",
+                success: function (result){
+                    alert("삭제 완료");
+                    location.reload();
+                },
+                error: function (x,h,r){
+                    alert("시스템 에러 발생");
+                    location.reload();
+                }
+            })
+        }else{
+            return;
         }
     }
 </script>

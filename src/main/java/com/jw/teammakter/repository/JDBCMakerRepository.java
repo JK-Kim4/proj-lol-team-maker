@@ -20,6 +20,11 @@ public class JDBCMakerRepository implements MakerRepository{
     }
 
     @Override
+    public void delete(int id) {
+        jdbcTemplate.update("delete from user where id =" +id);
+    }
+
+    @Override
     public Player save(Player player) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("user").usingGeneratedKeyColumns("id");

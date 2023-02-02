@@ -13,4 +13,6 @@ public interface MakerRepository {
     List<Player> getPlayerAll();
 
     List<Player> getPlayerByIds(List<Integer> ids);
+
+    void delete(int id);
 }

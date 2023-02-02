@@ -6,10 +6,7 @@ import com.jw.teammakter.service.MakerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -58,6 +55,12 @@ public class MakerController {
         List<PlayerOnTeam> result = makerService.makeTeam(selectedPlayer);
 
         return result;
+    }
+
+    @DeleteMapping("/maker/delete/{id}")
+    @ResponseBody
+    public void deleteMethod(@PathVariable("id") int id){
+        makerService.deletePlayer(id);
     }
 
     @GetMapping("/template")

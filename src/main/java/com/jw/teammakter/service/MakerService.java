@@ -86,4 +86,8 @@ public class MakerService {
     public Player insertPlayer(Player player) {
         return makerRepository.save(player);
     }
+
+    public void deletePlayer(int id) {
+        makerRepository.delete(id);
+    }
 }

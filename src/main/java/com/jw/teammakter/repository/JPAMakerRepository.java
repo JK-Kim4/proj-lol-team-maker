@@ -17,6 +17,11 @@ public class JPAMakerRepository implements MakerRepository{
     }
 
     @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
     public List<Player> getPlayerByIds(List<Integer> ids) {
         return null;
     }
