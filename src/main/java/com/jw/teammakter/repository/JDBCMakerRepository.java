@@ -26,8 +26,8 @@ public class JDBCMakerRepository implements MakerRepository{
 
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("name", player.getPlayerName());
-        parameter.put("position", player.getPositionPoint());
-        parameter.put("tier", player.getTierPoint());
+        parameter.put("position", player.getPositionName());
+        parameter.put("tier", player.getTierName());
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameter));
         player.setId(key.intValue());
@@ -42,7 +42,7 @@ public class JDBCMakerRepository implements MakerRepository{
 
     @Override
     public List<Player> getPlayerByIds(List<Integer> ids) {
-        return jdbcTemplate.query("select * from name where id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", playerRowMapper(),
+        return jdbcTemplate.query("select * from user where id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", playerRowMapper(),
                 ids.get(0),ids.get(1),ids.get(2),ids.get(3),ids.get(4),ids.get(5),ids.get(6),ids.get(7),ids.get(8),ids.get(9));
     }
 

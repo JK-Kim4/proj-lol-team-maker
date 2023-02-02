@@ -58,7 +58,6 @@ public class MakerService {
         Comparator<PlayerWithRating> cp = new Comparator<PlayerWithRating>() {
             @Override
             public int compare(PlayerWithRating o1, PlayerWithRating o2) {
-
                 int total1 = o1.getTotalRating();
                 int total2 = o2.getTotalRating();
 
@@ -69,19 +68,20 @@ public class MakerService {
                 }
             }
         };
-
         Collections.sort(players, cp);
+        result = separatePlayers(players);
 
-        for(PlayerWithRating player : players){
+        return result;
+    }
 
-            System.out.println(player.getTotalRating());
+    private List<PlayerOnTeam> separatePlayers(List<PlayerWithRating> players) {
+        List<PlayerOnTeam> result = new ArrayList<>();
 
-            if(index == 0){
-                result.add(new PlayerOnTeam(player, 0));
-                index++;
-            }else if(index == 1){
-                result.add(new PlayerOnTeam(player, 1));
-                index--;
+        for(int i = 0; i < players.size(); i++){
+            if(i == 0 || i == 9 || i == 2 || i == 7 || i == 4){
+                result.add(new PlayerOnTeam(players.get(i), 1));
+            }else {
+                result.add(new PlayerOnTeam(players.get(i), 0));
             }
         }
 

@@ -43,13 +43,33 @@
     <div class="row">
         <div class="col-5" >
             <h4>Team A</h4>
-            <ul id="teamA"></ul>
+            <table class="table">
+                <thead>
+                <tr>
+                    <td> Nickname </td>
+                    <td> 평가점수 </td>
+                </tr>
+                </thead>
+                <tbody id="teamA">
+
+                </tbody>
+
+            </table>
         </div>
         <div class="col-5">
             <h4>Team B</h4>
-            <ul id="teamB">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td> Nickname </td>
+                    <td> 평가점수 </td>
+                </tr>
+                </thead>
+                <tbody id="teamB">
 
-            </ul>
+                </tbody>
+
+            </table>
         </div>
     </div>
     <div class="row">
@@ -78,8 +98,8 @@
                 });
             }
 
-            if(data.length == 0){
-                alert("10명의 플레이어를 선택 해 주세요.");
+            if(data.length != 10){
+                alert("10명의 플레이어를 선택 해 주세요. (현재 선택된 플레이어 수: " +data.length +")");
                 return;
             }
 
@@ -94,10 +114,18 @@
 
                     result.forEach(function (elem, index){
                        if(elem.team == 1){
-                           $("#teamA").append("<li>"+elem.player.playerName+"("+elem.player.totalRating+")</li>");
+                           $("#teamA").append(
+                               "<tr>" +
+                                   "<td>"+elem.player.playerName+"</td>" +
+                                   "<td>"+elem.player.totalRating+"</td>" +
+                               "</tr>");
                            aTotal += parseInt(elem.player.totalRating);
                        }else{
-                           $("#teamB").append("<li>"+elem.player.playerName+"("+elem.player.totalRating+")</li>");
+                           $("#teamB").append(
+                                   "<tr>" +
+                                       "<td>"+elem.player.playerName+"</td>" +
+                                       "<td>"+elem.player.totalRating+"</td>" +
+                                   "</tr>");
                            bTotal += parseInt(elem.player.totalRating);
                        }
                     });

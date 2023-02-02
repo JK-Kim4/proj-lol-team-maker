@@ -28,8 +28,16 @@ public class Player {
         return this.position.getPoint();
     }
 
+    public String getPositionName(){
+        return this.position.name();
+    }
+
     public int getTierPoint(){
         return this.tier.getPoint();
+    }
+
+    public String getTierName(){
+        return this.tier.name();
     }
 
     public void setId(int id){
