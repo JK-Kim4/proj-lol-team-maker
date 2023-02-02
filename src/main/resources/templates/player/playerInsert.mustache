@@ -75,7 +75,7 @@
                 contentType: "application/json;  charset=utf-8",
                 data: JSON.stringify(player),
                 success: function (result) {
-                    if(result > 0){
+                    if(result != null){
                         if(confirm("플레이어 등록 완료! 팀 생성 메뉴로 이동하시겠습니까?")){
                             location.href="/maker/player/list";
                         }else{

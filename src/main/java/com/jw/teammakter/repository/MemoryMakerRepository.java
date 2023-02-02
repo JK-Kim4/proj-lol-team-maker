@@ -1,3 +1,4 @@
+/*
 package com.jw.teammakter.repository;
 
 import com.jw.teammakter.domain.Player;
@@ -8,9 +9,15 @@ import java.util.List;
 
 public class MemoryMakerRepository implements MakerRepository{
 
+    public MemoryMakerRepository(MakerRepository makerRepository){
+
+    }
+
     public static final List<Player> PLAYER = new ArrayList<>();
 
-    /*sample data 10 players*/
+    */
+/*sample data 10 players*//*
+
     Player player1 = new Player(1,"player1", "SUPPORTER","IRON");
     Player player2 = new Player(2,"player2","TOP","BRONZE");
     Player player3 = new Player(3,"player3", "JUNGLE","SILVER");
@@ -41,9 +48,10 @@ public class MemoryMakerRepository implements MakerRepository{
     }
 
     @Override
-    public int addPlayer(Player player){
+    public Player addPlayer(Player player){
         PLAYER.add(player);
-        return PLAYER.size();
+        return PLAYER.get(PLAYER.size()-1);
     }
 
 }
+*/

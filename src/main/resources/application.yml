@@ -3,3 +3,22 @@ server:
     encoding:
       charset: UTF-8
       force-request: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: loc
+---
+## active profile : dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+---
+## active profile : prod
+spring:
+  config:
+    activate:
+      on-profile: prod
+---

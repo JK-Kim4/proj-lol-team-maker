@@ -32,6 +32,10 @@ public class Player {
         return this.tier.getPoint();
     }
 
+    public void setId(int id){
+        this.id = id;
+    }
+
     public void setPlayerName(String playerName){
         this.playerName = playerName;
     }

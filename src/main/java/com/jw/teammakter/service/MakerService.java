@@ -3,8 +3,7 @@ package com.jw.teammakter.service;
 import com.jw.teammakter.domain.Player;
 import com.jw.teammakter.domain.PlayerOnTeam;
 import com.jw.teammakter.domain.PlayerWithRating;
-import com.jw.teammakter.repository.MemoryMakerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jw.teammakter.repository.MakerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,22 +14,22 @@ import java.util.List;
 @Service
 public class MakerService {
 
-    private MemoryMakerRepository makerRepository;
+    private MakerRepository makerRepository;
 
-    @Autowired
-    public MakerService(final MemoryMakerRepository makerRepository){
+
+    public MakerService(MakerRepository makerRepository){
         this.makerRepository = makerRepository;
     }
 
     public List<Player> getPlayersById(List<Integer> ids){
-        List<Player> result = new ArrayList<>();
-        MemoryMakerRepository.PLAYER.stream().forEach(player -> {
+        List<Player> result = makerRepository.getPlayerByIds(ids);
+        /*makerRepository.PLAYER.stream().forEach(player -> {
             ids.stream().forEach(id->{
                 if(player.getId() == id){
                     result.add(player);
                 }
             });
-        });
+        });*/
         return result;
     }
 
@@ -93,7 +92,7 @@ public class MakerService {
         return makerRepository.getPlayerAll();
     }
 
-    public int insertPlayer(Player player) {
+    public Player insertPlayer(Player player) {
         return makerRepository.addPlayer(player);
     }
 }

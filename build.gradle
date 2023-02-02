@@ -18,6 +18,10 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    //runtimeOnly 'mysql:mysql-connector-java'
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
+
     implementation 'org.projectlombok:lombok'
 }
 

@@ -8,8 +8,9 @@ import java.util.List;
 @Repository
 public interface MakerRepository {
 
-    int addPlayer(Player player);
+    Player addPlayer(Player player);
 
     List<Player> getPlayerAll();
 
+    List<Player> getPlayerByIds(List<Integer> ids);
 }

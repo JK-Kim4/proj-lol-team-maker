@@ -47,7 +47,7 @@ public class MakerController {
 
     @PostMapping("/maker/player/insert")
     @ResponseBody
-    public int insertMethod(@RequestBody Player player){
+    public Player insertMethod(@RequestBody Player player){
         return makerService.insertPlayer(player);
     }
 
