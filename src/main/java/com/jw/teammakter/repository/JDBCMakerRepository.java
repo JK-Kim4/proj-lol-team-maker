@@ -20,7 +20,7 @@ public class JDBCMakerRepository implements MakerRepository{
     }
 
     @Override
-    public Player addPlayer(Player player) {
+    public Player save(Player player) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("user").usingGeneratedKeyColumns("id");
 

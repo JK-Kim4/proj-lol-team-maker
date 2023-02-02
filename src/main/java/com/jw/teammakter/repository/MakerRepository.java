@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface MakerRepository {
 
-    Player addPlayer(Player player);
+    Player save(Player player);
 
     List<Player> getPlayerAll();
 
