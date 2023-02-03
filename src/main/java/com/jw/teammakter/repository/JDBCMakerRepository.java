@@ -21,13 +21,13 @@ public class JDBCMakerRepository implements MakerRepository{
 
     @Override
     public void delete(int id) {
-        jdbcTemplate.update("delete from user where id =" +id);
+        jdbcTemplate.update("delete from player where id =" +id);
     }
 
     @Override
     public Player save(Player player) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-        jdbcInsert.withTableName("user").usingGeneratedKeyColumns("id");
+        jdbcInsert.withTableName("player").usingGeneratedKeyColumns("id");
 
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("name", player.getPlayerName());
@@ -41,13 +41,13 @@ public class JDBCMakerRepository implements MakerRepository{
 
     @Override
     public List<Player> getPlayerAll() {
-        List<Player> resultList = jdbcTemplate.query("select * from user",  playerRowMapper());
+        List<Player> resultList = jdbcTemplate.query("select * from player",  playerRowMapper());
         return resultList;
     }
 
     @Override
     public List<Player> getPlayerByIds(List<Integer> ids) {
-        return jdbcTemplate.query("select * from user where id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", playerRowMapper(),
+        return jdbcTemplate.query("select * from player where id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", playerRowMapper(),
                 ids.get(0),ids.get(1),ids.get(2),ids.get(3),ids.get(4),ids.get(5),ids.get(6),ids.get(7),ids.get(8),ids.get(9));
     }
 
