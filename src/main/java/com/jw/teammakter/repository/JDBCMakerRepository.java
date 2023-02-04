@@ -1,6 +1,7 @@
 package com.jw.teammakter.repository;
 
 import com.jw.teammakter.domain.Player;
+import com.jw.teammakter.domain.PlayerV2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -22,6 +23,16 @@ public class JDBCMakerRepository implements MakerRepository{
     @Override
     public void delete(int id) {
         jdbcTemplate.update("delete from player where id =" +id);
+    }
+
+    @Override
+    public List<PlayerV2> getPlayerV2All() {
+        return null;
+    }
+
+    @Override
+    public List<PlayerV2> getPlayerV2ByIds(List<Integer> ids) {
+        return null;
     }
 
     @Override
