@@ -1,6 +1,7 @@
 package com.jw.teammakter.repository;
 
 import com.jw.teammakter.domain.Player;
+import com.jw.teammakter.domain.PlayerV2;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,4 +16,8 @@ public interface MakerRepository {
     List<Player> getPlayerByIds(List<Integer> ids);
 
     void delete(int id);
+
+    List<PlayerV2> getPlayerV2All();
+
+    List<PlayerV2> getPlayerV2ByIds(List<Integer> ids);
 }

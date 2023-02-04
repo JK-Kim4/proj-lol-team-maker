@@ -39,7 +39,13 @@ public class PlayerV2 {
         return this.positionSub.name();
     }
 
+    public int getTierPoint(){
+        return this.tier.getPoint();
+    }
 
+    public String getTier(){
+        return this.tier.name();
+    }
 
 
 }
