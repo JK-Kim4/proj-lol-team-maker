@@ -36,4 +36,9 @@ public class JPAMakerRepository implements MakerRepository{
     public List<PlayerV2> getPlayerV2ByIds(List<Integer> ids) {
         return null;
     }
+
+    @Override
+    public PlayerV2 saveV2(PlayerV2 playerV2) {
+        return null;
+    }
 }

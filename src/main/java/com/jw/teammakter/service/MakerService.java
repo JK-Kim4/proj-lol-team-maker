@@ -2,6 +2,7 @@ package com.jw.teammakter.service;
 
 import com.jw.teammakter.domain.Player;
 import com.jw.teammakter.domain.PlayerOnTeam;
+import com.jw.teammakter.domain.PlayerV2;
 import com.jw.teammakter.domain.PlayerWithRating;
 import com.jw.teammakter.repository.MakerRepository;
 import org.springframework.stereotype.Service;
@@ -89,5 +90,9 @@ public class MakerService {
 
     public void deletePlayer(int id) {
         makerRepository.delete(id);
+    }
+
+    public PlayerV2 insertPlayerV2(PlayerV2 playerV2) {
+        return makerRepository.saveV2(playerV2);
     }
 }
