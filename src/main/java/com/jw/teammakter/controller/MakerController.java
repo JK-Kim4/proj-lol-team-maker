@@ -2,6 +2,7 @@ package com.jw.teammakter.controller;
 
 import com.jw.teammakter.domain.Player;
 import com.jw.teammakter.domain.PlayerOnTeam;
+import com.jw.teammakter.domain.PlayerV2;
 import com.jw.teammakter.service.MakerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,5 +67,24 @@ public class MakerController {
     @GetMapping("/template")
     public String templatePage(){
         return "starter-template";
+    }
+
+    @GetMapping("/maker/v2/player/list")
+    public String listPage(Model model){
+
+        return "player2/playerList";
+    }
+
+    @GetMapping("/maker/v2/player/insert")
+    public String insertPage(){
+        return "player2/playerInsert";
+
+    }
+
+    @PostMapping("/maker/v2/player/insert")
+    @ResponseBody
+    public PlayerV2 insertMethod(@RequestBody PlayerV2 playerV2){
+        return makerService.insertPlayerV2(playerV2);
+
     }
 }

@@ -22,13 +22,32 @@ public class PlayerV2 {
 
     private Tier tier;
 
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return this.id;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
     public int getPositionMainPoint(){
         return this.positionMain.getPoint();
     }
 
     public String getPositionMain(){
         return this.positionMain.name();
+    }
 
+    public void setPositionMain(String  position){
+        this.positionMain = Position.valueOf(position);
     }
 
     public int getPositionSubPoint(){
@@ -43,8 +62,17 @@ public class PlayerV2 {
         return this.tier.getPoint();
     }
 
+    public void setPositionSub(String position){
+        this.positionSub = Position.valueOf(position);
+
+    }
+
     public String getTier(){
         return this.tier.name();
+    }
+
+    public void setTier(String tier){
+        this.tier = Tier.valueOf(tier);
     }
 
 

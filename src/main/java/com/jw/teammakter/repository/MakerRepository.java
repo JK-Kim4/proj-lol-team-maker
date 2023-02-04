@@ -20,4 +20,6 @@ public interface MakerRepository {
     List<PlayerV2> getPlayerV2All();
 
     List<PlayerV2> getPlayerV2ByIds(List<Integer> ids);
+
+    PlayerV2 saveV2(PlayerV2 playerV2);
 }
