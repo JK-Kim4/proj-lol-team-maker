@@ -25,6 +25,16 @@ public class PlayerV2 {
 
     private Tier tier;
 
+    private int team;
+
+    public void setTeam(int team) {
+        this.team = team;
+    }
+
+    public int getTeam() {
+        return team;
+    }
+
     public void setId(int id){
         this.id = id;
     }
