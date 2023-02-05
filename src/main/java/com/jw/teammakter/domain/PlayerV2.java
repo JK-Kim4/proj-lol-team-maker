@@ -1,5 +1,8 @@
 package com.jw.teammakter.domain;
 
+import lombok.ToString;
+
+@ToString
 public class PlayerV2 {
 
     public PlayerV2(){};
