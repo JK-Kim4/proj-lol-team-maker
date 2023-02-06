@@ -1,16 +1,10 @@
 package com.jw.teammakter.service;
 
-import com.jw.teammakter.domain.Player;
-import com.jw.teammakter.domain.PlayerOnTeam;
-import com.jw.teammakter.domain.PlayerV2;
-import com.jw.teammakter.domain.PlayerWithRating;
+import com.jw.teammakter.domain.*;
 import com.jw.teammakter.repository.MakerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MakerService {
@@ -84,6 +78,8 @@ public class MakerService {
         return makerRepository.getPlayerAll();
     }
 
+    public List<PlayerV2> getPlayerV2All(){return makerRepository.getPlayerV2All();}
+
     public Player insertPlayer(Player player) {
         return makerRepository.save(player);
     }
@@ -94,5 +90,29 @@ public class MakerService {
 
     public PlayerV2 insertPlayerV2(PlayerV2 playerV2) {
         return makerRepository.saveV2(playerV2);
+    }
+
+    public PositionGroup assignPositionForPlayers(List<PlayerV2> players){
+
+        Map<String, Object> tempMap = new HashMap<>();
+        PositionGroup pg = new PositionGroup();
+
+        players.forEach(player ->{
+            if(Position.TOP.equals(player.getPositionMain())){
+                pg.addTopGroup(player);
+            }else if(Position.JUNGLE.equals(player.getPositionMain())){
+                pg.addJungleGroup(player);
+            }else if(Position.APCARRY.equals(player.getPositionMain())){
+                pg.addApGroup(player);
+            }else if(Position.ADCARRY.equals(player.getPositionMain())){
+                pg.addAdGroup(player);
+            }else if(Position.SUPPORTER.equals(player.getPositionMain())){
+                pg.addSupGroup(player);
+            }else{
+                pg.addAllGroup(player);
+            }
+        });
+
+        return pg;
     }
 }

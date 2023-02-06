@@ -22,3 +22,4 @@ spring:
     activate:
       on-profile: prod
 ---
+
