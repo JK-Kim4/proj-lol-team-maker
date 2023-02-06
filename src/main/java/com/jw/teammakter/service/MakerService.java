@@ -1,8 +1,6 @@
 package com.jw.teammakter.service;
 
-import com.jw.teammakter.domain.Player;
-import com.jw.teammakter.domain.PlayerOnTeam;
-import com.jw.teammakter.domain.PlayerWithRating;
+import com.jw.teammakter.domain.*;
 import com.jw.teammakter.repository.MakerRepository;
 import org.springframework.stereotype.Service;
 
