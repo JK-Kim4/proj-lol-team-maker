@@ -1,4 +1,4 @@
-package com.jw.teammakter.domain;
+package com.jw.teammakter.domain.v2;
 
 import java.util.ArrayList;
 import java.util.List;

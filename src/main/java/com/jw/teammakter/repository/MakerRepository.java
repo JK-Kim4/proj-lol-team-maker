@@ -1,7 +1,7 @@
 package com.jw.teammakter.repository;
 
-import com.jw.teammakter.domain.Player;
-import com.jw.teammakter.domain.PlayerV2;
+import com.jw.teammakter.domain.v1.Player;
+import com.jw.teammakter.domain.v2.PlayerV2;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

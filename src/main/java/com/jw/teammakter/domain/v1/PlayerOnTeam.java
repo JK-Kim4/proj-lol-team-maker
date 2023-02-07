@@ -1,4 +1,4 @@
-package com.jw.teammakter.domain;
+package com.jw.teammakter.domain.v1;
 
 public class PlayerOnTeam {
 

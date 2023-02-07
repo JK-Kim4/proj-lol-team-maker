@@ -1,5 +1,7 @@
 package com.jw.teammakter.domain;
 
+import com.jw.teammakter.domain.v1.Player;
+
 public class Team {
 
     private Player top;

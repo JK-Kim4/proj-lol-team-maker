@@ -1,9 +1,9 @@
-package com.jw.teammakter.controller;
+package com.jw.teammakter.controller.v1;
 
-import com.jw.teammakter.domain.Player;
-import com.jw.teammakter.domain.PlayerOnTeam;
-import com.jw.teammakter.domain.PlayerV2;
-import com.jw.teammakter.service.MakerService;
+import com.jw.teammakter.domain.v1.Player;
+import com.jw.teammakter.domain.v1.PlayerOnTeam;
+import com.jw.teammakter.domain.v2.PlayerV2;
+import com.jw.teammakter.service.v1.MakerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +54,6 @@ public class MakerController {
     public List<PlayerOnTeam> teamMaking(Model model, @RequestBody List<Integer> info){
         List<Player> selectedPlayer = makerService.getPlayersById(info);
         List<PlayerOnTeam> result = makerService.makeTeam(selectedPlayer);
-
         return result;
     }
 

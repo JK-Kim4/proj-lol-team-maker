@@ -1,7 +1,7 @@
 /*
 package com.jw.teammakter.repository;
 
-import com.jw.teammakter.domain.Player;
+import com.jw.teammakter.domain.v1.Player;
 
 import java.util.ArrayList;
 import java.util.List;
