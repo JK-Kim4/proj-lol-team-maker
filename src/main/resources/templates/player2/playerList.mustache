@@ -6,7 +6,8 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nickname</th>
-            <th scope="col">Position</th>
+            <th scope="col">Position_Main</th>
+            <th scope="col">Position_Sub</th>
             <th scope="col">Top tier</th>
             <th scope="col">삭제</th>
         </tr>
@@ -16,9 +17,15 @@
             <tr onclick="javascript:changeStatus({{id}});">
                 <td><input type="checkbox" name="player" value="{{id}}" id="player{{id}}"></td>
                 <td><span>{{playerName}}</span></td>
-                <td><span>{{position}}</span></td>
+                <td><span>{{positionMain}}</span></td>
+                <td><span>{{positionSub}}</span></td>
                 <td><span>{{tier}}</span></td>
                 <td><button class="btn btn-danger" onclick="javascript:deletePlayer({{id}});">삭제</button></td>
+            </tr>
+        {{/players}}
+        {{^players}}
+            <tr>
+                <td colspan="6"><span>등록된 플레이어가 없습니다. </span></td>
             </tr>
         {{/players}}
         </tbody>
@@ -88,60 +95,11 @@
         $("#makeBtn").on("click", function (){
 
             //TODO 선택 player 검증 및 데이터 만들기
-            let data = [];
 
-            if($("input:checkbox[name='player']:checked").length > 0){
-                $("input:checkbox[name='player']:checked").each(function (index,element){
-                    data.push(element.value);
-                });
-            }
-
-            if(data.length != 10){
-                alert("10명의 플레이어를 선택 해 주세요. (현재 선택된 플레이어 수: " +data.length +")");
-                return;
-            }
-
-            $.ajax({
-                url: "/maker/making",
-                method: "post",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(data),
-                success: function (result){
-                    let aTotal = 0;
-                    let bTotal = 0;
-
-                    result.forEach(function (elem, index){
-                        if(elem.team == 1){
-                            $("#teamA").append(
-                                    "<tr>" +
-                                    "<td>"+elem.player.playerName+"</td>" +
-                                    "<td>"+elem.player.totalRating+"</td>" +
-                                    "</tr>");
-                            aTotal += parseInt(elem.player.totalRating);
-                        }else{
-                            $("#teamB").append(
-                                    "<tr>" +
-                                    "<td>"+elem.player.playerName+"</td>" +
-                                    "<td>"+elem.player.totalRating+"</td>" +
-                                    "</tr>");
-                            bTotal += parseInt(elem.player.totalRating);
-                        }
-                    });
-                    $("#teamA").append("<span> 전체 점수 :"+aTotal+"</span>");
-                    $("#teamB").append("<span> 전체 점수 :"+bTotal+"</span>");
-                    $("#inputDiv").hide();
-                    $("#resultDiv").show();
-                },
-                error: function (x){
-                    console.log(x);
-                    alert("시스템 에러 발생. 김종완에게 문의해 주세요.");
-                    return;
-                }
-            });
         });
 
         $("#insertBtn").on("click", function (){
-            location.href="/maker/player/insert";
+            location.href = "/v2/player/insert";
         });
     });
 
@@ -154,22 +112,7 @@
     }
 
     function deletePlayer(id){
-        if(confirm("플레이어를 삭제하시겠습니까?")) {
-            $.ajax({
-                url: "/maker/delete/"+id,
-                method: "DELETE",
-                success: function (result){
-                    alert("삭제 완료");
-                    location.reload();
-                },
-                error: function (x,h,r){
-                    alert("시스템 에러 발생");
-                    location.reload();
-                }
-            })
-        }else{
-            return;
-        }
+
     }
 </script>
 {{>layouts/footer}}

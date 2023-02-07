@@ -79,7 +79,7 @@ public class MakerService {
         return result;
     }
 
-    public List<Player> getPlayerAll() {
+    public List<Player> getPlayerAll(){
         return makerRepository.getPlayerAll();
     }
 
@@ -93,9 +93,7 @@ public class MakerService {
         makerRepository.delete(id);
     }
 
-    public PlayerV2 insertPlayerV2(PlayerV2 playerV2) {
-        return makerRepository.saveV2(playerV2);
-    }
+
 
     public PositionGroup assignPositionForPlayers(List<PlayerV2> players){
 

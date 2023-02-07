@@ -66,12 +66,12 @@
             let tier = $("#inputTier").val();
 
             //TODO parameter validation
-            if(positio_main == undefined || positio_main == null){
+            if(position_main == undefined || position_main == null){
                 alert("포지션을 선택해 주세요.");
                 return;
             }
 
-            if(positio_sub == undefined || positio_sub == null){
+            if(position_sub == undefined || position_sub == null){
                 alert("포지션을 선택해 주세요.");
                 return;
             }
@@ -89,14 +89,14 @@
             }
 
             $.ajax({
-                url: "/maker/v2/player/insert",
+                url: "/v2/player/insert",
                 method: "post",
                 contentType: "application/json;  charset=utf-8",
                 data: JSON.stringify(player),
                 success: function (result) {
                     if(result != null){
                         if(confirm("플레이어 등록 완료! 팀 생성 메뉴로 이동하시겠습니까?")){
-                            location.href="/maker/v2/player/list";
+                            location.href="/v2/player/list";
                         }else{
                             location.reload();
                         }

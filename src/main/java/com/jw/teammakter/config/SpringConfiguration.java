@@ -1,7 +1,9 @@
 package com.jw.teammakter.config;
 
 import com.jw.teammakter.repository.JDBCMakerRepository;
+import com.jw.teammakter.repository.JDBCPlayerRepository;
 import com.jw.teammakter.repository.MakerRepository;
+import com.jw.teammakter.repository.PlayerRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,5 +23,10 @@ public class SpringConfiguration {
     public MakerRepository makerRepository(){
 //        return new MemoryMakerRepository();
         return new JDBCMakerRepository(dataSource);
+    }
+
+    @Bean
+    public PlayerRepository playerRepository(){
+        return new JDBCPlayerRepository(dataSource);
     }
 }
