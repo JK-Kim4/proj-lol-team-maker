@@ -84,7 +84,7 @@ public class JDBCMakerRepository implements MakerRepository{
         insert.withTableName("player_v2").usingGeneratedKeyColumns("id");
 
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("name", playerV2.getName());
+        parameter.put("name", playerV2.getPlayerName());
         parameter.put("positionMain", playerV2.getPositionMain());
         parameter.put("positionSub", playerV2.getPositionSub());
         parameter.put("tier", playerV2.getTier());
@@ -99,7 +99,7 @@ public class JDBCMakerRepository implements MakerRepository{
         return (rs, rowNumber)-> {
             PlayerV2 v2 = new PlayerV2();
             v2.setId(rs.getInt("id"));
-            v2.setName(rs.getString("name"));
+            v2.setPlayerName(rs.getString("name"));
             v2.setPositionMain(rs.getString("positionMain"));
             v2.setPositionSub(rs.getString("positionSub"));
             v2.setTier(rs.getString("tier"));

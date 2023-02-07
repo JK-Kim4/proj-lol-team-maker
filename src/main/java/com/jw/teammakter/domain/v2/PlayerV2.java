@@ -7,8 +7,8 @@ public class PlayerV2 {
 
     public PlayerV2(){};
 
-    public PlayerV2(String name, String positionMain, String positionSub, String tier){
-        this.name = name;
+    public PlayerV2(String playerName, String positionMain, String positionSub, String tier){
+        this.playerName = playerName;
         this.positionMain = Position.valueOf(positionMain);
         this.positionSub = Position.valueOf(positionSub);
         this.tier = Tier.valueOf(tier);
@@ -17,7 +17,7 @@ public class PlayerV2 {
 
     private int id;
 
-    private String name;
+    private String playerName;
 
     private Position positionMain;
 
@@ -43,12 +43,12 @@ public class PlayerV2 {
         return this.id;
     }
 
-    public String getName(){
-        return this.name;
+    public String getPlayerName(){
+        return this.playerName;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public void setPlayerName(String name){
+        this.playerName = name;
     }
 
     public int getPositionMainPoint(){
