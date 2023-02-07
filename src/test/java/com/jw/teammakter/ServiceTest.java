@@ -1,8 +1,8 @@
 package com.jw.teammakter;
 
-import com.jw.teammakter.domain.PlayerV2;
-import com.jw.teammakter.domain.PositionGroup;
-import com.jw.teammakter.service.MakerService;
+import com.jw.teammakter.domain.v2.PlayerV2;
+import com.jw.teammakter.domain.v2.PositionGroup;
+import com.jw.teammakter.service.v1.MakerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

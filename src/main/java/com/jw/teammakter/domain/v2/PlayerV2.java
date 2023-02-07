@@ -1,4 +1,7 @@
-package com.jw.teammakter.domain;
+package com.jw.teammakter.domain.v2;
+
+import com.jw.teammakter.domain.Position;
+import com.jw.teammakter.domain.Tier;
 
 public class PlayerV2 {
 
