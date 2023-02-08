@@ -1,5 +1,6 @@
 package com.jw.teammakter.controller.v2;
 
+import com.jw.teammakter.domain.v1.PlayerOnTeam;
 import com.jw.teammakter.domain.v2.PlayerV2;
 import com.jw.teammakter.service.v2.PlayerService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,14 @@ public class PlayerController {
     @ResponseBody
     public int insertMethod(@RequestBody PlayerV2 playerV2){
         return playerService.insertPlayerV2(playerV2);
+    }
+
+    @PostMapping("/make/team")
+    @ResponseBody
+    public List<PlayerOnTeam> teamMaking(Model model, @RequestBody List<Integer> info){
+
+
+        return null;
     }
 
 }

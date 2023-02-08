@@ -26,18 +26,6 @@ public class ServiceTest {
         List<PlayerV2> players = makerService.getPlayerV2All();
         PositionGroup pg = makerService.assignPositionForPlayers(players);
 
-        pg.getTopGroup().stream().forEach(System.out::println);
-        System.out.println("====");
-        pg.getJungleGroup().stream().forEach(System.out::println);
-        System.out.println("====");
-        pg.getApGroup().stream().forEach(System.out::println);
-        System.out.println("====");
-        pg.getAdGroup().stream().forEach(System.out::println);
-        System.out.println("====");
-        pg.getSupGroup().stream().forEach(System.out::println);
-        System.out.println("====");
-        pg.getAllGroup().stream().forEach(System.out::println);
-
 
     }
 }
