@@ -1,6 +1,5 @@
 package com.jw.teammakter.service.v1;
 
-import com.jw.teammakter.domain.*;
 import com.jw.teammakter.domain.v1.Player;
 import com.jw.teammakter.domain.v1.PlayerOnTeam;
 import com.jw.teammakter.domain.v1.PlayerWithRating;
@@ -100,7 +99,7 @@ public class MakerService {
         Map<String, Object> tempMap = new HashMap<>();
         PositionGroup pg = new PositionGroup();
 
-        players.forEach(player ->{
+        /*players.forEach(player ->{
             if(Position.TOP.equals(player.getPositionMain())){
                 pg.addTopGroup(player);
             }else if(Position.JUNGLE.equals(player.getPositionMain())){
@@ -114,7 +113,7 @@ public class MakerService {
             }else{
                 pg.addAllGroup(player);
             }
-        });
+        });*/
 
         return pg;
     }
