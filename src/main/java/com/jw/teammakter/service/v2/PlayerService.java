@@ -33,23 +33,24 @@ import java.util.List;
         return result;
     }
 
-    public List<PositionGroup> separateWithPosition(List<PlayerV2> playerList){
+    public List<PositionGroup> separateWithPosition(List<PlayerV2> parameter){
         List<PositionGroup> resultList = new ArrayList<>();
+
+        /*올라운더 임의 포지션 배정*/
+        assignPositionForAllRounder(parameter);
 
         // 포지션 별 그룹 분배
         // 01-1. 메인 포지션 별로 그룹핑
         Position.stream().forEach(position -> {
             PositionGroup pg = new PositionGroup();
             pg.setPosition(position.name());
-            for(PlayerV2 player : playerList){
+            for(PlayerV2 player : parameter){
                 if(player.getPositionMain().equals(position.name())){
                     pg.addPlayer(player);
                 }
             }
             resultList.add(pg);
         });
-
-        // 01-2. Position.ALLROUNDER 임의 그룹 배정 진행
 
 
         // 02-1. 각 포지션 별 2명 선별
@@ -60,6 +61,16 @@ import java.util.List;
 
         // return result = 5 Position Group have 2 players each
         return resultList;
+    }
+
+    private static void assignPositionForAllRounder(List<PlayerV2> playerList) {
+        for(PlayerV2 playerV2 : playerList){
+            if(Position.ALLROUNDER.name().equals(playerV2.getPositionMain())){
+                playerV2.setPositionMain(Position.alignRandomPositionForAllRounder());
+                playerV2.setPositionSub(Position.alignRandomPositionForAllRounder());
+            }
+        }
+        /*return playerList;*/
     }
 
     public int delete(int playerId) {

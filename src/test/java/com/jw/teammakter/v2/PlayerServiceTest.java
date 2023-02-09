@@ -63,8 +63,8 @@ public class PlayerServiceTest {
                     temp.setTier(Tier.GOLD2.name());
                     break;
                 default:
-                    temp.setPositionMain(Position.SUPPORTER.name());
-                    temp.setPositionSub(Position.JUNGLE.name());
+                    temp.setPositionMain(Position.ALLROUNDER.name());
+                    temp.setPositionSub(Position.ALLROUNDER.name());
                     temp.setTier(Tier.GOLD2.name());
                     break;
             }

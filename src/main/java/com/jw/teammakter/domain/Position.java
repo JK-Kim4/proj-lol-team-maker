@@ -31,7 +31,7 @@ public enum Position {
     }
 
     /*Position.ALLROUNDER 에게 임의 포지션 할당*/
-    public String alignRandomPositionForAllRounder(){
+    public static String alignRandomPositionForAllRounder(){
         int validator = CommonUtil.randomIntGenerateOnRange(1,5);
         switch (validator){
             case 1:
