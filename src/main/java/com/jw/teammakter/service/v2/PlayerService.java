@@ -34,9 +34,10 @@ import java.util.List;
     }
 
     public List<PositionGroup> separateWithPosition(List<PlayerV2> playerList){
-
         List<PositionGroup> resultList = new ArrayList<>();
 
+        // 포지션 별 그룹 분배
+        // 01. 메인 포지션 별로 그룹핑
         Position.stream().forEach(position -> {
             PositionGroup pg = new PositionGroup();
             pg.setPosition(position.name());
@@ -48,8 +49,17 @@ import java.util.List;
             resultList.add(pg);
         });
 
+        // 02-1. 각 포지션 별 2명 선별
+        // 02-2. 초과 인원 sub position 재분배
 
 
+
+
+        // return result = 5 Position Group have 2 players each
         return resultList;
+    }
+
+    public int delete(int playerId) {
+        return playerRepository.delete(playerId);
     }
 }

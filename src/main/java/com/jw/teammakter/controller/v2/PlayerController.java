@@ -48,4 +48,10 @@ public class PlayerController {
         return null;
     }
 
+    @DeleteMapping("/delete/{playerId}")
+    @ResponseBody
+    public int deleteMethod(@PathVariable("playerId") int playerId){
+        return playerService.delete(playerId);
+    }
+
 }

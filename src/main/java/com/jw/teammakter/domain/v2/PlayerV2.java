@@ -84,6 +84,15 @@ public class PlayerV2 {
         return this.tier.name();
     }
 
+    public int getTierPointMain(){
+        return this.tier.getPoint();
+    }
+
+    /*Sub Position tier point = Main Position tier point - 10 */
+    public int getTierPointSub(){
+        return (this.tier.getPoint() - 10);
+    }
+
     public void setTier(String tier){
         this.tier = Tier.valueOf(tier);
     }
