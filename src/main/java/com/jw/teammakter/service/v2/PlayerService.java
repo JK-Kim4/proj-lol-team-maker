@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-    public class PlayerService {
+public class PlayerService {
         private PlayerRepository playerRepository;
 
         public PlayerService(PlayerRepository playerRepository){
@@ -24,13 +24,12 @@ import java.util.List;
     }
 
     public List<PlayerV2> getPlayerList(){
-        List<PlayerV2> result = new ArrayList<>();
         try {
-            result = playerRepository.getPlayerList();
-        }catch (Exception e){
+            return playerRepository.getPlayerList();
+        } catch (Exception e){
             e.printStackTrace();
+            return new ArrayList<>();
         }
-        return result;
     }
 
     public List<PositionGroup> separateWithPosition(List<PlayerV2> parameter){
@@ -64,13 +63,13 @@ import java.util.List;
     }
 
     private static void assignPositionForAllRounder(List<PlayerV2> playerList) {
-        for(PlayerV2 playerV2 : playerList){
-            if(Position.ALLROUNDER.name().equals(playerV2.getPositionMain())){
-                playerV2.setPositionMain(Position.alignRandomPositionForAllRounder());
-                playerV2.setPositionSub(Position.alignRandomPositionForAllRounder());
-            }
-        }
-        /*return playerList;*/
+        playerList.stream()
+                .filter(player -> Position.ALLROUNDER.name().equals(player.getPositionMain()))
+                .forEach(player -> {
+                    String position = Position.alignRandomPositionForAllRounder();
+                    player.setPositionMain(position);
+                    player.setPositionSub(position);
+                });
     }
 
     public int delete(int playerId) {
