@@ -35,7 +35,6 @@ public enum Tier {
     public int getPoint(){
         return this.point;
     }
-
     public static Stream<Tier> stream() {
         return Stream.of(Tier.values());
     }

@@ -1,4 +1,4 @@
-package com.jw.teammakter.config;
+package com.jw.teammakter.common.config;
 
 import com.jw.teammakter.repository.JDBCMakerRepository;
 import com.jw.teammakter.repository.JDBCPlayerRepository;

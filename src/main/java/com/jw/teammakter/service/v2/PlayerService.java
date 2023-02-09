@@ -37,7 +37,7 @@ import java.util.List;
         List<PositionGroup> resultList = new ArrayList<>();
 
         // 포지션 별 그룹 분배
-        // 01. 메인 포지션 별로 그룹핑
+        // 01-1. 메인 포지션 별로 그룹핑
         Position.stream().forEach(position -> {
             PositionGroup pg = new PositionGroup();
             pg.setPosition(position.name());
@@ -48,6 +48,9 @@ import java.util.List;
             }
             resultList.add(pg);
         });
+
+        // 01-2. Position.ALLROUNDER 임의 그룹 배정 진행
+
 
         // 02-1. 각 포지션 별 2명 선별
         // 02-2. 초과 인원 sub position 재분배
