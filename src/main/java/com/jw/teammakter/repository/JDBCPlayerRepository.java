@@ -41,12 +41,6 @@ public class JDBCPlayerRepository implements PlayerRepository{
         return jdbcTemplate.query(query, playerMapper());
     }
 
-    @Override
-    public int delete(int playerId) {
-        String query = "DELETE FROM PLAYER_V2 WHERE PLAYER_ID = " +playerId;
-        return jdbcTemplate.update(query);
-    }
-
     private RowMapper<PlayerV2> playerMapper(){
         return ((rs, rowNum) -> {
             PlayerV2 player = new PlayerV2();

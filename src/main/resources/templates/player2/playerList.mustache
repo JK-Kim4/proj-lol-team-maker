@@ -113,19 +113,6 @@
 
     function deletePlayer(id){
 
-        $.ajax({
-            url: "/v2/player/delete/"+id,
-            method: "DELETE",
-            success: function (result){
-                alert("삭제 완료");
-                location.reload();
-            },
-            error: function (x,h,r){
-                alert("시스템 에러 발생");
-                location.reload();
-            }
-        })
-
     }
 </script>
 {{>layouts/footer}}

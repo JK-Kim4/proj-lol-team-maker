@@ -9,6 +9,4 @@ public interface PlayerRepository {
     int save(PlayerV2 playerV2);
 
     List<PlayerV2> getPlayerList();
-
-    int delete(int playerId);
 }
