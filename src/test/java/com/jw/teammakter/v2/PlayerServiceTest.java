@@ -82,7 +82,7 @@ public class PlayerServiceTest {
         positionGroupList.stream().forEach(pg->{
             System.out.println("=======" + pg.getPositionName() + " POSITION PLAYER =======");
             pg.getPlayerOnPosition().stream().forEach(playerV2 -> {
-                System.out.println("name = " +playerV2.getPlayerName() + ", position = "+playerV2.getPositionMain());
+                System.out.println("name = " +playerV2.getPlayerName() + ", main position = "+playerV2.getPositionMain() +", sub position = "+playerV2.getPositionSub());
             });
         });
 

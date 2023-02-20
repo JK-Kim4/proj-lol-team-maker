@@ -97,7 +97,7 @@ public class MakerService {
     public PositionGroup assignPositionForPlayers(List<PlayerV2> players){
 
         Map<String, Object> tempMap = new HashMap<>();
-        PositionGroup pg = new PositionGroup();
+        /*PositionGroup pg = new PositionGroup();*/
 
         /*players.forEach(player ->{
             if(Position.TOP.equals(player.getPositionMain())){
@@ -115,6 +115,6 @@ public class MakerService {
             }
         });*/
 
-        return pg;
+        return null;
     }
 }

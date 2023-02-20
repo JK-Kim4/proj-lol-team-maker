@@ -35,45 +35,41 @@ public class PlayerService {
 
     public List<PositionGroup> separateWithPosition(List<PlayerV2> parameter){
         List<PositionGroup> resultList = new ArrayList<>();
-
         /*올라운더 임의 포지션 배정*/
         assignPositionForAllRounder(parameter);
-
         // 포지션 별 그룹 분배
         // 01-1. 메인 포지션 별로 그룹핑
         Position.stream().forEach(position -> {
-            PositionGroup pg = new PositionGroup();
-            pg.setPosition(position.name());
-            for(PlayerV2 player : parameter){
-                if(player.getPositionMain().equals(position.name())){
-                    pg.addPlayer(player);
+            PositionGroup pg = new PositionGroup(position);
+            for(PlayerV2 playerV2 : parameter){
+                if(playerV2.getPositionMain().equals(position.name())){
+                    pg.addPlayer(playerV2);
                 }
             }
             resultList.add(pg);
         });
 
-        // 02-1. 각 포지션 별 2명 선별
-        resultList.stream().forEach(positionGroup -> {
-
-            //메인 포지션 인원 2명 이상인 경우 2명 남기고 재분배
-            if(positionGroup.getPlayerOnPosition().size() > 2){
-                List<PlayerV2> temp = positionGroup.getPlayerOnPosition();
-                int player1 = 0;
-                int player2 = 0;
+        List<PlayerV2> leftPlayerList = new ArrayList<>();
+        // 02-1.각 포지션 별 2명 플레이어만 할당
+        for (PositionGroup pg : resultList){
+            if (pg.getPlayerOnPosition().size() > 2){
                 do{
-                    player1 = (int) (Math.random() * temp.size()) + 1;
-                    player2 = (int) (Math.random() * temp.size()) + 1;
-                }while (player1 == player2);
-
-                System.out.println("player size = " +temp.size());
-                System.out.println("player1 = " +player1);
-                System.out.println("player2 = " +player2);
-
+                    int index = (int) (Math.random() * pg.getPlayerOnPosition().size());
+                    leftPlayerList.add(pg.getPlayerOnPosition().remove(index));
+                }while (pg.getPlayerOnPosition().size() != 2);
             }
+        }
 
-        });
+        // 03-1. 플레이어가 1명인 경우
+        for (PositionGroup pg : resultList){
+            if(pg.getPlayerOnPosition().size() == 0 || pg.getPlayerOnPosition().size() == 1){
+                for(int i = pg.getPlayerOnPosition().size(); i < 2; i++){
 
-        // 02-2. 초과 인원 sub position 재분배
+                }
+            }
+        }
+
+
 
 
 

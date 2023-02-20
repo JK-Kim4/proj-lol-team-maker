@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PositionGroup {
+    public PositionGroup(Position position){
+        this.position = position;
+    }
 
     private Position position;
 
@@ -22,6 +25,16 @@ public class PositionGroup {
 
     public void setPosition(String position){
         this.position = Position.valueOf(position);
+    }
+
+    public void setPlayerOnPosition(List<PlayerV2> playerList){
+        this.playerOnPosition = playerList;
+    }
+
+    public void addPlayerOnPosition(List<PlayerV2> playerList){
+        for(PlayerV2 player: playerList){
+            playerOnPosition.add(player);
+        }
     }
 
     public void addPlayer(PlayerV2 playerV2){
