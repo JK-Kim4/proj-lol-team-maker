@@ -12,7 +12,6 @@ public class PlayerV2 {
         this.positionMain = Position.valueOf(positionMain);
         this.positionSub = Position.valueOf(positionSub);
         this.tier = Tier.valueOf(tier);
-
     }
 
     private int id;
@@ -25,13 +24,13 @@ public class PlayerV2 {
 
     private Tier tier;
 
-    private int team;
+    private boolean team;
 
-    public void setTeam(int team) {
+    public void setTeam(boolean team) {
         this.team = team;
     }
 
-    public int getTeam() {
+    public boolean getTeam() {
         return team;
     }
 
