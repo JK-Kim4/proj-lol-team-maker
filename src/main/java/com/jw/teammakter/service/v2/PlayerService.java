@@ -60,20 +60,14 @@ public class PlayerService {
             }
         }
 
-        // 03-1. 플레이어가 1명인 경우
         for (PositionGroup pg : resultList){
-            if(pg.getPlayerOnPosition().size() == 0 || pg.getPlayerOnPosition().size() == 1){
-                for(int i = pg.getPlayerOnPosition().size(); i < 2; i++){
-
-                }
+            if (pg.getPlayerOnPosition().size() == 0 || pg.getPlayerOnPosition().size() == 1){
+                do{
+                    int index = (int) (Math.random() * leftPlayerList.size());
+                    pg.addPlayer(leftPlayerList.get(index));
+                }while (pg.getPlayerOnPosition().size() != 2);
             }
         }
-
-
-
-
-
-
         // return result = 5 Position Group have 2 players each
         return resultList;
     }
