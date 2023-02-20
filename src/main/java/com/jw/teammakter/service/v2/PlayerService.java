@@ -9,17 +9,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Slf4j
 public class PlayerService {
-        private PlayerRepository playerRepository;
+    private PlayerRepository playerRepository;
 
-        public PlayerService(PlayerRepository playerRepository){
-            this.playerRepository = playerRepository;
-        }
+    public PlayerService(PlayerRepository playerRepository){
+        this.playerRepository = playerRepository;
+    }
 
-        public int insertPlayerV2(PlayerV2 playerV2) {
+    public int insertPlayerV2(PlayerV2 playerV2) {
         return playerRepository.save(playerV2);
     }
 

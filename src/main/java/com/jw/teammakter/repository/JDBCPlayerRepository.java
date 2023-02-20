@@ -52,4 +52,9 @@ public class JDBCPlayerRepository implements PlayerRepository{
             return player;
         });
     }
+
+    @Override
+    public int delete(int playerId) {
+        return 0;
+    }
 }
