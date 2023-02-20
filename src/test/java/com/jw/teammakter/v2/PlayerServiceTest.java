@@ -12,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootTest
 @ActiveProfiles("dev")
@@ -94,5 +95,20 @@ public class PlayerServiceTest {
         Position.stream().forEach(position -> {
             System.out.println("position = " + position.name());
         });
+    }
+
+    @Test
+    public void 랜덤_부울값_테스트(){
+        for(int i = 0; i < 10; i++){
+            System.out.println(getBoolean());
+        }
+    }
+
+    private boolean getBoolean(){
+        Random random = new Random();
+
+
+
+        return random.nextBoolean();
     }
 }
