@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -39,35 +41,64 @@ public class PlayerService {
         assignPositionForAllRounder(parameter);
         // 포지션 별 그룹 분배
         // 01-1. 메인 포지션 별로 그룹핑
-        Position.stream().forEach(position -> {
-            PositionGroup pg = new PositionGroup(position);
-            for(PlayerV2 playerV2 : parameter){
-                if(playerV2.getPositionMain().equals(position.name())){
-                    pg.addPlayer(playerV2);
-                }
+        System.out.println("================== 선택 플레이어 메인 포지션 할당 START ==================");
+        Map<String, List<PlayerV2>> map = parameter.stream().collect(Collectors.groupingBy(PlayerV2::getPositionMain));
+        System.out.println("================== 선택 플레이어 메인 포지션 할당 END ==================");
+
+
+        System.out.println("================== 각 포지션 별 플레이어 2명 제한 START ==================");
+        List<PlayerV2> leftPlayerList = new ArrayList<>();
+        map.forEach((s, playerList) -> {
+            while (playerList.size() > 2){
+                int index = (int) (Math.random() * playerList.size());
+                leftPlayerList.add(playerList.remove(index));
             }
-            resultList.add(pg);
+        });
+        System.out.println("================== 각 포지션 별 플레이어 2명 제한 END ==================");
+
+
+        System.out.println("================== 미할당 플레이어 서브 포지션 기준 할당 START ==================");
+        for(PlayerV2 playerV2 : leftPlayerList){
+            List<PlayerV2> playerList =  map.get(playerV2.getPositionSub());
+            if(playerList == null){
+                List<PlayerV2> subPositionPlayer = new ArrayList<>();
+                subPositionPlayer.add(playerV2);
+                map.put(playerV2.getPositionSub(), subPositionPlayer);
+            }else if (playerList.size() == 1 ){
+                playerList.add(playerV2);
+                map.put(playerV2.getPositionSub(), playerList);
+            }else {
+                continue;
+            }
+        }
+        System.out.println("================== 미할당 플레이어 서브 포지션 기준 할당 END ==================");
+
+
+        System.out.println("================== 미할당 플레이어 임의 포지션 할당 START ==================");
+        // 02-1.각 포지션 별 2명 플레이어만 할당
+        map.forEach((s, playerList) -> {
+            if(playerList.isEmpty()){
+                List<PlayerV2> nonPlayer = new ArrayList<>();
+                for(int i = 0; i < 2; i++){
+                    int index = (int) (Math.random() * leftPlayerList.size());
+                    nonPlayer.add(leftPlayerList.remove(index));
+                }
+                playerList = nonPlayer;
+            }else if(playerList.size() == 1){
+                int index = (int) (Math.random() * leftPlayerList.size());
+                playerList.add(leftPlayerList.remove(index));
+            }
         });
 
-        List<PlayerV2> leftPlayerList = new ArrayList<>();
-        // 02-1.각 포지션 별 2명 플레이어만 할당
-        for (PositionGroup pg : resultList){
-            if (pg.getPlayerOnPosition().size() > 2){
-                do{
-                    int index = (int) (Math.random() * pg.getPlayerOnPosition().size());
-                    leftPlayerList.add(pg.getPlayerOnPosition().remove(index));
-                }while (pg.getPlayerOnPosition().size() != 2);
-            }
-        }
+        map.forEach((s ,playserList) -> {
+            System.out.println("position " + s + "  result");
+            playserList.stream().forEach(playerV2 -> {
+                System.out.println("main position = " +playerV2.getPositionMain());
+                System.out.println("sub position = " +playerV2.getPositionSub());
+            });
+        });
+        System.out.println("================== 미할당 플레이어 임의 포지션 할당 END ==================");
 
-        for (PositionGroup pg : resultList){
-            if (pg.getPlayerOnPosition().size() == 0 || pg.getPlayerOnPosition().size() == 1){
-                do{
-                    int index = (int) (Math.random() * leftPlayerList.size());
-                    pg.addPlayer(leftPlayerList.get(index));
-                }while (pg.getPlayerOnPosition().size() != 2);
-            }
-        }
         // return result = 5 Position Group have 2 players each
         return resultList;
     }
