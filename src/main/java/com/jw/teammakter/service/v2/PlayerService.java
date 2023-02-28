@@ -1,6 +1,7 @@
 package com.jw.teammakter.service.v2;
 
 import com.jw.teammakter.domain.Position;
+import com.jw.teammakter.domain.Team;
 import com.jw.teammakter.domain.v2.PlayerV2;
 import com.jw.teammakter.domain.v2.PositionGroup;
 import com.jw.teammakter.repository.PlayerRepository;
@@ -37,6 +38,12 @@ public class PlayerService {
 
     public List<PositionGroup> separateWithPosition(List<PlayerV2> parameter){
         List<PositionGroup> resultList = new ArrayList<>();
+
+        int totalRate = 0;
+
+        for(PlayerV2 p : parameter){
+            totalRate += (p.getPositionMainPoint() + p.getTierPoint());
+        }
         /*올라운더 임의 포지션 배정*/
         assignPositionForAllRounder(parameter);
         // 포지션 별 그룹 분배
@@ -101,6 +108,14 @@ public class PlayerService {
 
         // return result = 5 Position Group have 2 players each
         return resultList;
+    }
+
+    public List<Team> assignTeamToEachPlayer(List<PositionGroup> positionGroups){
+        List<Team> result = new ArrayList<>();
+
+
+
+        return result;
     }
 
     private static void assignPositionForAllRounder(List<PlayerV2> playerList) {
