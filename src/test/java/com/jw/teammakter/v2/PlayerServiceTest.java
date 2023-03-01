@@ -12,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @SpringBootTest
@@ -78,16 +79,18 @@ public class PlayerServiceTest {
         });
 
         //when - make Teams
-        List<PositionGroup> positionGroupList = playerService.separateWithPosition(playerV2List);
-
-        positionGroupList.stream().forEach(pg->{
-            System.out.println("=======" + pg.getPositionName() + " POSITION PLAYER =======");
-            pg.getPlayerOnPosition().stream().forEach(playerV2 -> {
-                System.out.println("name = " +playerV2.getPlayerName() + ", main position = "+playerV2.getPositionMain() +", sub position = "+playerV2.getPositionSub());
-            });
-        });
+        Map<String, List<PlayerV2>> map = playerService.separateWithPosition(playerV2List);
 
         //then - validation Teams
+
+        System.out.printf("separateWithPosition result =====");
+        map.forEach((s ,playserList) -> {
+            System.out.println("position " + s + "  result");
+            playserList.stream().forEach(playerV2 -> {
+                System.out.println("main position = " +playerV2.getPositionMain());
+                System.out.println("sub position = " +playerV2.getPositionSub());
+            });
+        });
     }
 
     @Test

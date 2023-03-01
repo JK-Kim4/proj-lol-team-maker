@@ -36,9 +36,7 @@ public class PlayerService {
         }
     }
 
-    public List<PositionGroup> separateWithPosition(List<PlayerV2> parameter){
-        List<PositionGroup> resultList = new ArrayList<>();
-
+    public Map<String, List<PlayerV2>> separateWithPosition(List<PlayerV2> parameter){
         int totalRate = 0;
 
         for(PlayerV2 p : parameter){
@@ -96,24 +94,26 @@ public class PlayerService {
                 playerList.add(leftPlayerList.remove(index));
             }
         });
-
-        map.forEach((s ,playserList) -> {
-            System.out.println("position " + s + "  result");
-            playserList.stream().forEach(playerV2 -> {
-                System.out.println("main position = " +playerV2.getPositionMain());
-                System.out.println("sub position = " +playerV2.getPositionSub());
-            });
-        });
         System.out.println("================== 미할당 플레이어 임의 포지션 할당 END ==================");
-
+        assignTeamToEachPlayer(map);
         // return result = 5 Position Group have 2 players each
-        return resultList;
+        return map;
     }
 
-    public List<Team> assignTeamToEachPlayer(List<PositionGroup> positionGroups){
+    public List<Team> assignTeamToEachPlayer(Map<String, List<PlayerV2>> param){
         List<Team> result = new ArrayList<>();
+        int avgRating = 0;
 
+        for(String key : param.keySet()){
+            List<PlayerV2> playerV2List = param.get(key);
+            for(PlayerV2 p : playerV2List){
+                avgRating += (p.getTierPoint() + p.getPositionMainPoint());
+            }
+        }
 
+        avgRating = avgRating/10;
+
+        System.out.println("total Rating = " + avgRating);
 
         return result;
     }
