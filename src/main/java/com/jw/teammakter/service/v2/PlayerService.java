@@ -3,7 +3,6 @@ package com.jw.teammakter.service.v2;
 import com.jw.teammakter.domain.Position;
 import com.jw.teammakter.domain.Team;
 import com.jw.teammakter.domain.v2.PlayerV2;
-import com.jw.teammakter.domain.v2.PositionGroup;
 import com.jw.teammakter.repository.PlayerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,8 @@ public class PlayerService {
 
     public List<PlayerV2> getPlayerList(){
         try {
-            return playerRepository.getPlayerList();
+            List<PlayerV2> result = playerRepository.getPlayerList();
+            return result;
         } catch (Exception e){
             e.printStackTrace();
             return new ArrayList<>();
