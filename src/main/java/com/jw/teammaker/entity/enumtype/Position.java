@@ -6,6 +6,6 @@ public enum Position {
     JNG,
     MID,
     AD,
-    SUP
+    SUPPORTER
 
 }
