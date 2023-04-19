@@ -1,8 +1,35 @@
 {{>layouts/header}}
 
-<div class="container starter-template" >
-    <h3>플레이어 선택</h3>
+<div class="starter-template">
+    <div class="container-head-title">
+        <h1>플레이어 목록</h1>
+    </div>
+    <div class="container-head-menu">
+            <button class="btn btn-primary" id="movePlayerSavePage">플레이어 추가</button>
+    </div>
 
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>게시글 제목</th>
+                    <th>등록일</th>
+                    <th>수정일</th>
+                    <th>등록/수정 관리자</th>
+                </tr>
+                </thead>
+                <tbody id="playerListDiv">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
+<script src="/js/player.js"></script>
+<script>
+
+</script>
 {{>layouts/footer}}
