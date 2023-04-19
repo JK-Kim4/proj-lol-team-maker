@@ -19,16 +19,13 @@ public class PlayerServiceTest {
 
     @Test
     public void player_save_test(){
-
-        System.out.println("position = " +Position.valueOf(Position.BRONZE.toString()));
-
         //given
         PlayerSaveDto dto = new PlayerSaveDto();
         dto.setName("test");
         dto.setNickName("tester");
-        dto.setTier(Tier.FIVE.toString());
-        dto.setMainPosition(Position.BRONZE.toString());
-        dto.setSubPosition(Position.SILVER.toString());
+        dto.setTier(Tier.BRONZE.toString());
+        dto.setMainPosition(Position.TOP.toString());
+        dto.setSubPosition(Position.MID.toString());
 
         System.out.println("dto = " +dto.toString());
 

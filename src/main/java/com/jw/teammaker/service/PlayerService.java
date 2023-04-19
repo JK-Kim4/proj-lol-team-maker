@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 /**
@@ -30,7 +31,12 @@ public class PlayerService {
     * Response Parameter: Long PlayerId
     * */
     public Long save(PlayerSaveDto dto){
-        return playerRepository.save(new Player(dto));
+        if(isAlreadyExistPlayer(dto.getName())){
+            return playerRepository.save(new Player(dto));
+        }else {
+            throw new IllegalArgumentException("이미 존재하는 사용자입니다.");
+        }
+
     }
 
     /*플레이어 삭제
@@ -60,5 +66,11 @@ public class PlayerService {
     }
 
     /*private*/
-
+    private boolean isAlreadyExistPlayer(String playerName){
+        try {
+            return CommonUtils.isNull(playerRepository.findByName(playerName));
+        }catch (NoResultException e){
+            return true;
+        }
+    }
 }

@@ -4,8 +4,8 @@ import com.jw.teammaker.entity.Player;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -34,14 +34,15 @@ public class PlayerRepository {
         em.remove(findPlayer);
     }
 
-    public Player findByName(String playerName) {
-        TypedQuery<Player> result = em.createQuery(
+    public Player findByName(String playerName) throws NoResultException {
+
+        Player result = em.createQuery(
                         "select p " +
                                 "from Player p " +
                                 "where name = :name",
                                     Player.class)
-                                .setParameter("name", playerName);
-        return (Player) result;
+                                .setParameter("name", playerName).getSingleResult();
+        return result;
     }
 
     public List<Player> findAll() {
