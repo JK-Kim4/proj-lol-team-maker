@@ -36,7 +36,7 @@ public class PlayerRepository {
         TypedQuery<Player> result = em.createQuery(
                         "select p " +
                                 "from Player p " +
-                                "where name = :name",
+                                "where p.name = :name",
                                     Player.class)
                                 .setParameter("name", playerName);
         return (Player) result;
