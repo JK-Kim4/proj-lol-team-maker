@@ -4,8 +4,6 @@ import com.jw.teammaker.entity.enumtype.Position;
 import com.jw.teammaker.entity.enumtype.Tier;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -16,11 +14,12 @@ import javax.persistence.*;
  * 게임 플레이어 정보 관리
  * */
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 public class Player {
 
-    @Builder
+
+    public Player(){};
+
     public Player(PlayerSaveDto dto){
         this.name = dto.getName();
         this.nickname = dto.getNickName();
