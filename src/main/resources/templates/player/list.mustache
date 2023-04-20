@@ -14,10 +14,10 @@
                 <thead>
                 <tr>
                     <th>No</th>
-                    <th>게시글 제목</th>
-                    <th>등록일</th>
-                    <th>수정일</th>
-                    <th>등록/수정 관리자</th>
+                    <th>닉네임</th>
+                    <th>메인포지션</th>
+                    <th>서브포지션</th>
+                    <th>탑티어</th>
                 </tr>
                 </thead>
                 <tbody id="playerListDiv">
@@ -30,6 +30,8 @@
 
 <script src="/js/player.js"></script>
 <script>
-
+    $(document).ready(function(){
+       main.getPlayerList();
+    });
 </script>
 {{>layouts/footer}}
