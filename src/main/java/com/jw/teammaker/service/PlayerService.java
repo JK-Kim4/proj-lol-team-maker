@@ -30,9 +30,7 @@ public class PlayerService {
     * Response Parameter: Long PlayerId
     * */
     public Long save(PlayerSaveDto dto){
-        return playerRepository.save(Player.builder()
-                                        .dto(dto)
-                                    .build());
+        return playerRepository.save(new Player(dto));
     }
     /*플레이어 삭제
     * Request Parameter: Long playerId
