@@ -4,6 +4,7 @@ import com.jw.teammaker.common.util.CommonUtils;
 import com.jw.teammaker.entity.Player;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import com.jw.teammaker.repository.PlayerRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,16 +16,12 @@ import java.util.List;
  *
  * */
 @Service
+@RequiredArgsConstructor
 public class PlayerService {
 
     private final Logger logger = LoggerFactory.getLogger(PlayerService.class);
 
-    private PlayerRepository playerRepository;
-
-    private PlayerService(PlayerRepository playerRepository){
-        this.playerRepository = playerRepository;
-    }
-
+    private final PlayerRepository playerRepository;
 
     /*PUBLIC*/
 
@@ -33,25 +30,16 @@ public class PlayerService {
     * Response Parameter: Long PlayerId
     * */
     public Long save(PlayerSaveDto dto){
-        if(!isAlreadyExistPlayer(dto.getName())){
-            return playerRepository.save(Player.builder()
-                                            .dto(dto)
-                                        .build());
-        }else {
-            throw new IllegalArgumentException("이미 존재하는 플레이어 이름입니다.");
-        }
+        return playerRepository.save(Player.builder()
+                                        .dto(dto)
+                                    .build());
     }
     /*플레이어 삭제
     * Request Parameter: Long playerId
     * Response Parameter: void
     * */
     public void delete(Long playerId){
-        Player findPlayer = playerRepository.findById(playerId);
-        if(!CommonUtils.isNull(findPlayer)){
-            playerRepository.delete(findPlayer);
-        }else {
-            throw new IllegalArgumentException("삭제할 사용자의 ID를 확인해 주세요.");
-        }
+        playerRepository.delete(playerId);
     }
 
     /*플레이어 조회

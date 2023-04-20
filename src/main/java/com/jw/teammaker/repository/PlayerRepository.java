@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ import java.util.List;
  *
  * */
 @Repository
+@Transactional
 public class PlayerRepository {
 
     @PersistenceContext
@@ -28,8 +30,8 @@ public class PlayerRepository {
         return em.find(Player.class, playerId);
     }
 
-    public void delete(Player findPlayer) {
-        em.remove(findPlayer);
+    public void delete(Long playerId) {
+        em.remove(findById(playerId));
     }
 
     public Player findByName(String playerName) {
