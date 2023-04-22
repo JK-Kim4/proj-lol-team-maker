@@ -14,30 +14,54 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="inputTitle">제목</label>
-                        <input type="text" class="form-control" id="inputTitle" placeholder="제목을 입력해 주세요">
+                        <label for="inputName">이름</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="inputIsAvailable">사용 여부</label>
-                        <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                        <fieldset>
-                            <div class="form-group">
-                                <div class="form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inputIsAvailable" id="inputIsAvailableY" value="true" checked>
-                                    <label class="form-check-label" for="inputIsAvailableY">Y</label>
-                                </div>
-                                <div class="form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inputIsAvailable" id="inputIsAvailableN" value="false">
-                                    <label class="form-check-label" for="inputIsAvailableN">N</label>
-                                </div>
-                            </div>
-                        </fieldset>
+                        <label for="inputNickName">닉네임</label>
+                        <input type="text" class="form-control" id="inputNickName" placeholder="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <label for="inputDescription">본문</label>
-                        <textarea class="form-control" id="inputDescription" cols="30" rows="10"></textarea>
+                        <label for="inputMainPosition">메인 포지션</label>
+                        <select name="inputMainPosition" id="inputMainPosition">
+                            <option value="TOP">탑</option>
+                            <option value="JUG">정글</option>
+                            <option value="MID">미드</option>
+                            <option value="AD">원딜</option>
+                            <option value="SUP">서포터</option>
+                            <option value="ALL">올라운더</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="inputSubPosition">서브 포지션</label>
+                        <select name="inputSubPosition" id="inputSubPosition">
+                            <option value="TOP">탑</option>
+                            <option value="JUG">정글</option>
+                            <option value="MID">미드</option>
+                            <option value="AD">원딜</option>
+                            <option value="SUP">서포터</option>
+                            <option value="ALL">올라운더</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="inputTier01">탑 티어</label>
+                        <select name="inputTier01" id="inputTier01">
+                            <option value="IRON">아이언</option>
+                            <option value="BRONZE">브론즈</option>
+                            <option value="SILVER">실버</option>
+                            <option value="GOLD">골드</option>
+                            <option value="PLATINUM">플레티넘</option>
+                            <option value="DIAMOND">다이아몬드</option>
+                            <option value="MASTER">마스터</option>
+                            <option value="GRANDMASTER">그랜드마스터</option>
+                            <option value="CHALLENGER">챌린저</option>
+                            <option value="SEMIPRO">준프로</option>
+                            <option value="PRO">프로</option>
+                        </select>
                     </div>
                 </div>
             </div>

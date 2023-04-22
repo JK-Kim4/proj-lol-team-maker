@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -23,7 +25,33 @@ public class PlayerController {
 
     private final PlayerService playerService;
 
-    @GetMapping("/player")
+
+    /*플레이어 리스트 페이지*/
+    @GetMapping("/list")
+    public String listPage(){
+        return "player/list";
+    }
+
+    /*플레이어 등록 페이지*/
+    @GetMapping("/save")
+    public String savePage(){
+        return "player/save";
+    }
+
+    /*플레이어 상세 페이지*/
+    @GetMapping("/detail/{playerId}")
+    public String detailPage(
+            @PathVariable(name = "playerId") Long playerId,
+            Model model){
+        model.addAttribute("playerId", playerId);
+        return "player/detail";
+    }
+
+
+
+
+    /*플레이어 조회 로직*/
+    @GetMapping("/players")
     public ResponseEntity<Object> playerList(){
         List<Player> playerList = playerService.findAll();
         return new ResponseEntity<>(playerList, HttpStatus.OK);
