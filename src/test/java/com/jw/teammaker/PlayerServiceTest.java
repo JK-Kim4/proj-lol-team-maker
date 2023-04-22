@@ -24,7 +24,7 @@ public class PlayerServiceTest {
         //given
         PlayerSaveDto dto = new PlayerSaveDto();
         dto.setName("player");
-        dto.setTier(Tier.TWO.name());
+        dto.setTier(Tier.BRONZE.name());
         dto.setMainPosition(Position.JNG.name());
         dto.setSubPosition(Position.MID.name());
 
@@ -48,7 +48,7 @@ public class PlayerServiceTest {
         //given
         PlayerSaveDto dto = new PlayerSaveDto();
         dto.setName("player");
-        dto.setTier(Tier.TWO.name());
+        dto.setTier(Tier.SEMIPRO.name());
         dto.setMainPosition(Position.JNG.name());
         dto.setSubPosition(Position.MID.name());
 

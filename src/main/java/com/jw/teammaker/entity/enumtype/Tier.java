@@ -2,12 +2,7 @@ package com.jw.teammaker.entity.enumtype;
 
 public enum Tier {
 
-    ONE,
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    PROMOTION
+IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, MASTER, GRANDMASTER, CHALLENGER, SEMIPRO, PRO
 
 
 }
