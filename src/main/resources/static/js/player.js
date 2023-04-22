@@ -13,7 +13,7 @@ let main = {
                     $.each(result, function (index, element){
                         html += "<tr>" +
                             "<td>"+element.id+"</td>" +
-                            "<td>"+element.nickName+"</td>" +
+                            "<td><a href='/player/detail/"+element.id+"'>"+element.nickName+"</a></td>" +
                             "<td>"+element.mainPosition+"</td>" +
                             "<td>"+element.subPosition+"</td>" +
                             "<td>"+element.tier+"</td>" +
