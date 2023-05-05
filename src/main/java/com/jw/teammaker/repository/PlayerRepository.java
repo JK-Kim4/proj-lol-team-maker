@@ -47,4 +47,11 @@ public class PlayerRepository {
     public List<Player> findAll() {
         return em.createQuery("select p from  Player p", Player.class).getResultList();
     }
+
+    public List<Player> findPlayerListByIds(Long[] ids) {
+        String query = "select p from Player p where p.id in :ids";
+        return em.createQuery(query, Player.class)
+                .setParameter("ids", ids)
+                .getResultList();
+    }
 }

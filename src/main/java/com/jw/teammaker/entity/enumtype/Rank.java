@@ -1,6 +1,6 @@
 package com.jw.teammaker.entity.enumtype;
 
-public enum TierNumber {
+public enum Rank {
 
     ONE, TWO, THREE, FOUR, FIVE
 }

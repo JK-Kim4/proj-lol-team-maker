@@ -3,6 +3,7 @@ package com.jw.teammaker.service;
 import com.jw.teammaker.common.util.CommonUtils;
 import com.jw.teammaker.entity.Player;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
+import com.jw.teammaker.presentation.dto.TeamResponseDto;
 import com.jw.teammaker.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -53,8 +54,16 @@ public class PlayerService {
         return playerRepository.findAll();
     }
 
+    public List<Player> findPlayerListByIds(Long[] ids){
+        return playerRepository.findPlayerListByIds(ids);
+    }
+
     /*private*/
     private boolean isAlreadyExistPlayer(String playerName){
         return CommonUtils.isNull(playerRepository.findByName(playerName));
+    }
+
+    private TeamResponseDto assignPlayerToTeam(){
+        return null;
     }
 }
