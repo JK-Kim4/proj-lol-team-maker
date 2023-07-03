@@ -49,15 +49,18 @@ let main = {
                 if(xhr.status == 200){
 
                     $.each(result, function (index, element){
-                        html += "<tr>" +
-                            "<td>"+element.id+"</td>" +
-                            "<td><a href='/player/detail/"+element.id+"'>"+element.nickName+"</a></td>" +
-                            "<td>"+element.mainPosition+"</td>" +
-                            "<td>"+element.subPosition+"</td>" +
-                            "<td>"+element.tier+"</td>" +
-                            "<td>"+element.badPlayerRating+"</td>" +
-                            "<td><button class='btn btn-primary disable'>선택</button></td>" +
-                        "</tr>";
+                        html += "<tr class='addPlayerList' data-player-id='"+element.id+"'>" +
+                                    "<td>"+element.id+"</td>" +
+                                    "<td><a href='/player/detail/"+element.id+"'>"+element.nickName+"</a></td>" +
+                                    "<td>"+element.mainPosition+"</td>" +
+                                    "<td>"+element.subPosition+"</td>" +
+                                    "<td>"+element.tier+"</td>" +
+                                    "<td>"+element.badPlayerRating+"</td>" +
+                                "</tr>";
+
+                        $(".addPlayerList").on("click", function (){
+                           main.addPlyerToList(this);
+                        });
                     });
 
                     $("#playerListDiv").html(html);
@@ -68,6 +71,9 @@ let main = {
                 return;
             }
         });
+    },
+    addPlyerToList:function (elem){
+        console.log(elem);
     }
 }
 
