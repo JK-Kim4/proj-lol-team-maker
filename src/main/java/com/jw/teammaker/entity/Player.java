@@ -3,8 +3,9 @@ package com.jw.teammaker.entity;
 import com.jw.teammaker.entity.enumtype.Position;
 import com.jw.teammaker.entity.enumtype.Tier;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -15,20 +16,35 @@ import javax.persistence.*;
  * 게임 플레이어 정보 관리
  * */
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Player {
 
-    public Player(PlayerSaveDto dto){
-        this.name = dto.getName();
-        this.nickname = dto.getNickName();
-        this.tier = Tier.valueOf(dto.getTier());
-        this.mainPosition = Position.valueOf(dto.getMainPosition());
-        this.subPosition = Position.valueOf(dto.getSubPosition());
+
+    @Builder
+    public Player(PlayerSaveDto saveDto){
+        this.name = saveDto.getName();
+        this.nickname = saveDto.getNickName();
+        this.mainPosition = Position.valueOf(saveDto.getMainPosition());
+        this.mainTier = Tier.valueOf(saveDto.getMainTier());
+        this.subPosition = Position.valueOf(saveDto.getSubPosition());
+        this.subTier = Tier.valueOf(saveDto.getSubTier());
+        this.badPlayerRating = 0;
     }
 
-    @Id @GeneratedValue
-    @Column(name = "PLAYER_ID")
+    public Player update(PlayerUpdateDto updateDto) {
+        this.nickname = updateDto.getNickName();
+        this.mainPosition = Position.valueOf(updateDto.getMainPosition());
+        this.mainTier = Tier.valueOf(updateDto.getMainTier());
+        this.subPosition = Position.valueOf(updateDto.getSubPosition());
+        this.subTier = Tier.valueOf(updateDto.getSubTier());
+        return this;
+    }
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "player_id")
     private Long id;
 
     @Column(length = 50)
@@ -38,36 +54,20 @@ public class Player {
     private String nickname;
 
     @Enumerated(EnumType.STRING)
-    private Tier tier;
+    private Position mainPosition;
 
     @Enumerated(EnumType.STRING)
-    private Position mainPosition;
+    private Tier mainTier;
 
     @Enumerated(EnumType.STRING)
     private Position subPosition;
 
-    public Long getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    private Tier subTier;
 
-    public String getName() {
-        return name;
-    }
+    @Column
+    @ColumnDefault("0")
+    private int badPlayerRating;
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public Tier getTier() {
-        return tier;
-    }
-
-    public Position getMainPosition() {
-        return mainPosition;
-    }
-
-    public Position getSubPosition() {
-        return subPosition;
-    }
 }
 

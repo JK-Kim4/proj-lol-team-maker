@@ -4,15 +4,18 @@ import com.jw.teammaker.entity.Player;
 import com.jw.teammaker.entity.enumtype.Position;
 import com.jw.teammaker.entity.enumtype.Tier;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
+import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
 import com.jw.teammaker.service.PlayerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @SpringBootTest
+@Transactional
 @ActiveProfiles("dev")
 public class PlayerServiceTest {
 
@@ -24,7 +27,7 @@ public class PlayerServiceTest {
         //given
         PlayerSaveDto dto = new PlayerSaveDto();
         dto.setName("player");
-        dto.setTier(Tier.BRONZE.name());
+        dto.setMainTier(Tier.BRONZE.name());
         dto.setMainPosition(Position.JNG.name());
         dto.setSubPosition(Position.MID.name());
 
@@ -44,11 +47,42 @@ public class PlayerServiceTest {
     }
 
     @Test
+    public void player_save_and_update_test(){
+        //given
+        PlayerSaveDto dto = new PlayerSaveDto();
+        dto.setName("player");
+        dto.setName("player");
+        dto.setMainPosition(Position.JNG.name());
+        dto.setMainTier(Tier.GOLD.name());
+        dto.setSubPosition(Position.MID.name());
+        dto.setSubTier(Tier.SILVER.name());
+
+        Long result = playerService.save(dto);
+
+        PlayerUpdateDto updateDto = new PlayerUpdateDto();
+        updateDto.setPlayerId(result);
+        updateDto.setNickName("updatePlayer");
+        updateDto.setMainPosition(Position.MID.name());
+        updateDto.setMainTier(Tier.BRONZE.name());
+        updateDto.setSubPosition(Position.TOP.name());
+        updateDto.setSubTier(Tier.CHALLENGER.name());
+
+        //when
+        playerService.updatePlayer(updateDto);
+
+        //then
+        Player player = playerService.findById(result);
+
+        System.out.println("update result = " + player.toString());
+
+    }
+
+    @Test
     public void player_delete_test(){
         //given
         PlayerSaveDto dto = new PlayerSaveDto();
         dto.setName("player");
-        dto.setTier(Tier.SEMIPRO.name());
+        dto.setMainTier(Tier.SEMIPRO.name());
         dto.setMainPosition(Position.JNG.name());
         dto.setSubPosition(Position.MID.name());
 

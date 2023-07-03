@@ -22,8 +22,13 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
+    //logging - log4j2사용
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
     //database
-    runtimeOnly 'com.h2database:h2:1.4.199'
+    /*runtimeOnly 'com.h2database:h2:1.4.199'
+    implementation 'org.hibernate:hibernate-entitymanager:5.3.10.Final'*/
+    runtimeOnly 'mysql:mysql-connector-java'
     implementation 'org.hibernate:hibernate-entitymanager:5.3.10.Final'
 
     //mustache
@@ -32,6 +37,13 @@ dependencies {
     //test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+}
+
+//logging - logback exclude
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
 
 tasks.named('test') {

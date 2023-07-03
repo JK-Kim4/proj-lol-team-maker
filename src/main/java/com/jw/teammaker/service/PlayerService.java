@@ -3,6 +3,7 @@ package com.jw.teammaker.service;
 import com.jw.teammaker.common.util.CommonUtils;
 import com.jw.teammaker.entity.Player;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
+import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
 import com.jw.teammaker.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -30,8 +31,11 @@ public class PlayerService {
     * Response Parameter: Long PlayerId
     * */
     public Long save(PlayerSaveDto dto){
-        return playerRepository.save(new Player(dto));
+
+        Player insertPlayer = Player.builder().saveDto(dto).build();
+        return playerRepository.save(insertPlayer);
     }
+
     /*플레이어 삭제
     * Request Parameter: Long playerId
     * Response Parameter: void
@@ -39,6 +43,26 @@ public class PlayerService {
     public void delete(Long playerId){
         playerRepository.delete(playerId);
     }
+
+    /*플레이어 수정 - 플레이어 정보
+    * Request Parameter: Long playerId
+    * Response Parameter: int result
+    * */
+    public Long updatePlayer(PlayerUpdateDto dto){
+        return playerRepository.update(dto);
+    }
+
+
+    /*플레이어 수정 - 신고 횟수 +
+     * Request Parameter: Long playerId
+     * Response Parameter: int result
+     * */
+    public int plusBadPlayerRating(Long playerId){
+        return playerRepository.plusPlayerRating(playerId);
+    }
+
+
+
 
     /*플레이어 조회
     * Request Parameter: Long playerId
@@ -54,6 +78,7 @@ public class PlayerService {
     }
 
     /*private*/
+    /*사용자 등록 여부 조회 - 이름*/
     private boolean isAlreadyExistPlayer(String playerName){
         return CommonUtils.isNull(playerRepository.findByName(playerName));
     }

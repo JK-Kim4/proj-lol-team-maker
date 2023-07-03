@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+
+    <Properties>
+        <Property name="logFileName">team-maker</Property>
+        <Property name="consoleLayout">%style{%d{ISO8601}} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1.}}{bright,yellow}: %msg%n%throwable</Property>
+        <Property name="fileLayout">%d [%t] %-5level %c(%M:%L) - %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${consoleLayout}" disableAnsi="false" />
+        </Console>
+        <!--        <RollingFile name="file" fileName="logs/${logFileName}.log" filePattern="logs/${logFileName}.%d{yyyy-MM-dd-hh}.log">-->
+        <RollingFile name="file"
+                     fileName="/home/app/logs/team-maker/${logFileName}.log"
+                     filePattern="/home/app/logs/team-maker/${logFileName}.%d{yyyy-MM-dd}.log"
+        >
+            <PatternLayout pattern="${fileLayout}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5MB"/> <!--로그 파일 크기따라 로그 파일 생성-->
+                <TimeBasedTriggeringPolicy interval="1"/> <!--시간별 로그 파일 생성-->
+            </Policies>
+            <DefaultRolloverStrategy max="5" fileIndex="min" /><!-- 롤링 파일 5개 까지 생성 -->
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="DEBUG" additivity="false">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="file"/>
+        </Root>
+    </Loggers>
+</Configuration>

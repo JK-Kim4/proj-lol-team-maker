@@ -2,6 +2,7 @@ package com.jw.teammaker.presentation;
 
 
 import com.jw.teammaker.entity.Player;
+import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import com.jw.teammaker.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -10,9 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,14 +46,18 @@ public class PlayerController {
         return "player/detail";
     }
 
-
-
-
     /*플레이어 조회 로직*/
     @GetMapping("/players")
     public ResponseEntity<Object> playerList(){
         List<Player> playerList = playerService.findAll();
         return new ResponseEntity<>(playerList, HttpStatus.OK);
+    }
+
+    /*플레이어 등록 로직*/
+    @PostMapping("/insert")
+    public ResponseEntity<Object> playerInsertMethod(
+            @RequestBody PlayerSaveDto dto){
+        return new ResponseEntity<>(playerService.save(dto), HttpStatus.OK);
     }
 
 
