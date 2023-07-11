@@ -83,17 +83,26 @@ let main = {
         let playerName = elem.getAttribute("data-player-name");
         let playerId = elem.getAttribute("data-player-id");
 
-        console.log(selectedPlayerList);
-        selectedPlayerList.push(playerId);
-        console.log(selectedPlayerList);
-
         //if (player list에 해당 플레이어가 없다면) append
-        html += '<span class="badge badge-dark badge-player-name">'
-            +playerName + '<span style="color:red; font-size: 1em;"><i class="fa-solid fa-x"></i></span></span>';
+        if(!main.isPlayerExist(playerId)){
+            selectedPlayerList.push(playerId);
+            html += '<span class="badge badge-dark badge-player-name">'
+                        +playerName + '<span style="color:red; font-size: 1em;"><i class="fa-solid fa-x"></i></span>' +
+                    '</span>';
 
-        $("#selectedPlayerListDiv").append(html);
-        //else (player list에 해당 플레이어가 있다면) return;
-
+            $("#selectedPlayerListDiv").append(html);
+        }else{
+            //else (player list에 해당 플레이어가 있다면) return
+            alert("이미 선택 된 플레이어입니다.");
+            return;
+        }
+    },
+    isPlayerExist: function (playerId){
+        let result = false;
+        for(let id of selectedPlayerList){
+            if(id == playerId) result = true;
+        }
+        return result;
     }
 }
 
