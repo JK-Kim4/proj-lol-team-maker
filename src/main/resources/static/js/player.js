@@ -83,6 +83,10 @@ let main = {
         let playerName = elem.getAttribute("data-player-name");
         let playerId = elem.getAttribute("data-player-id");
 
+        console.log(selectedPlayerList);
+        selectedPlayerList.push(playerId);
+        console.log(selectedPlayerList);
+
         //if (player list에 해당 플레이어가 없다면) append
         html += '<span class="badge badge-dark badge-player-name">'
             +playerName + '<span style="color:red; font-size: 1em;"><i class="fa-solid fa-x"></i></span></span>';
