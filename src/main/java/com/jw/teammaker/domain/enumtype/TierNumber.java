@@ -1,6 +1,7 @@
-package com.jw.teammaker.entity.enumtype;
+package com.jw.teammaker.domain.enumtype;
 
 public enum TierNumber {
 
     ONE, TWO, THREE, FOUR, FIVE
+
 }

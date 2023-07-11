@@ -1,13 +1,15 @@
-package com.jw.teammaker.entity;
+package com.jw.teammaker.domain;
 
-import com.jw.teammaker.entity.enumtype.Position;
-import com.jw.teammaker.entity.enumtype.Tier;
+import com.jw.teammaker.domain.enumtype.Position;
+import com.jw.teammaker.domain.enumtype.Tier;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -16,8 +18,7 @@ import javax.persistence.*;
  * 게임 플레이어 정보 관리
  * */
 @Entity
-@Getter
-@Setter
+@Getter@Setter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Player {
@@ -32,15 +33,6 @@ public class Player {
         this.subPosition = Position.valueOf(saveDto.getSubPosition());
         this.subTier = Tier.valueOf(saveDto.getSubTier());
         this.badPlayerRating = 0;
-    }
-
-    public Player update(PlayerUpdateDto updateDto) {
-        this.nickname = updateDto.getNickName();
-        this.mainPosition = Position.valueOf(updateDto.getMainPosition());
-        this.mainTier = Tier.valueOf(updateDto.getMainTier());
-        this.subPosition = Position.valueOf(updateDto.getSubPosition());
-        this.subTier = Tier.valueOf(updateDto.getSubTier());
-        return this;
     }
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,8 +58,39 @@ public class Player {
     private Tier subTier;
 
     @Column
+    private int winningPoint;
+
+    @Column
+    private int loosingPoint;
+
+    @Column
     @ColumnDefault("0")
     private int badPlayerRating;
 
+    @OneToMany(mappedBy = "player")
+    private List<GameResult> gameResults = new ArrayList<>();
+
+
+    //로직
+    public Player update(PlayerUpdateDto updateDto) {
+        this.nickname = updateDto.getNickName();
+        this.mainPosition = Position.valueOf(updateDto.getMainPosition());
+        this.mainTier = Tier.valueOf(updateDto.getMainTier());
+        this.subPosition = Position.valueOf(updateDto.getSubPosition());
+        this.subTier = Tier.valueOf(updateDto.getSubTier());
+        return this;
+    }
+
+    public void addBadPlayerRating(){
+        this.badPlayerRating += 1;
+    }
+
+    public void decreaseBadPlayerRating(){
+        this.badPlayerRating -= 1;
+    }
+
+    public void addGameResult(GameResult gameResult){
+        this.gameResults.add(gameResult);
+    }
 }
 

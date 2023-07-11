@@ -1,6 +1,6 @@
 package com.jw.teammaker.repository;
 
-import com.jw.teammaker.entity.Player;
+import com.jw.teammaker.domain.Player;
 import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
 import org.springframework.stereotype.Repository;
 

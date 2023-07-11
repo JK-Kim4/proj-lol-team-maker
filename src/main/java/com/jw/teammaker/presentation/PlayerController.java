@@ -1,7 +1,7 @@
 package com.jw.teammaker.presentation;
 
 
-import com.jw.teammaker.entity.Player;
+import com.jw.teammaker.domain.Player;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import com.jw.teammaker.service.PlayerService;
 import lombok.RequiredArgsConstructor;

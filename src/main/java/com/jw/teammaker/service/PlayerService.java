@@ -1,7 +1,7 @@
 package com.jw.teammaker.service;
 
 import com.jw.teammaker.common.util.CommonUtils;
-import com.jw.teammaker.entity.Player;
+import com.jw.teammaker.domain.Player;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
 import com.jw.teammaker.repository.PlayerRepository;

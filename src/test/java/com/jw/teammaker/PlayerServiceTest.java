@@ -1,8 +1,8 @@
 package com.jw.teammaker;
 
-import com.jw.teammaker.entity.Player;
-import com.jw.teammaker.entity.enumtype.Position;
-import com.jw.teammaker.entity.enumtype.Tier;
+import com.jw.teammaker.domain.Player;
+import com.jw.teammaker.domain.enumtype.Position;
+import com.jw.teammaker.domain.enumtype.Tier;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
 import com.jw.teammaker.service.PlayerService;
