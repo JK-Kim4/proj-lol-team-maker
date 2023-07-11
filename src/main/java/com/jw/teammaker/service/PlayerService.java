@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
  * */
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class PlayerService {
 
     private final Logger logger = LoggerFactory.getLogger(PlayerService.class);
@@ -30,6 +32,7 @@ public class PlayerService {
     * Request Parameter: PlayerSaveDto dto
     * Response Parameter: Long PlayerId
     * */
+    @Transactional
     public Long save(PlayerSaveDto dto){
 
         Player insertPlayer = Player.builder().saveDto(dto).build();
@@ -40,6 +43,7 @@ public class PlayerService {
     * Request Parameter: Long playerId
     * Response Parameter: void
     * */
+    @Transactional
     public void delete(Long playerId){
         playerRepository.delete(playerId);
     }
@@ -48,6 +52,7 @@ public class PlayerService {
     * Request Parameter: Long playerId
     * Response Parameter: int result
     * */
+    @Transactional
     public Long updatePlayer(PlayerUpdateDto dto){
         return playerRepository.update(dto);
     }
@@ -57,6 +62,7 @@ public class PlayerService {
      * Request Parameter: Long playerId
      * Response Parameter: int result
      * */
+    @Transactional
     public int plusBadPlayerRating(Long playerId){
         return playerRepository.plusPlayerRating(playerId);
     }

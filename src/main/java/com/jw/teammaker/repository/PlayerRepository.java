@@ -2,12 +2,11 @@ package com.jw.teammaker.repository;
 
 import com.jw.teammaker.domain.Player;
 import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -15,11 +14,10 @@ import java.util.List;
  *
  * */
 @Repository
-@Transactional
+@RequiredArgsConstructor
 public class PlayerRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
 
     /*플레이어 저장*/
     public Long save(Player player) {
