@@ -10,7 +10,7 @@ let main = {
            location.href = "/player/save";
         });
 
-        $(".add-player-to-list").on("click", function (){
+        $(document).on("click", ".add-list", function (){
             _this.addPlyerToList(this);
         });
     },
@@ -31,7 +31,6 @@ let main = {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(data),
             success: function (result, textStatus, xhr){
-                console.log(xhr.status);
                 if(xhr.status == 200 && result > 0){
                     alert("신규 플레이어가 등록되었습니다.")
                     location.href = "/player/list";
@@ -65,12 +64,8 @@ let main = {
                                     "<td>"+element.subPosition+"</td>" +
                                     "<td>"+element.mainTier+"</td>" +
                                     "<td>"+element.badPlayerRating+"</td>" +
-                                    "<td><button class='btn btn-success add-player-to-list' data-player-id='"+element.id+"'> 선택 </button></td>" +
+                                    "<td><button class='btn btn-success add-list' data-player-id='"+element.id+"' data-player-name='"+element.nickname+"'> 선택 </button></td>" +
                                 "</tr>";
-
-                        $(".add-player-to-list").on("click", function (){
-                           main.addPlyerToList(this);
-                        });
                     });
 
                     $("#playerListDiv").html(html);
@@ -83,7 +78,18 @@ let main = {
         });
     },
     addPlyerToList:function (elem){
-        console.log(elem);
+        //player list 존재 여부 확인
+        let html = "";
+        let playerName = elem.getAttribute("data-player-name");
+        let playerId = elem.getAttribute("data-player-id");
+
+        //if (player list에 해당 플레이어가 없다면) append
+        html += '<span class="badge badge-dark badge-player-name">'
+            +playerName + '<span style="color:red; font-size: 1em;"><i class="fa-solid fa-x"></i></span></span>';
+
+        $("#selectedPlayerListDiv").append(html);
+        //else (player list에 해당 플레이어가 있다면) return;
+
     }
 }
 
