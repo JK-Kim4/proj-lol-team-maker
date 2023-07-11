@@ -16,4 +16,5 @@ public class GameResult {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "player_id")
     private Player player;
+
 }
