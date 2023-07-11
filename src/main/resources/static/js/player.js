@@ -5,6 +5,14 @@ let main = {
         $("#playerInsertBtn").on("click", function (){
             _this.insert();
         });
+
+        $("#movePlayerSavePage").on("click", function (){
+           location.href = "/player/save";
+        });
+
+        $(".add-player-to-list").on("click", function (){
+            _this.addPlyerToList(this);
+        });
     },
     insert: function (){
 
@@ -18,8 +26,9 @@ let main = {
         data.subTier = $("#inputSubTier").val();
 
         $.ajax({
-            url: "/player/players",
+            url: "/player/insert",
             method: "POST",
+            contentType: "application/json; charset=utf-8",
             data: JSON.stringify(data),
             success: function (result, textStatus, xhr){
                 console.log(xhr.status);
@@ -49,16 +58,17 @@ let main = {
                 if(xhr.status == 200){
 
                     $.each(result, function (index, element){
-                        html += "<tr class='addPlayerList' data-player-id='"+element.id+"'>" +
+                        html += "<tr>" +
                                     "<td>"+element.id+"</td>" +
-                                    "<td><a href='/player/detail/"+element.id+"'>"+element.nickName+"</a></td>" +
+                                    "<td><a href='/player/detail/"+element.id+"'>"+element.nickname+"</a></td>" +
                                     "<td>"+element.mainPosition+"</td>" +
                                     "<td>"+element.subPosition+"</td>" +
-                                    "<td>"+element.tier+"</td>" +
+                                    "<td>"+element.mainTier+"</td>" +
                                     "<td>"+element.badPlayerRating+"</td>" +
+                                    "<td><button class='btn btn-success add-player-to-list' data-player-id='"+element.id+"'> 선택 </button></td>" +
                                 "</tr>";
 
-                        $(".addPlayerList").on("click", function (){
+                        $(".add-player-to-list").on("click", function (){
                            main.addPlyerToList(this);
                         });
                     });

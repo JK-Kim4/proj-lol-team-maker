@@ -2,7 +2,7 @@ server:
   servlet:
     encoding:
       charset: UTF-8
-      force-request: true
+      force: true
 
 ---
 spring:
