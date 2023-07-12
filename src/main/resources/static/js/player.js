@@ -86,8 +86,8 @@ let main = {
         //if (player list에 해당 플레이어가 없다면) append
         if(!main.isPlayerExist(playerId)){
             selectedPlayerList.push(playerId);
-            html += '<span class="badge badge-dark badge-player-name">'
-                        +playerName + '<span style="color:red; font-size: 1em;"><i class="fa-solid fa-x"></i></span>' +
+            html += '<span class="badge badge-dark badge-player-name"> '
+                        +playerName + '<span style="color:red; font-size: 1em;" data-player-id="'+playerId+'" onclick="main.removePlayerToList(this)"><i class="fa-solid fa-x"></i></span>' +
                     '</span>';
 
             $("#selectedPlayerListDiv").append(html);
@@ -103,6 +103,17 @@ let main = {
             if(id == playerId) result = true;
         }
         return result;
+    },
+    removePlayerToList: function (elem){
+        let playerId = elem.getAttribute('data-player-id');
+        let index = selectedPlayerList.indexOf(playerId);
+        if(index > -1){
+            selectedPlayerList.splice(index, 1);
+            elem.parentNode.remove();
+        }else{
+            alert("선택된 플레이어 목록에 오류 발생. 관리자에게 문의해 주세요.");
+            return;
+        }
     }
 }
 
