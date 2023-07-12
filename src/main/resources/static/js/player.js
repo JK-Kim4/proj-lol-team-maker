@@ -78,6 +78,12 @@ let main = {
         });
     },
     addPlyerToList:function (elem){
+        //선택된 플레이어 수 검증 (10명 이하)
+        if(selectedPlayerList.length >= 10){
+           alert("10명의 플레이어가 모두 선택되었습니다.");
+           return;
+        }
+
         //player list 존재 여부 확인
         let html = "";
         let playerName = elem.getAttribute("data-player-name");
@@ -86,7 +92,7 @@ let main = {
         //if (player list에 해당 플레이어가 없다면) append
         if(!main.isPlayerExist(playerId)){
             selectedPlayerList.push(playerId);
-            html += '<span class="badge badge-dark badge-player-name"> '
+            html += '<span class="badge badge-dark badge-player-name mr-2"> '
                         +playerName + '<span style="color:red; font-size: 1em;" data-player-id="'+playerId+'" onclick="main.removePlayerToList(this)"><i class="fa-solid fa-x"></i></span>' +
                     '</span>';
 
