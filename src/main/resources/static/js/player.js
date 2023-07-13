@@ -10,6 +10,10 @@ let main = {
            location.href = "/player/save";
         });
 
+        $("#makeTeamButton").on("click", function (){
+           _this.makeTeams();
+        });
+
         $(document).on("click", ".add-list", function (){
             _this.addPlyerToList(this);
         });
@@ -45,8 +49,23 @@ let main = {
                 return;
             }
         });
-
-
+    },
+    makeTeams: function (){
+        $.ajax({
+            url: "/player/make-teams",
+            method: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(selectedPlayerList),
+            success: function (result){
+                console.log(result);
+            },
+            error: function (x,h,r){
+                console.log(x);
+                alert("시스템 오류 발생");
+                return;
+            }
+        });
     },
     getPlayerList: function (){
         $.ajax({

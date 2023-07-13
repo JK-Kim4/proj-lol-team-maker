@@ -60,5 +60,13 @@ public class PlayerController {
         return new ResponseEntity<>(playerService.save(dto), HttpStatus.OK);
     }
 
+    /*팀 생성*/
+    @PostMapping("/make-teams")
+    public ResponseEntity<Object> makeTeamsLogic(
+            @RequestBody Long[] playerIds){
+        logger.info("[PlayerController::makeTeamsLogic] request body: {}", playerIds);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }
