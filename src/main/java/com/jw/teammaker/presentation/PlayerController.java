@@ -2,6 +2,7 @@ package com.jw.teammaker.presentation;
 
 
 import com.jw.teammaker.domain.Player;
+import com.jw.teammaker.domain.Team;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import com.jw.teammaker.service.PlayerService;
 import lombok.RequiredArgsConstructor;
@@ -65,6 +66,9 @@ public class PlayerController {
     public ResponseEntity<Object> makeTeamsLogic(
             @RequestBody Long[] playerIds){
         logger.info("[PlayerController::makeTeamsLogic] request body: {}", playerIds);
+
+        List<Team> resultTeamList = playerService.makeTeams(playerIds);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

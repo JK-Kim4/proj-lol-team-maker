@@ -2,6 +2,8 @@ package com.jw.teammaker.service;
 
 import com.jw.teammaker.common.util.CommonUtils;
 import com.jw.teammaker.domain.Player;
+import com.jw.teammaker.domain.Team;
+import com.jw.teammaker.exception.NotEnoughPlayerException;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
 import com.jw.teammaker.repository.PlayerRepository;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,7 +70,33 @@ public class PlayerService {
         return playerRepository.plusPlayerRating(playerId);
     }
 
+    /*팀 생성 로직*/
+    @Transactional
+    public List<Team> makeTeams(Long[] playerIds) {
+        //플레이어 수 검증 (10명)
+        if(playerIds.length != 10){
+            throw new NotEnoughPlayerException("플레이어 수가 부족합니다. Player length: " +playerIds.length);
+        }
 
+        //변수 초기화
+        Team teamA = new Team();
+        Team teamB = new Team();
+        List<Player> playerList = new ArrayList<>();
+
+        //플레이어 조회
+
+        //플레이어 정렬(평가 점수 기준 오름차순)
+
+        /*팀 분배
+        * Team A: [ 1,3,5,8,10 ]
+        * Team B: [ 2,4,6,7,9  ]
+        * */
+
+
+
+
+        return null;
+    }
 
 
     /*플레이어 조회
@@ -88,4 +117,5 @@ public class PlayerService {
     private boolean isAlreadyExistPlayer(String playerName){
         return CommonUtils.isNull(playerRepository.findByName(playerName));
     }
+
 }
