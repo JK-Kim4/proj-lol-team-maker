@@ -67,6 +67,9 @@ public class Player {
     @ColumnDefault("0")
     private int badPlayerRating;
 
+    @Transient
+    private int evaluationPoint;
+
     @OneToMany(mappedBy = "player")
     private List<GameResult> gameResults = new ArrayList<>();
 
@@ -91,6 +94,10 @@ public class Player {
 
     public void addGameResult(GameResult gameResult){
         this.gameResults.add(gameResult);
+    }
+
+    public void calculateEvaluationPoint(){
+        this.evaluationPoint = (this.mainPosition.getPoint() + this.mainTier.getPoint());
     }
 }
 

@@ -65,11 +65,9 @@ public class PlayerController {
     @PostMapping("/make-teams")
     public ResponseEntity<Object> makeTeamsLogic(
             @RequestBody Long[] playerIds){
-        logger.info("[PlayerController::makeTeamsLogic] request body: {}", playerIds);
-
         List<Team> resultTeamList = playerService.makeTeams(playerIds);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(resultTeamList, HttpStatus.OK);
     }
 
 

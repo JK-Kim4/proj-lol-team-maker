@@ -14,7 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Service: PlayerService
@@ -81,21 +84,47 @@ public class PlayerService {
         //변수 초기화
         Team teamA = new Team();
         Team teamB = new Team();
+        List<Team> resultList = new ArrayList<>();
         List<Player> playerList = new ArrayList<>();
 
         //플레이어 조회
+        playerList = Arrays
+                        .stream(playerIds)
+                        .map(id -> playerRepository.findById(id))
+                    .collect(Collectors.toList());
+
+
 
         //플레이어 정렬(평가 점수 기준 오름차순)
+        for(Player p : playerList){
+            p.calculateEvaluationPoint();
+        }
+
+        playerList = playerList
+                        .stream()
+                        .sorted(Comparator.comparing(Player::getEvaluationPoint))
+                    .collect(Collectors.toList());
 
         /*팀 분배
         * Team A: [ 1,3,5,8,10 ]
         * Team B: [ 2,4,6,7,9  ]
         * */
 
+        int[] teamAIndex = {0,2,4,7,9};
+        int[] teamBIndex = {1,3,5,6,8};
 
+        for(int i: teamAIndex){
+            teamA.addPlayer(playerList.get(i));
+        }
 
+        for(int i: teamBIndex){
+            teamB.addPlayer(playerList.get(i));
+        }
 
-        return null;
+        resultList.add(teamA);
+        resultList.add(teamB);
+
+        return resultList;
     }
 
 

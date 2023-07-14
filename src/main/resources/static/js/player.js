@@ -57,7 +57,8 @@ let main = {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(selectedPlayerList),
-            success: function (result){
+            success: function (result, textStatus, xhr){
+                console.log(xhr.status);
                 console.log(result);
             },
             error: function (x,h,r){
