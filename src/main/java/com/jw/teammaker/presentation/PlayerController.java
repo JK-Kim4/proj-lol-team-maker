@@ -2,7 +2,6 @@ package com.jw.teammaker.presentation;
 
 
 import com.jw.teammaker.domain.Player;
-import com.jw.teammaker.domain.Team;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import com.jw.teammaker.service.PlayerService;
 import lombok.RequiredArgsConstructor;
@@ -62,12 +61,11 @@ public class PlayerController {
     }
 
     /*팀 생성*/
-    @PostMapping("/make-teams")
+    @PostMapping("/make-teams/{type}")
     public ResponseEntity<Object> makeTeamsLogic(
+            @PathVariable(name = "type") String type,
             @RequestBody Long[] playerIds){
-        List<Team> resultTeamList = playerService.makeTeams(playerIds);
-
-        return new ResponseEntity<>(resultTeamList, HttpStatus.OK);
+        return new ResponseEntity<>(playerService.makeTeams(playerIds, type), HttpStatus.OK);
     }
 
 

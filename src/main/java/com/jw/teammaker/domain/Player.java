@@ -18,7 +18,7 @@ import java.util.List;
  * 게임 플레이어 정보 관리
  * */
 @Entity
-@Getter@Setter
+@Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Player {
@@ -94,6 +94,10 @@ public class Player {
 
     public void addGameResult(GameResult gameResult){
         this.gameResults.add(gameResult);
+    }
+
+    public  void setBadPlayerRating(int badPlayerRating){
+        this.badPlayerRating = badPlayerRating;
     }
 
     public void calculateEvaluationPoint(){
