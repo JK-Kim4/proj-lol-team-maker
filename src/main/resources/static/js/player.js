@@ -58,8 +58,28 @@ let main = {
             dataType: "json",
             data: JSON.stringify(selectedPlayerList),
             success: function (result, textStatus, xhr){
-                console.log(xhr.status);
-                console.log(result);
+                let html = "";
+
+                $("#selectedPlayerListDiv").fadeOut('slow', function (){
+                    if(xhr.status == 200 && result.length > 0){
+
+                        $("#teamADesc").text( "평균 점수: " + (result[0].totalPoint / 5) );
+                        $("#teamBDesc").text( "평균 점수: " + (result[1].totalPoint / 5) );
+
+                        let teamAPlayers = result[0].players.reverse();
+                        let teamBPlayers = result[1].players.reverse();
+
+                        $("#teamAList").html(main.makeTeamResultHtml(teamAPlayers));
+                        $("#teamBList").html(main.makeTeamResultHtml(teamBPlayers));
+
+
+                        $("#teamResultDiv").show();
+                        $("#teamResultDiv").fadeIn('slow');
+                    }else{
+                        html = "<h4>팀 생성에 실패하였습니다. 다시 시도해 주세요.</h4>";
+                        $("#teamResultDiv").html(html);
+                    }
+                });
             },
             error: function (x,h,r){
                 console.log(x);
@@ -140,6 +160,19 @@ let main = {
             alert("선택된 플레이어 목록에 오류 발생. 관리자에게 문의해 주세요.");
             return;
         }
+    },
+    makeTeamResultHtml: function (playerList){
+        let html = "";
+
+        $.each(playerList, function (index, element){
+            html += "<tr>" +
+                "<td>"+element.nickname+"</td>" +
+                "<td>"+element.mainPosition+"</td>" +
+                "<td>"+element.evaluationPoint+"</td>" +
+                "</tr>";
+        });
+
+        return html;
     }
 }
 

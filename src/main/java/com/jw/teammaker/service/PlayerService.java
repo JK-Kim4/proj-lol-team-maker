@@ -115,10 +115,13 @@ public class PlayerService {
 
         for(int i: teamAIndex){
             teamA.addPlayer(playerList.get(i));
+            teamA.sumTotalPoint(playerList.get(i).getEvaluationPoint());
+
         }
 
         for(int i: teamBIndex){
             teamB.addPlayer(playerList.get(i));
+            teamB.sumTotalPoint(playerList.get(i).getEvaluationPoint());
         }
 
         resultList.add(teamA);
