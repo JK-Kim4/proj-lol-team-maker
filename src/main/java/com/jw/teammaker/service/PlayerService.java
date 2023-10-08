@@ -1,5 +1,6 @@
 package com.jw.teammaker.service;
 
+import com.jw.teammaker.common.CommonValue;
 import com.jw.teammaker.common.util.CommonUtils;
 import com.jw.teammaker.domain.Player;
 import com.jw.teammaker.domain.Team;
@@ -69,60 +70,88 @@ public class PlayerService {
      * Response Parameter: int result
      * */
     @Transactional
-    public int plusBadPlayerRating(Long playerId){
+    public int addBadPlayerRating(Long playerId){
         return playerRepository.plusPlayerRating(playerId);
     }
 
-    /*팀 생성 로직*/
-    @Transactional
-    public List<Team> makeTeams(Long[] playerIds) {
+    public List<Team> makeTeams(Long[] playerIds, String type) {
+        List<Team> resultList = new ArrayList<>();
+
         //플레이어 수 검증 (10명)
         if(playerIds.length != 10){
             throw new NotEnoughPlayerException("플레이어 수가 부족합니다. Player length: " +playerIds.length);
         }
 
+        //플레이어 조회
+        List<Player> playerList =  Arrays
+                .stream(playerIds)
+                .map(id -> playerRepository.findById(id))
+                .sorted(Comparator.comparing(Player::getEvaluationPoint))
+                .collect(Collectors.toList());
+
+        if(CommonValue.MAKE_TEAM_LOGIC_BALANCE.equals(type)){
+
+        }else if(CommonValue.MAKE_TEAM_LOGIC_RANDOM.equals(type)){
+
+        }else{
+            resultList = makeTeamsDefaultLogic(playerList);
+        }
+
+        return resultList;
+    }
+
+
+    /*팀 생성 로직 - 기본*/
+    private List<Team> makeTeamsDefaultLogic(List<Player> playerList) {
+
         //변수 초기화
         Team teamA = new Team();
         Team teamB = new Team();
         List<Team> resultList = new ArrayList<>();
-        List<Player> playerList = new ArrayList<>();
-
-        //플레이어 조회
-        playerList = Arrays
-                        .stream(playerIds)
-                        .map(id -> playerRepository.findById(id))
-                    .collect(Collectors.toList());
-
-
-
-        //플레이어 정렬(평가 점수 기준 오름차순)
-        for(Player p : playerList){
-            p.calculateEvaluationPoint();
-        }
-
-        playerList = playerList
-                        .stream()
-                        .sorted(Comparator.comparing(Player::getEvaluationPoint))
-                    .collect(Collectors.toList());
 
         /*팀 분배
         * Team A: [ 1,3,5,8,10 ]
         * Team B: [ 2,4,6,7,9  ]
         * */
-
         int[] teamAIndex = {0,2,4,7,9};
         int[] teamBIndex = {1,3,5,6,8};
 
         for(int i: teamAIndex){
             teamA.addPlayer(playerList.get(i));
+            teamA.sumTotalPoint(playerList.get(i).getEvaluationPoint());
+
         }
 
         for(int i: teamBIndex){
             teamB.addPlayer(playerList.get(i));
+            teamB.sumTotalPoint(playerList.get(i).getEvaluationPoint());
         }
 
         resultList.add(teamA);
         resultList.add(teamB);
+
+        return resultList;
+    }
+
+    private List<Team> makeTeamRandomLogic(List<Player> playerList) {
+        //변수 초기화
+        Team teamA = new Team();
+        Team teamB = new Team();
+        List<Team> resultList = new ArrayList<>();
+        boolean teamFlag = false;
+
+
+
+
+        return resultList;
+    }
+
+    private List<Team> makeTeamBalanceLogic(List<Player> playerList) {
+        //변수 초기화
+        Team teamA = new Team();
+        Team teamB = new Team();
+        List<Team> resultList = new ArrayList<>();
+
 
         return resultList;
     }
@@ -146,5 +175,6 @@ public class PlayerService {
     private boolean isAlreadyExistPlayer(String playerName){
         return CommonUtils.isNull(playerRepository.findByName(playerName));
     }
+
 
 }

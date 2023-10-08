@@ -2,12 +2,11 @@ package com.jw.teammaker.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter @Setter
+@Getter
 @NoArgsConstructor
 public class Team {
 
@@ -17,5 +16,9 @@ public class Team {
 
     public void addPlayer(Player player){
         this.players.add(player);
+    }
+
+    public void sumTotalPoint(int playerEvePoint){
+        this.totalPoint += playerEvePoint;
     }
 }

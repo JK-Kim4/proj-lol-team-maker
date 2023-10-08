@@ -32,7 +32,11 @@ public class PlayerRepository {
     
     /*플레이어 조회 - 고유번호*/
     public Player findById(Long playerId) {
-        return em.find(Player.class, playerId);
+
+        Player player = em.find(Player.class, playerId);
+        player.calculateEvaluationPoint();
+
+        return player;
     }
 
     /*플레이어 조회 - 이름*/
