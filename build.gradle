@@ -30,6 +30,8 @@ dependencies {
     runtimeOnly 'com.h2database:h2:1.4.199'
     implementation 'org.hibernate:hibernate-entitymanager:5.3.10.Final'
 
+    //websocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
     //mustache
     implementation 'org.springframework.boot:spring-boot-starter-mustache'
