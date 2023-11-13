@@ -11,7 +11,12 @@ let main = {
         });
 
         $("#makeTeamButton").on("click", function (){
-           _this.makeTeams();
+            let teamType = $("input[name=teamType]:checked").val();
+            if(teamType == undefined){
+                alert("팀 생성 타입을 선택해 주세요.");
+                return;
+            }
+           _this.makeTeams(teamType);
         });
 
         $(document).on("click", ".add-list", function (){
@@ -50,9 +55,9 @@ let main = {
             }
         });
     },
-    makeTeams: function (){
+    makeTeams: function (teamType){
         $.ajax({
-            url: "/player/make-teams",
+            url: "/player/make-teams/"+teamType,
             method: "POST",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -75,6 +80,7 @@ let main = {
 
                         $("#teamResultDiv").show();
                         $("#teamResultDiv").fadeIn('slow');
+                        selectedPlayerList = [];
                     }else{
                         html = "<h4>팀 생성에 실패하였습니다. 다시 시도해 주세요.</h4>";
                         $("#teamResultDiv").html(html);

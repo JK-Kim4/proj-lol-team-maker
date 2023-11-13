@@ -65,7 +65,7 @@ public class PlayerController {
     public ResponseEntity<Object> makeTeamsLogic(
             @PathVariable(name = "type") String type,
             @RequestBody Long[] playerIds){
-        return new ResponseEntity<>(playerService.makeTeams(playerIds, type), HttpStatus.OK);
+        return new ResponseEntity<>(playerService.makeTeams(playerIds, type.toLowerCase()), HttpStatus.OK);
     }
 
 
