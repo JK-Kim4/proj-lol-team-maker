@@ -2,6 +2,7 @@ package com.jw.teammaker.service;
 
 import com.jw.teammaker.common.CommonValue;
 import com.jw.teammaker.common.util.CommonUtils;
+import com.jw.teammaker.common.util.PlayerComparator;
 import com.jw.teammaker.domain.Player;
 import com.jw.teammaker.domain.Team;
 import com.jw.teammaker.exception.NotEnoughPlayerException;
@@ -14,10 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -86,13 +84,12 @@ public class PlayerService {
         List<Player> playerList =  Arrays
                 .stream(playerIds)
                 .map(id -> playerRepository.findById(id))
-                .sorted(Comparator.comparing(Player::getEvaluationPoint))
                 .collect(Collectors.toList());
 
         if(CommonValue.MAKE_TEAM_LOGIC_BALANCE.equals(type)){
 
         }else if(CommonValue.MAKE_TEAM_LOGIC_RANDOM.equals(type)){
-
+            resultList = makeTeamRandomLogic(playerList);
         }else{
             resultList = makeTeamsDefaultLogic(playerList);
         }
@@ -108,23 +105,18 @@ public class PlayerService {
         Team teamA = new Team();
         Team teamB = new Team();
         List<Team> resultList = new ArrayList<>();
+        Collections.sort(playerList, new PlayerComparator());
 
         /*팀 분배
         * Team A: [ 1,3,5,8,10 ]
         * Team B: [ 2,4,6,7,9  ]
         * */
-        int[] teamAIndex = {0,2,4,7,9};
-        int[] teamBIndex = {1,3,5,6,8};
-
-        for(int i: teamAIndex){
-            teamA.addPlayer(playerList.get(i));
-            teamA.sumTotalPoint(playerList.get(i).getEvaluationPoint());
-
-        }
-
-        for(int i: teamBIndex){
-            teamB.addPlayer(playerList.get(i));
-            teamB.sumTotalPoint(playerList.get(i).getEvaluationPoint());
+        for(int i = 0; i < playerList.size(); i++){
+            if(i % 2 == 0){
+                teamA.addPlayer(playerList.get(i));
+            }else{
+                teamB.addPlayer(playerList.get(i));
+            }
         }
 
         resultList.add(teamA);
@@ -138,11 +130,19 @@ public class PlayerService {
         Team teamA = new Team();
         Team teamB = new Team();
         List<Team> resultList = new ArrayList<>();
-        boolean teamFlag = false;
+        //플레이어 Shuffle
+        Collections.shuffle(playerList);
 
-
-
-
+        //팀 분배
+        for(int i = 0; i < playerList.size(); i++){
+            if(i % 2 == 0){
+                teamA.addPlayer(playerList.get(i));
+            }else{
+                teamB.addPlayer(playerList.get(i));
+            }
+        }
+        resultList.add(teamA);
+        resultList.add(teamB);
         return resultList;
     }
 

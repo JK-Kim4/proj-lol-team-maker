@@ -21,7 +21,7 @@ import java.util.List;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Player {
+public class Player implements Comparable<Player>{
 
 
     @Builder
@@ -102,6 +102,16 @@ public class Player {
 
     public void calculateEvaluationPoint(){
         this.evaluationPoint = (this.mainPosition.getPoint() + this.mainTier.getPoint());
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        if(o.getEvaluationPoint() < this.evaluationPoint){
+            return 1;
+        }else if(o.getEvaluationPoint() > this.evaluationPoint){
+            return -1;
+        }
+        return 0;
     }
 }
 
