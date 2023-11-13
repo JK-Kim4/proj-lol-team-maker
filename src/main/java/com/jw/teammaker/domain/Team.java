@@ -18,7 +18,9 @@ public class Team {
         this.players.add(player);
     }
 
-    public void sumTotalPoint(int playerEvePoint){
-        this.totalPoint += playerEvePoint;
+    public void calculateTotalPoint(){
+        for(Player p : this.players){
+            this.totalPoint += p.getEvaluationPoint();
+        }
     }
 }

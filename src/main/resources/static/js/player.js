@@ -126,8 +126,8 @@ let main = {
     addPlyerToList:function (elem){
         //선택된 플레이어 수 검증 (10명 이하)
         if(selectedPlayerList.length >= 10){
-           alert("10명의 플레이어가 모두 선택되었습니다.");
-           return;
+            alert("10명의 플레이어가 모두 선택되었습니다.");
+            return;
         }
 
         //player list 존재 여부 확인
