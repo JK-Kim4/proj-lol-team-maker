@@ -111,15 +111,22 @@ public class PlayerService {
         * Team A: [ 1,3,5,8,10 ]
         * Team B: [ 2,4,6,7,9  ]
         * */
-        for(int i = 0; i < playerList.size(); i++){
-            if(i % 2 == 0) teamA.addPlayer(playerList.get(i));
-            else teamB.addPlayer(playerList.get(i));
-
-            if(i == (playerList.size()-1)){
-                teamA.calculateTotalPoint();
-                teamB.calculateTotalPoint();
+        for(int i = 0; i < 5; i++){
+            if(i == 4){
+                teamB.addPlayer(playerList.remove(playerList.size() -1));
+                teamA.addPlayer(playerList.remove(0));
+            }else{
+                if(i % 2 == 0){
+                    teamA.addPlayer(playerList.remove(playerList.size() -1));
+                    teamA.addPlayer(playerList.remove(0));
+                }else{
+                    teamB.addPlayer(playerList.remove(playerList.size() -1));
+                    teamB.addPlayer(playerList.remove(0));
+                }
             }
         }
+        teamA.calculateTotalPoint();
+        teamB.calculateTotalPoint();
 
         resultList.add(teamA);
         resultList.add(teamB);
