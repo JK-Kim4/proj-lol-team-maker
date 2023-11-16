@@ -68,11 +68,15 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group default-btn-div" >
                 <input type="radio" name="teamType" id="typeDefault" value="default" checked><label for="typeDefault">기본</label>
                 <!--<input type="radio" name="teamType" id="typeBalance" value="balance"><label for="typeBalance">밸런스</label>-->
                 <input type="radio" name="teamType" id="typeRandom" value="random"><label for="typeRandom">랜덤</label>
                 <button class="btn btn-warning" id="makeTeamButton">팀 만들기</button>
+            </div>
+            <div class="form-group result-btn-div" style="display: none;">
+                <button class="btn btn-warning" id="remakeButton">다시 섞기</button>
+                <button class="btn btn-secondary" onclick="location.href='/player/list'">처음으로</button>
             </div>
         </div>
     </div>

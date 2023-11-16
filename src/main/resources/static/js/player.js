@@ -19,6 +19,10 @@ let main = {
            _this.makeTeams(teamType);
         });
 
+        $("#remakeButton").on("click", function (){
+            $("#makeTeamButton").click();
+        });
+
         $(document).on("click", ".add-list", function (){
             _this.addPlyerToList(this);
         });
@@ -80,7 +84,9 @@ let main = {
 
                         $("#teamResultDiv").show();
                         $("#teamResultDiv").fadeIn('slow');
-                        selectedPlayerList = [];
+                        //selectedPlayerList = [];
+                        $(".default-btn-div").hide();
+                        $(".result-btn-div").show();
                     }else{
                         html = "<h4>팀 생성에 실패하였습니다. 다시 시도해 주세요.</h4>";
                         $("#teamResultDiv").html(html);
