@@ -7,6 +7,7 @@ import com.jw.teammaker.domain.Player;
 import com.jw.teammaker.domain.Team;
 import com.jw.teammaker.exception.NotEnoughPlayerException;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
+import com.jw.teammaker.presentation.dto.TeamResponseDto;
 import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
 import com.jw.teammaker.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
@@ -181,11 +182,18 @@ public class PlayerService {
         return playerRepository.findAll();
     }
 
+    public List<Player> findPlayerListByIds(Long[] ids){
+        return playerRepository.findPlayerListByIds(ids);
+    }
+
     /*private*/
     /*사용자 등록 여부 조회 - 이름*/
     private boolean isAlreadyExistPlayer(String playerName){
         return CommonUtils.isNull(playerRepository.findByName(playerName));
     }
 
+    private TeamResponseDto assignPlayerToTeam(){
+        return null;
+    }
 
 }

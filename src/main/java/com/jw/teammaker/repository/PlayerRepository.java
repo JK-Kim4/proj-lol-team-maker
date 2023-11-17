@@ -54,6 +54,12 @@ public class PlayerRepository {
         return em.createQuery("select p from  Player p", Player.class).getResultList();
     }
 
+    public List<Player> findPlayerListByIds(Long[] ids) {
+        String query = "select p from Player p where p.id in :ids";
+        return em.createQuery(query, Player.class)
+                .setParameter("ids", ids)
+                .getResultList();
+
     public Long update(PlayerUpdateDto dto) {
         Player player = em.find(Player.class, dto.getPlayerId()).update(dto);
         return player.getId();
@@ -63,5 +69,6 @@ public class PlayerRepository {
         Player player = findById(playerId);
         player.setBadPlayerRating( (player.getBadPlayerRating()+1) );
         return player.getBadPlayerRating();
+
     }
 }
