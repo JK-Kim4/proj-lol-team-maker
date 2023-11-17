@@ -14,8 +14,13 @@ public class Team {
 
     private int totalPoint;
 
+    private int teamAveragePoint;
+
     public void addPlayer(Player player){
+        //플레이어 추가 후 팀 평균 점수 계산
         this.players.add(player);
+        this.totalPoint += player.getEvaluationPoint();
+        this.teamAveragePoint = this.totalPoint / players.size();
     }
 
     public void calculateTotalPoint(){

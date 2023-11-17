@@ -78,7 +78,8 @@ public class PlayerService {
 
         //플레이어 수 검증 (10명)
         if(playerIds.length != 10){
-            throw new NotEnoughPlayerException("플레이어 수가 부족합니다. Player length: " +playerIds.length);
+            throw
+                    new NotEnoughPlayerException("플레이어 수가 부족합니다. Player length: " +playerIds.length);
         }
 
         //플레이어 조회
@@ -99,6 +100,10 @@ public class PlayerService {
     }
 
 
+    /* TODO
+    *  팀 분배 기본 로직 수정
+    *  기존: 평가점수 내림차수 정렬 후 List Index 기준 팀 분배
+    *  수정: minimax(team-maker-algo.md 참조) 팀 분배*/
     /*팀 생성 로직 - 기본*/
     private List<Team> makeTeamsDefaultLogic(List<Player> playerList) {
 
@@ -108,7 +113,7 @@ public class PlayerService {
         List<Team> resultList = new ArrayList<>();
         Collections.sort(playerList, new PlayerComparator());
 
-        /*팀 분배
+        /*팀 분배(기존)
         * Team A: [ 1,3,5,8,10 ]
         * Team B: [ 2,4,6,7,9  ]
         * */
@@ -126,8 +131,21 @@ public class PlayerService {
                 }
             }
         }
-        teamA.calculateTotalPoint();
-        teamB.calculateTotalPoint();
+
+        /*팀 분배(minimax)*/
+        //01. 평가점수 최상위 플레이어 2명 팀 분배 (1:TeamA / 2:TeamB)
+        /*teamA.addPlayer(playerList.remove(0));
+        teamA.addPlayer(playerList.remove(playerList.size()-1));
+        teamB.addPlayer(playerList.remove(0));
+        teamB.addPlayer(playerList.remove(playerList.size()-1));
+        //02. (loop) playerList 포함 된 플레이어 중 팀 평균 점수와 가장 차이가 있는 플레이어를 선별하여 해당 팀에 편입
+        for(int i = 0; i < 6; i++){
+            if(i % 2 == 0){
+                teamB.addPlayer(playerList.remove(0));
+            }else{
+                teamA.addPlayer(playerList.remove(0));
+            }
+        }*/
 
         resultList.add(teamA);
         resultList.add(teamB);

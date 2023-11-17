@@ -75,8 +75,8 @@ let main = {
                         $("#teamADesc").text( "평균 점수: " + (result[0].totalPoint / 5) );
                         $("#teamBDesc").text( "평균 점수: " + (result[1].totalPoint / 5) );
 
-                        let teamAPlayers = result[0].players.reverse();
-                        let teamBPlayers = result[1].players.reverse();
+                        let teamAPlayers = result[0].players;
+                        let teamBPlayers = result[1].players;
 
                         $("#teamAList").html(main.makeTeamResultHtml(teamAPlayers));
                         $("#teamBList").html(main.makeTeamResultHtml(teamBPlayers));
