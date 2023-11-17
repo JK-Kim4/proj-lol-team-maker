@@ -16,6 +16,10 @@ public class Team {
 
     private int teamAveragePoint;
 
+    //듀오 슬롯 추가 (최대 2)
+    private Duo[] duoSlot = new Duo[2];
+
+
     public void addPlayer(Player player){
         //플레이어 추가 후 팀 평균 점수 계산
         this.players.add(player);
@@ -27,5 +31,9 @@ public class Team {
         for(Player p : this.players){
             this.totalPoint += p.getEvaluationPoint();
         }
+    }
+
+    public void addDuo(Duo duo){
+        this.duoSlot[duoSlot.length] = duo;
     }
 }
