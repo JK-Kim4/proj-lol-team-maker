@@ -29,7 +29,7 @@ public class PlayerRepository {
     public void delete(Long playerId) {
         em.remove(findById(playerId));
     }
-    
+
     /*플레이어 조회 - 고유번호*/
     public Player findById(Long playerId) {
 
@@ -45,7 +45,7 @@ public class PlayerRepository {
                         "select p " +
                                 "from Player p " +
                                 "where p.name = :name", Player.class)
-                                .setParameter("name", playerName);
+                .setParameter("name", playerName);
         return (Player) result;
     }
 
@@ -59,6 +59,8 @@ public class PlayerRepository {
         return em.createQuery(query, Player.class)
                 .setParameter("ids", ids)
                 .getResultList();
+
+    }
 
     public Long update(PlayerUpdateDto dto) {
         Player player = em.find(Player.class, dto.getPlayerId()).update(dto);

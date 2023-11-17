@@ -168,7 +168,6 @@ public class PlayerService {
         return resultList;
     }
 
-
     /*플레이어 조회
     * Request Parameter: Long playerId
     * Response Parameter: Player findPlayer
