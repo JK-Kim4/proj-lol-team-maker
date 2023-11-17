@@ -3,22 +3,36 @@ package com.jw.teammaker.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 @NoArgsConstructor
 public class Duo {
 
-    private List<Player> duoPlayerList = new ArrayList<>();
+    private Player[] players = new Player[2];
 
-    private Integer duoTotalPoint;
-    private Integer duoAveragePoint;
+    private float duoTotalPoint;
+    private float duoAveragePoint;
 
     public void addPlayer(Player player){
-        this.duoPlayerList.add(player);
-        this.duoTotalPoint += player.getEvaluationPoint();
-        this.duoAveragePoint = duoTotalPoint / duoPlayerList.size();
+        if(isPlayerEmpty()){
+            this.players[0] = player;
+            addTotalPoint(player);
+        }else{
+            this.players[this.players.length] = player;
+            addTotalPoint(player);
+            calculationAveragePoint();
+        }
     }
 
+    public boolean isPlayerEmpty(){
+        if(players.length > 0) return false;
+        else return true;
+    }
+
+    private void addTotalPoint(Player player){
+        this.duoTotalPoint += player.getEvaluationPoint();
+    }
+
+    private void calculationAveragePoint(){
+        this.duoAveragePoint = this.duoTotalPoint / players.length;
+    }
 }
