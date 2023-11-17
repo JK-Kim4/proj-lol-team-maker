@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.6.7'
+    id 'org.springframework.boot' version '2.7.3'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
@@ -22,9 +22,18 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
+    //logging - log4j2사용
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
     //database
-    runtimeOnly 'com.h2database:h2:1.4.199'
+    /*runtimeOnly 'mysql:mysql-connector-java'*/
+    /*runtimeOnly 'com.h2database:h2:1.4.199'*/
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation 'org.postgresql:postgresql'
     implementation 'org.hibernate:hibernate-entitymanager:5.3.10.Final'
+
+    //websocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
     //mustache
     implementation 'org.springframework.boot:spring-boot-starter-mustache'
@@ -32,6 +41,13 @@ dependencies {
     //test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+}
+
+//logging - logback exclude
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
 
 tasks.named('test') {

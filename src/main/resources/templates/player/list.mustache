@@ -4,7 +4,7 @@
     <div class="container-head-title">
         <h1>플레이어 목록</h1>
     </div>
-    <div class="container-head-menu">
+    <div class="container-head-menu mb-3">
             <button class="btn btn-primary" id="movePlayerSavePage">플레이어 추가</button>
     </div>
 
@@ -18,6 +18,8 @@
                     <th>메인포지션</th>
                     <th>서브포지션</th>
                     <th>탑티어</th>
+                    <th>비매너 지수</th>
+                    <th>선택</th>
                 </tr>
                 </thead>
                 <tbody id="playerListDiv">
@@ -25,11 +27,64 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="container">
+            <div class="form-group" id="selectedPlayerListDiv">
+                <h3>선택된 플레이어</h3>
+
+            </div>
+            <div class="form-group" id="teamResultDiv" style="display: none;">
+                <h3>결과</h3>
+                <div class="row">
+                    <div class="col-md-6" id="teamAResultDiv">
+                        <span id="teamADesc">team A</span>
+                        <table class="table table-striped table-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>닉네임</th>
+                                    <th>메인 포지션</th>
+                                    <th>평가 점수</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teamAList">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6" id="teamBResultDiv">
+                        <span id="teamBDesc">team A</span>
+                        <table class="table table-striped table-sm">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>닉네임</th>
+                                    <th>메인 포지션</th>
+                                    <th>평가 점수</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teamBList">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group default-btn-div" >
+                <input type="radio" name="teamType" id="typeDefault" value="default" checked><label for="typeDefault">기본</label>
+                <!--<input type="radio" name="teamType" id="typeBalance" value="balance"><label for="typeBalance">밸런스</label>-->
+                <input type="radio" name="teamType" id="typeRandom" value="random"><label for="typeRandom">랜덤</label>
+                <button class="btn btn-warning" id="makeTeamButton">팀 만들기</button>
+            </div>
+            <div class="form-group result-btn-div" style="display: none;">
+                <button class="btn btn-warning" id="remakeButton">다시 섞기</button>
+                <button class="btn btn-secondary" onclick="location.href='/player/list'">처음으로</button>
+            </div>
+        </div>
     </div>
 </div>
 
 <script src="/js/player.js"></script>
 <script>
+    let selectedPlayerList = [];
     $(document).ready(function(){
        main.getPlayerList();
     });
