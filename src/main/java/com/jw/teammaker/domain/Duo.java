@@ -17,7 +17,7 @@ public class Duo {
             this.players[0] = player;
             addTotalPoint(player);
         }else{
-            this.players[this.players.length -1] = player;
+            this.players[getPlayerCount()] = player;
             addTotalPoint(player);
             calculationAveragePoint();
         }

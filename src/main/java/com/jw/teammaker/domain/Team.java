@@ -31,10 +31,10 @@ public class Team {
 
     public void addDuo(Duo duo) throws ArrayIndexOutOfBoundsException{
         try {
-            if(isDuoEmpty()){
+            if(getDuoCount() == 0){
                 this.duoSlot[0] = duo;
             }else{
-                this.duoSlot[this.duoSlot.length] = duo;
+                this.duoSlot[getDuoCount()] = duo;
             }
 
             addTeamTotalPoint(duo.getDuoTotalPoint());
@@ -44,12 +44,12 @@ public class Team {
         }
     }
 
-    public boolean isDuoEmpty(){
-        if(this.duoSlot.length > 0){
-            return false;
-        }else{
-            return true;
+    public int getDuoCount(){
+        int cnt = 0;
+        for(Duo d: duoSlot){
+            if(d != null) cnt++;
         }
+        return cnt;
     }
 
     /*private methods*/
