@@ -13,7 +13,7 @@ public class Duo {
     private float duoAveragePoint;
 
     public void addPlayer(Player player){
-        if(isPlayerEmpty()){
+        if(getPlayerCount() == 0){
             this.players[0] = player;
             addTotalPoint(player);
         }else{
@@ -23,9 +23,12 @@ public class Duo {
         }
     }
 
-    public boolean isPlayerEmpty(){
-        if(players.length > 0) return false;
-        else return true;
+    public int getPlayerCount(){
+        int cnt = 0;
+        for(Player p: players){
+            if(p != null) cnt ++;
+        }
+        return cnt;
     }
 
     private void addTotalPoint(Player player){

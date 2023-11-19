@@ -27,17 +27,16 @@ public class DuoDomainTest {
         duoSlot2 = new Duo();
 
         //Duo PlayerField null 여부 검증 필요
-        assertEquals(true, duoSlot1.isPlayerEmpty());
-        assertEquals(true, duoSlot2.isPlayerEmpty());
+        assertEquals(0, duoSlot1.getPlayerCount());
+        assertEquals(0, duoSlot2.getPlayerCount());
 
         duoSlot1.addPlayer(duoPlayer0101);
         duoSlot1.addPlayer(duoPlayer0102);
         duoSlot2.addPlayer(duoPlayer0201);
         duoSlot2.addPlayer(duoPlayer0202);
 
-        assertEquals(false, duoSlot1.isPlayerEmpty());
-        assertEquals(false, duoSlot2.isPlayerEmpty());
-
+        assertEquals(2, duoSlot1.getPlayerCount());
+        assertEquals(2, duoSlot2.getPlayerCount());
     }
 
     @Test
