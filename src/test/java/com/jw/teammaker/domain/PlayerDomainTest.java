@@ -5,6 +5,8 @@ import com.jw.teammaker.domain.enumtype.Tier;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * Player Domain Unit Test
  *
@@ -15,9 +17,7 @@ public class PlayerDomainTest {
 
     @Test
     public void 플레이어_평가점수_계산_테스트(){
-
-        System.out.println(samplePlayer.toString());
-
+        assertEquals(samplePlayer.getEvaluationPoint(), (float)(Position.JNG.getPoint() + Tier.GOLD.getPoint()));
     }
 
 
