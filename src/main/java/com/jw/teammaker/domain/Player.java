@@ -33,6 +33,8 @@ public class Player implements Comparable<Player>{
         this.subPosition = Position.valueOf(saveDto.getSubPosition());
         this.subTier = Tier.valueOf(saveDto.getSubTier());
         this.badPlayerRating = 0;
+
+        this.calculateEvaluationPoint();
     }
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

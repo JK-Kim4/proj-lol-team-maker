@@ -165,11 +165,6 @@ public class PlayerService {
         for(int i = 0; i < playerList.size(); i++){
             if(i % 2 == 0) teamA.addPlayer(playerList.get(i));
             else teamB.addPlayer(playerList.get(i));
-
-            if(i == (playerList.size()-1)){
-                teamA.calculateTotalPoint();
-                teamB.calculateTotalPoint();
-            }
         }
         resultList.add(teamA);
         resultList.add(teamB);
