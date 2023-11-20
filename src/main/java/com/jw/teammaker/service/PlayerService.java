@@ -2,9 +2,12 @@ package com.jw.teammaker.service;
 
 import com.jw.teammaker.common.CommonValue;
 import com.jw.teammaker.common.util.CommonUtils;
+import com.jw.teammaker.common.util.DuoComparator;
 import com.jw.teammaker.common.util.PlayerComparator;
+import com.jw.teammaker.domain.Duo;
 import com.jw.teammaker.domain.Player;
 import com.jw.teammaker.domain.Team;
+import com.jw.teammaker.exception.DuoIndexOutOfBoundsException;
 import com.jw.teammaker.exception.NotEnoughPlayerException;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
 import com.jw.teammaker.presentation.dto.TeamResponseDto;
@@ -78,8 +81,7 @@ public class PlayerService {
 
         //플레이어 수 검증 (10명)
         if(playerIds.length != 10){
-            throw
-                    new NotEnoughPlayerException("플레이어 수가 부족합니다. Player length: " +playerIds.length);
+            throw new NotEnoughPlayerException("플레이어 수가 부족합니다. Player length: " +playerIds.length);
         }
 
         //플레이어 조회
@@ -89,7 +91,7 @@ public class PlayerService {
                 .collect(Collectors.toList());
 
         if(CommonValue.MAKE_TEAM_LOGIC_BALANCE.equals(type)){
-
+            resultList = makeTeamsDefaultLogic(playerList);
         }else if(CommonValue.MAKE_TEAM_LOGIC_RANDOM.equals(type)){
             resultList = makeTeamRandomLogic(playerList);
         }else{
@@ -99,6 +101,59 @@ public class PlayerService {
         return resultList;
     }
 
+    public List<Team> makeTeamsWithDuo(List<Long[]> duoIdList, Long[] playerIds, String type){
+        List<Team> resultList = new ArrayList<>();
+        List<Duo> duoList = new ArrayList<>();
+        int duoCount;
+        //0. 듀오 슬롯이 빈 값으로 넘어올 경우: 일반 팀 분배 로직 call
+        if(duoIdList == null && duoIdList.size() == 0){
+            return this.makeTeams(playerIds, type);
+        }
+        //1. duoSlot 최대값 검증
+        if(duoIdList.size() > 4) {
+            throw new DuoIndexOutOfBoundsException("듀오는 최대 8인(4개)까지 가능합니다.");
+        }
+        //2. 듀오 슬롯 선수 조회
+        for(Long[] duoSlot: duoIdList){
+            Duo duo = new Duo();
+            for(Long id: duoSlot){
+                duo.addPlayer(playerRepository.findById(id));
+            }
+            duoList.add(duo);
+        }
+
+        Collections.sort(duoList, new DuoComparator());
+
+        Team teamA = new Team();
+        Team teamB = new Team();
+
+        teamA.addDuo(duoList.get(0));
+        teamA.addDuo(duoList.get(2));
+        teamB.addDuo(duoList.get(1));
+        teamB.addDuo(duoList.get(3));
+
+        //3. 듀오 슬롯 홀수 경우 듀오 추가
+        if((duoIdList.size() & 2) != 0){
+
+        }
+
+
+        List<Player> playerList =  Arrays
+                .stream(playerIds)
+                .map(id -> playerRepository.findById(id))
+                .collect(Collectors.toList());
+
+        for(int i = 0; i < playerList.size(); i++){
+            if(i % 2 == 0) teamA.addPlayer(playerList.get(i));
+            else teamB.addPlayer(playerList.get(i));
+        }
+
+        resultList.add(teamA);
+        resultList.add(teamB);
+
+
+        return resultList;
+    }
 
     /* TODO
     *  팀 분배 기본 로직 수정
