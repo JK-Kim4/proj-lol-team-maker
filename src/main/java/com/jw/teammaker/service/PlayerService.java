@@ -235,6 +235,17 @@ public class PlayerService {
         Team teamB = new Team();
         List<Team> resultList = new ArrayList<>();
 
+        float totalRating = 0.0f;
+        float averageRating = 0.0f;
+        for(Duo d: duoList){
+            totalRating += d.getDuoTotalPoint();
+        }
+        for(Player p: playerList){
+            totalRating += p.getEvaluationPoint();
+        }
+        averageRating = totalRating / 10.f;
+
+
         //듀오 큐 수가 홀수인 경우 -> 1개의 추가 듀오 생성
         if(duoList.size() % 2 != 0){
             float tempAverageRate = 0.00f;
@@ -245,21 +256,6 @@ public class PlayerService {
             duoList.add(makeDuoNearAverageRate(playerList, tempAverageRate));
         }
 
-        for(int i = 0; i < duoList.size(); i++){
-            if(i % 2 == 0){
-                teamA.addDuo(duoList.get(i));
-            }else{
-                teamB.addDuo(duoList.get(i));
-            }
-        }
-
-        for(int i = 0; i < playerList.size(); i++){
-            if(i % 2 == 0){
-                teamA.addPlayer(playerList.get(i));
-            }else{
-                teamB.addPlayer(playerList.get(i));
-            }
-        }
 
         resultList.add(teamA);
         resultList.add(teamB);

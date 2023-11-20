@@ -108,10 +108,10 @@ public class PlayerServiceTest {
     public void 듀오포함_팀분배_테스트(){
         List<Team> resultList = new ArrayList<>();
         List<Long[]> duoIdList = new ArrayList<>();
-        Long[] playerList = {7L, 8L, 9L,10L};
-        Long[] dou1 = {1L,2L};
-        Long[] dou2 = {3L,4L};
-        Long[] dou3 = {5L,6L};
+        Long[] playerList = {3L, 5L, 6L,9L};
+        Long[] dou1 = {4L,7L};
+        Long[] dou2 = {1L,10L};
+        Long[] dou3 = {2L,8L};
 
         duoIdList.add(dou1);
         duoIdList.add(dou2);
@@ -120,12 +120,8 @@ public class PlayerServiceTest {
         resultList = playerService.makeTeamsWithDuo(duoIdList, playerList, "default");
 
         for(Team t: resultList){
-            for(Player p: t.getPlayers()){
-                System.out.println(p.toString());
-            }
-            for(Duo d: t.getDuoSlot()){
-                System.out.println("duo cnt = " +d.getPlayerCount());
-            }
+            System.out.println("team average point : " + t.getTeamAveragePoint());
+            System.out.println(t.toString());
         }
     }
 
