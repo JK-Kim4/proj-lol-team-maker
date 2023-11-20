@@ -20,7 +20,7 @@ import java.util.List;
 @Entity
 @Getter
 @ToString
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Player implements Comparable<Player>{
 
 

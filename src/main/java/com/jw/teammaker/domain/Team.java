@@ -3,11 +3,13 @@ package com.jw.teammaker.domain;
 import com.jw.teammaker.exception.DuoIndexOutOfBoundsException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@ToString
 @NoArgsConstructor
 public class Team {
 

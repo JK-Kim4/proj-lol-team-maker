@@ -66,6 +66,22 @@ public class PlayerService {
         return playerRepository.update(dto);
     }
 
+    /*플레이어 조회
+     * Request Parameter: Long playerId
+     * Response Parameter: Player findPlayer
+     * */
+    public Player findById(Long playerId){
+        return playerRepository.findById(playerId);
+    }
+
+    /*플레이어 전체 조회*/
+    public List<Player> findAll(){
+        return playerRepository.findAll();
+    }
+
+    public List<Player> findPlayerListByIds(Long[] ids){
+        return playerRepository.findPlayerListByIds(ids);
+    }
 
     /*플레이어 수정 - 신고 횟수 +
      * Request Parameter: Long playerId
@@ -91,11 +107,11 @@ public class PlayerService {
                 .collect(Collectors.toList());
 
         if(CommonValue.MAKE_TEAM_LOGIC_BALANCE.equals(type)){
-            resultList = makeTeamsDefaultLogic(playerList);
+            resultList = makeTeamDefaultLogic(playerList);
         }else if(CommonValue.MAKE_TEAM_LOGIC_RANDOM.equals(type)){
             resultList = makeTeamRandomLogic(playerList);
         }else{
-            resultList = makeTeamsDefaultLogic(playerList);
+            resultList = makeTeamDefaultLogic(playerList);
         }
 
         return resultList;
@@ -104,7 +120,7 @@ public class PlayerService {
     public List<Team> makeTeamsWithDuo(List<Long[]> duoIdList, Long[] playerIds, String type){
         List<Team> resultList = new ArrayList<>();
         List<Duo> duoList = new ArrayList<>();
-        int duoCount;
+
         //0. 듀오 슬롯이 빈 값으로 넘어올 경우: 일반 팀 분배 로직 call
         if(duoIdList == null && duoIdList.size() == 0){
             return this.makeTeams(playerIds, type);
@@ -122,35 +138,12 @@ public class PlayerService {
             duoList.add(duo);
         }
 
-        Collections.sort(duoList, new DuoComparator());
-
-        Team teamA = new Team();
-        Team teamB = new Team();
-
-        teamA.addDuo(duoList.get(0));
-        teamA.addDuo(duoList.get(2));
-        teamB.addDuo(duoList.get(1));
-        teamB.addDuo(duoList.get(3));
-
-        //3. 듀오 슬롯 홀수 경우 듀오 추가
-        if((duoIdList.size() & 2) != 0){
-
-        }
-
-
         List<Player> playerList =  Arrays
                 .stream(playerIds)
                 .map(id -> playerRepository.findById(id))
                 .collect(Collectors.toList());
 
-        for(int i = 0; i < playerList.size(); i++){
-            if(i % 2 == 0) teamA.addPlayer(playerList.get(i));
-            else teamB.addPlayer(playerList.get(i));
-        }
-
-        resultList.add(teamA);
-        resultList.add(teamB);
-
+        resultList = makeTeamWithDuoLogic(duoList, playerList);
 
         return resultList;
     }
@@ -160,7 +153,7 @@ public class PlayerService {
     *  기존: 평가점수 내림차수 정렬 후 List Index 기준 팀 분배
     *  수정: minimax(team-maker-algo.md 참조) 팀 분배*/
     /*팀 생성 로직 - 기본*/
-    private List<Team> makeTeamsDefaultLogic(List<Player> playerList) {
+    private List<Team> makeTeamDefaultLogic(List<Player> playerList) {
 
         //변수 초기화
         Team teamA = new Team();
@@ -236,21 +229,66 @@ public class PlayerService {
         return resultList;
     }
 
-    /*플레이어 조회
-    * Request Parameter: Long playerId
-    * Response Parameter: Player findPlayer
-    * */
-    public Player findById(Long playerId){
-        return playerRepository.findById(playerId);
+    private List<Team> makeTeamWithDuoLogic(List<Duo> duoList, List<Player> playerList){
+        //변수 초기화
+        Team teamA = new Team();
+        Team teamB = new Team();
+        List<Team> resultList = new ArrayList<>();
+
+        float totalRating = 0.0f;
+        float averageRating = 0.0f;
+        for(Duo d: duoList){
+            totalRating += d.getDuoTotalPoint();
+        }
+        for(Player p: playerList){
+            totalRating += p.getEvaluationPoint();
+        }
+        averageRating = totalRating / 10.f;
+
+
+        //듀오 큐 수가 홀수인 경우 -> 1개의 추가 듀오 생성
+        if(duoList.size() % 2 != 0){
+            float tempAverageRate = 0.00f;
+            for(Duo duo: duoList){
+                tempAverageRate += duo.getDuoAveragePoint();
+            }
+            tempAverageRate = tempAverageRate/(float) duoList.size();
+            duoList.add(makeDuoNearAverageRate(playerList, tempAverageRate));
+        }
+
+
+        resultList.add(teamA);
+        resultList.add(teamB);
+
+        return resultList;
     }
 
-    /*플레이어 전체 조회*/
-    public List<Player> findAll(){
-        return playerRepository.findAll();
-    }
+    private Duo makeDuoNearAverageRate(List<Player> playerList, float tempAverageRate) {
+        Duo result = new Duo();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        float comparisonValue = 9999.99f;
 
-    public List<Player> findPlayerListByIds(Long[] ids){
-        return playerRepository.findPlayerListByIds(ids);
+        for(Player p1: playerList){
+            for(Player p2: playerList){
+                if(p1 == p2) continue;
+                float playerAverageRate = ( p1.getEvaluationPoint() + p2.getEvaluationPoint() ) / 2.0f;
+
+                if(Math.abs(playerAverageRate - tempAverageRate) < comparisonValue){
+                    comparisonValue = Math.abs(playerAverageRate - tempAverageRate);
+                    player1 = p1;
+                    player2 = p2;
+                }else {
+                    continue;
+                }
+            }
+        }
+
+        playerList.remove(player1);
+        playerList.remove(player2);
+        result.addPlayer(player1);
+        result.addPlayer(player2);
+        return result;
     }
 
     /*private*/
