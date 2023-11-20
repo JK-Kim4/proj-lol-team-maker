@@ -1,6 +1,8 @@
 package com.jw.teammaker.service;
 
+import com.jw.teammaker.domain.Duo;
 import com.jw.teammaker.domain.Player;
+import com.jw.teammaker.domain.Team;
 import com.jw.teammaker.domain.enumtype.Position;
 import com.jw.teammaker.domain.enumtype.Tier;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
@@ -12,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -99,6 +102,33 @@ public class PlayerServiceTest {
         //TODO assertThat
         System.out.println("update player desc = " +player.toString());
 
+    }
+
+    @Test
+    public void 듀오포함_팀분배_테스트(){
+        List<Team> resultList = new ArrayList<>();
+        List<Long[]> duoIdList = new ArrayList<>();
+        Long[] playerList = {9L,10L};
+        Long[] dou1 = {1L,2L};
+        Long[] dou2 = {3L,4L};
+        Long[] dou3 = {5L,6L};
+        Long[] dou4 = {7L,8L};
+
+        duoIdList.add(dou1);
+        duoIdList.add(dou2);
+        duoIdList.add(dou3);
+        duoIdList.add(dou4);
+
+        resultList = playerService.makeTeamsWithDuo(duoIdList, playerList, "default");
+
+        for(Team t: resultList){
+            for(Player p: t.getPlayers()){
+                System.out.println(p.toString());
+            }
+            for(Duo d: t.getDuoSlot()){
+                System.out.println("duo cnt = " +d.getPlayerCount());
+            }
+        }
     }
 
 
