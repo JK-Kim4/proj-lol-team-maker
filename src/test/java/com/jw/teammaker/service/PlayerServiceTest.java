@@ -108,16 +108,14 @@ public class PlayerServiceTest {
     public void 듀오포함_팀분배_테스트(){
         List<Team> resultList = new ArrayList<>();
         List<Long[]> duoIdList = new ArrayList<>();
-        Long[] playerList = {9L,10L};
+        Long[] playerList = {7L, 8L, 9L,10L};
         Long[] dou1 = {1L,2L};
         Long[] dou2 = {3L,4L};
         Long[] dou3 = {5L,6L};
-        Long[] dou4 = {7L,8L};
 
         duoIdList.add(dou1);
         duoIdList.add(dou2);
         duoIdList.add(dou3);
-        duoIdList.add(dou4);
 
         resultList = playerService.makeTeamsWithDuo(duoIdList, playerList, "default");
 
