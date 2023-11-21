@@ -2,7 +2,6 @@ package com.jw.teammaker.service;
 
 import com.jw.teammaker.common.CommonValue;
 import com.jw.teammaker.common.util.CommonUtils;
-import com.jw.teammaker.common.util.DuoComparator;
 import com.jw.teammaker.common.util.PlayerComparator;
 import com.jw.teammaker.domain.Duo;
 import com.jw.teammaker.domain.Player;
@@ -10,8 +9,8 @@ import com.jw.teammaker.domain.Team;
 import com.jw.teammaker.exception.DuoIndexOutOfBoundsException;
 import com.jw.teammaker.exception.NotEnoughPlayerException;
 import com.jw.teammaker.presentation.dto.PlayerSaveDto;
-import com.jw.teammaker.presentation.dto.TeamResponseDto;
 import com.jw.teammaker.presentation.dto.PlayerUpdateDto;
+import com.jw.teammaker.presentation.dto.TeamResponseDto;
 import com.jw.teammaker.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,7 +18,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -132,20 +134,17 @@ public class PlayerService {
         //2. 듀오 슬롯 선수 조회
         for(Long[] duoSlot: duoIdList){
             Duo duo = new Duo();
-            for(Long id: duoSlot){
-                duo.addPlayer(playerRepository.findById(id));
-            }
+            Arrays.stream(duoSlot)
+                    .forEach(playerId -> duo.addPlayer(playerRepository.findById(playerId)));
             duoList.add(duo);
         }
 
         List<Player> playerList =  Arrays
                 .stream(playerIds)
-                .map(id -> playerRepository.findById(id))
+                .map(playerRepository::findById)
                 .collect(Collectors.toList());
 
-        resultList = makeTeamWithDuoLogic(duoList, playerList);
-
-        return resultList;
+        return makeTeamWithDuoLogic(duoList, playerList);
     }
 
     /* TODO
@@ -234,28 +233,43 @@ public class PlayerService {
         Team teamA = new Team();
         Team teamB = new Team();
         List<Team> resultList = new ArrayList<>();
-
-        float totalRating = 0.0f;
         float averageRating = 0.0f;
-        for(Duo d: duoList){
-            totalRating += d.getDuoTotalPoint();
-        }
-        for(Player p: playerList){
-            totalRating += p.getEvaluationPoint();
-        }
-        averageRating = totalRating / 10.f;
+        averageRating = getAverageRating(duoList, playerList);
 
 
         //듀오 큐 수가 홀수인 경우 -> 1개의 추가 듀오 생성
         if(duoList.size() % 2 != 0){
-            float tempAverageRate = 0.00f;
+            float tempAverageRating = 0.00f;
             for(Duo duo: duoList){
-                tempAverageRate += duo.getDuoAveragePoint();
+                tempAverageRating += duo.getDuoAveragePoint();
             }
-            tempAverageRate = tempAverageRate/(float) duoList.size();
-            duoList.add(makeDuoNearAverageRate(playerList, tempAverageRate));
+            tempAverageRating = tempAverageRating/(float) duoList.size();
+            duoList.add(makeDuoNearAverageRating(playerList, tempAverageRating));
         }
 
+        Duo tempDuo = null;
+        boolean teamFlag = true;
+        float flag = 999.9f;
+        for(int i=1; i < duoList.size(); i++){
+
+            for(Duo d: duoList){
+                float validation = Math.abs(d.getDuoAveragePoint() - averageRating);
+                if(validation < flag){
+                    flag = validation;
+                    tempDuo = d;
+                }else {
+                    continue;
+                }
+            }
+            if(teamFlag){
+                teamA.addDuo(tempDuo);
+                teamFlag = false;
+            }else {
+                teamB.addDuo(tempDuo);
+                teamFlag = true;
+            }
+            duoList.remove(tempDuo);
+        }
 
         resultList.add(teamA);
         resultList.add(teamB);
@@ -263,7 +277,19 @@ public class PlayerService {
         return resultList;
     }
 
-    private Duo makeDuoNearAverageRate(List<Player> playerList, float tempAverageRate) {
+    private float getAverageRating(List<Duo> duoList, List<Player> playerList) {
+        float totalRating = 0.0f;
+        for(Duo d: duoList){
+            totalRating += d.getDuoTotalPoint();
+        }
+        for(Player p: playerList){
+            totalRating += p.getEvaluationPoint();
+        }
+
+        return totalRating / 10.0f;
+    }
+
+    private Duo makeDuoNearAverageRating(List<Player> playerList, float tempAverageRate) {
         Duo result = new Duo();
         Player player1 = new Player();
         Player player2 = new Player();
