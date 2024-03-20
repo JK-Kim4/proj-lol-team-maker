@@ -22,12 +22,12 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    //logging - log4j2사용
+    //logging - log4j2사용`
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 
     //database
-    runtimeOnly 'mysql:mysql-connector-java'
-    /*runtimeOnly 'com.h2database:h2:1.4.199'*/
+    /*runtimeOnly 'mysql:mysql-connector-java'*/
+    runtimeOnly 'com.h2database:h2:1.4.199'
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     //implementation 'org.postgresql:postgresql'
     implementation 'org.hibernate:hibernate-entitymanager:5.3.10.Final'
