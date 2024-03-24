@@ -1,12 +1,13 @@
 package com.jw.teammaker.domain.websocket;
 
-public class MessageModel {
+public class HelloMessage {
+
     private String name;
 
-    public MessageModel() {
+    public HelloMessage() {
     }
 
-    public MessageModel(String name) {
+    public HelloMessage(String name) {
         this.name = name;
     }
 
