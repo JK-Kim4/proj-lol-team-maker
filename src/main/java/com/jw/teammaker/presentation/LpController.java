@@ -2,12 +2,16 @@ package com.jw.teammaker.presentation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import java.time.Duration;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
@@ -21,6 +25,9 @@ import java.util.concurrent.ForkJoinPool;
 public class LpController {
 
     private final Logger logger = LoggerFactory.getLogger(LpController.class);
+
+    @Autowired
+    RestTemplateBuilder restTemplateBuilder;
 
     @GetMapping("/bake/{bakedGood}")
     public DeferredResult<String> syncPublisher(
@@ -62,6 +69,17 @@ public class LpController {
 
         });
         return output;
+    }
+
+    @GetMapping("/bakery/subscribe")
+    public String callBaker(){
+        RestTemplate restTemplate = restTemplateBuilder
+                .setConnectTimeout(Duration.ofSeconds(10))
+                .setReadTimeout(Duration.ofSeconds(10))
+                .build();
+
+
+        return restTemplate.getForObject("http://localhost:8080/long-polling/async/bake/ppang?bakeTime=1000", String.class);
     }
 
     @GetMapping("/async-deferredresult")
