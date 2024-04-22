@@ -59,8 +59,11 @@ public class LpController {
         output.onTimeout(() -> output.setErrorResult("the bakery is not responding in allowed time"));
         bakers.execute(() -> {
             try {
+                //Server 로직 구현부
+                //Client Request를 받아 결과 Response
                 System.out.println("Thread id: " +Thread.currentThread());
                 Thread.sleep(bakeTime);
+                //do something
                 output.setResult(String.format("Bake for %s complete and order dispatched. Enjoy!", bakedGood));
             }catch (Exception e){
 
@@ -78,7 +81,7 @@ public class LpController {
                 .setReadTimeout(Duration.ofSeconds(10))
                 .build();
 
-
+        //Client 호출 부
         return restTemplate.getForObject("http://localhost:8080/long-polling/async/bake/ppang?bakeTime=1000", String.class);
     }
 
