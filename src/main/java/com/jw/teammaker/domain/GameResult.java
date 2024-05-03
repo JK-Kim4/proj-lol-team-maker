@@ -16,6 +16,7 @@ public class GameResult {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column
     private ResultStatus resultStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
