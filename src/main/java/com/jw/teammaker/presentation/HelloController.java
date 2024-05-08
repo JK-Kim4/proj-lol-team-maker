@@ -11,4 +11,8 @@ public class HelloController {
         return "index";
     }
 
+    @GetMapping("/sockect/index")
+    public String wsIndex(){
+        return "/web-socket-index";
+    }
 }
